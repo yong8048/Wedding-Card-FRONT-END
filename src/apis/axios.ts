@@ -2,7 +2,7 @@ import axios from "axios";
 
 const createInstance = () => {
   const instance = axios.create({
-    baseURL: "https://discord.com/api",
+    baseURL: "	https://kapi.kakao.com",
     timeout: 10000,
     headers: {
       "Content-Type": "application/json",

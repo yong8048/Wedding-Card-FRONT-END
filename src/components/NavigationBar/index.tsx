@@ -3,7 +3,12 @@ import { FcSearch } from "react-icons/fc";
 import { FcTemplate } from "react-icons/fc";
 import { FcCollaboration } from "react-icons/fc";
 
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_KAKAO_REST_API_KEY}&redirect_uri=${import.meta.env.VITE_KAKAO_REDIRECT_URL}&response_type=code`;
+
 const NavigationBar = () => {
+  const getIsLogined = () => {
+    return false;
+  };
   return (
     <S.NavContainer>
       <div>
@@ -24,7 +29,7 @@ const NavigationBar = () => {
         </S.NavLinkEl>
       </div>
       <div>
-        <S.NavLinkEl to={"/mypage"}>
+        <S.NavLinkEl to={getIsLogined() ? "/mypage" : KAKAO_AUTH_URL}>
           <FcCollaboration size={25} />
           <span>MY</span>
         </S.NavLinkEl>

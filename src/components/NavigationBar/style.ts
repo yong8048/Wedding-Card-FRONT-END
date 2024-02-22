@@ -49,8 +49,10 @@ export const SearchButton = styled.button`
   border-radius: 12px;
   transition-duration: 300ms;
 
-  &:hover {
-    background-color: #dbdbc5;
+  @media (hover: hover) {
+    &:hover {
+      background-color: #dbdbc5;
+    }
   }
 `;
 
@@ -64,9 +66,12 @@ export const NavLinkEl = styled(NavLink)`
   border-radius: 12px;
   transition-duration: 300ms;
 
-  &:hover {
-    background-color: #dbdbc5;
+  @media (hover: hover) {
+    &:hover {
+      background-color: #dbdbc5;
+    }
   }
+
   img {
     width: 100%;
     height: 100%;
