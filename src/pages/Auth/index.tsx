@@ -40,7 +40,7 @@ const Auth = () => {
     navigate("/");
   };
 
-  return null;
+  return <></>;
 };
 
 export default Auth;
