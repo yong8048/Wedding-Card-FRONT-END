@@ -1,9 +1,10 @@
-import * as S from "./style";
+import MainSwiper from "@/components/MainSwiper";
+// import * as S from "./style";
 
 const Home = () => {
   return (
     <div>
-      <S.Logo src="/logo.png" alt="logo" />
+      <MainSwiper />
     </div>
   );
 };
