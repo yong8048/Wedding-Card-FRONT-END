@@ -19,7 +19,7 @@ export const SwiperContainer = styled.div`
     height: 100%;
   }
   .imgT {
-    max-width: 430px;
+    width: 100%;
   }
   .swiper-pagination {
   }
