@@ -1,3 +1,4 @@
+import { getUserInfo } from "@/apis/kakao";
 import * as S from "./style";
 import { FcSearch } from "react-icons/fc";
 import { FcTemplate } from "react-icons/fc";
@@ -9,6 +10,12 @@ const NavigationBar = () => {
   const getIsLogined = () => {
     return false;
   };
+
+  const handleGetUserInfo = async () => {
+    const res = await getUserInfo();
+    console.log(res);
+  };
+
   return (
     <S.NavContainer>
       <div>
@@ -17,7 +24,7 @@ const NavigationBar = () => {
         </S.NavLinkEl>
       </div>
       <div>
-        <S.SearchButton>
+        <S.SearchButton onClick={handleGetUserInfo}>
           <FcSearch size={25} />
           <span>검색</span>
         </S.SearchButton>
