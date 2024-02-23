@@ -1,29 +1,26 @@
-import axios from "axios";
+import { getCookie } from "@/utils/cookie";
+import axios, { AxiosError } from "axios";
 
-const createInstance = () => {
+const createInstance = (isServer: boolean) => {
   const instance = axios.create({
-    baseURL: "https://discord.com/api",
+    baseURL: isServer ? "" : "https://kapi.kakao.com",
     timeout: 10000,
     headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true,
+      "Content-Type": isServer ? "application/json" : "application/x-www-form-urlencoded;charset=utf-8",
     },
-    withCredentials: true,
   });
 
-  // instance.interceptors.request.use(
-  //   request => {
-  //     const token = getCookie("Disearch_access_token");
-  //     console.log(token);
-  //     if (token) request.headers["authorization"] = `Bearer ${token}`;
-  //     if (!token) request.headers["authorization"] = "";
-  //     return request;
-  //   },
-  //   (error: AxiosError) => {
-  //     return Promise.reject(error);
-  //   },
-  // );
+  instance.interceptors.request.use(
+    request => {
+      const token = getCookie("WECA_access_token");
+      if (token) request.headers["authorization"] = `Bearer ${token}`;
+      if (!token) request.headers["authorization"] = "";
+      return request;
+    },
+    (error: AxiosError) => {
+      return Promise.reject(error);
+    },
+  );
 
   // instance.interceptors.response.use(
   //   response => {
@@ -59,4 +56,5 @@ const createInstance = () => {
 
   return instance;
 };
-export const instance = createInstance();
+export const instance = createInstance(true);
+export const kakaoInstance = createInstance(false);
