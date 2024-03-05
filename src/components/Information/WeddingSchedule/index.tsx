@@ -30,7 +30,6 @@ const WeddingSchedule = () => {
   const handleSearch = () => {
     new window.daum.Postcode({
       oncomplete: async (data: IKakaoAddress) => {
-        console.log(data);
         setAddress(data.userSelectedType === "J" ? data.jibunAddress : data.roadAddress);
         const res = await GetLatLon(data.userSelectedType === "J" ? data.jibunAddress : data.roadAddress);
         setLatlon({ latitude: res.documents[0].y, longitude: res.documents[0].x });
