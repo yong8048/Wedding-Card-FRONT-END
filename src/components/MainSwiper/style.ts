@@ -7,19 +7,22 @@ export const SwiperContainer = styled.div`
     align-items: center;
     text-align: center;
     width: 100%;
-    max-height: 800px;
+    max-height: 100%;
     position: relative;
     overflow: hidden;
     z-index: 1;
   }
   .swiperslide {
-    background-position: center;
-    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
     width: 100%;
     height: 100%;
   }
   .imgT {
     width: 100%;
+    object-fit: contain;
   }
   .swiper-pagination {
   }

@@ -20,11 +20,11 @@ const MainSwiper = () => {
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
         slidesPerView={1}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 3000 }}
+        // autoplay={{ delay: 3000 }}
         loop={true}
       >
         {images.map((img, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className="swiperslide">
             <img src={img} alt="" className="imgT" />
           </SwiperSlide>
         ))}
