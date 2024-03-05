@@ -1,23 +1,62 @@
 import styled from "styled-components";
 
-export const ServeyFormContainer = styled.div``;
-export const ServeyFormChatUl = styled.ul`
-  width: 100%;
-  height: 100%;
-`;
-export const ServeyFormQuestionLi = styled.li`
-  width: 150px;
+type styleProps = {
+  opacity: number;
+};
 
-  background-color: gray;
-  margin: 30px 0;
-  border-radius: 4px 16px 16px 16px;
+export const ServeyFormContainer = styled.div`
+  padding: 10px;
+`;
+export const ServeyFormChatUl = styled.ul`
+  display: flex;
+  flex-direction: column;
+`;
+export const ServeyFormQuestionLi = styled.li<styleProps>`
+  opacity: ${props => props.opacity};
+  transition: opacity 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 30px 10px;
+`;
+export const ServeyFormQuestionLiItem = styled.div`
+  width: fit-content;
+  background-color: #818c7b;
+  border-radius: 16px;
   display: flex;
   gap: 10px;
   flex-direction: column;
-  padding: 15px 10px;
+  padding: 15px 15px;
+  color: white;
+  transition: opacity 1s ease-in-out;
+`;
+export const ServeyFormQuestionItem = styled.div`
+  width: 50%;
+  background-color: #818c7b;
+  border-radius: 16px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  padding: 15px 15px;
+  color: white;
+  div {
+    padding: 10px 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+    display: flex;
+  }
+
   button {
-    border-radius: 8px;
+    border-radius: 5px;
+    padding: 5px 10px;
     border: none;
   }
 `;
-export const ServeyFormAnswerLi = styled.li``;
+export const ServeyFormAnsweredItem = styled.div`
+  width: fit-content;
+  background-color: #818c7b;
+  border-radius: 16px;
+  padding: 15px 15px;
+  color: white;
+  margin-left: auto;
+`;

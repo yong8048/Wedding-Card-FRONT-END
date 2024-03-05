@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import * as S from "./style";
 
 const ServeyForm: React.FC = () => {
-  const questionList = ["질문할게여", "비디오가 있나여?", "라이브웨딩이 있나여?", "이제 청첩장에 적을 내용 적어주세여"];
+  const questionList = [
+    "안녕하세요. 웨딩카드 간편제작 웨카입니다.",
+    "포트폴리오 전용",
+    "라이브 웨딩 링크가 있나요?",
+    "이제 청첩장에 필요한 내용을 작성해주세요.",
+  ];
   const answerList = ["있음", "없음"];
 
-  const [answers, setAnswers] = useState<Array<string | null>>(Array.from({ length: questionList.length }, () => null));
+  const [answers, setAnswers] = useState<Array<string | null>>(Array.from({ length: questionList.length }, () => "no"));
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-
+  const [opacity, setOpacity] = useState<number[]>([]);
   const handleAnswerChange = (index: number, value: string) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
@@ -32,43 +37,48 @@ const ServeyForm: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [currentQuestionIndex]);
+
+  useEffect(() => {
+    setOpacity(prev => [...prev, 0]);
+    const timer = setTimeout(
+      () => setOpacity(prev => prev.map((val, idx) => (idx === currentQuestionIndex ? 1 : val))),
+      1000,
+    );
+    return () => clearTimeout(timer);
+  }, [currentQuestionIndex]);
+
   return (
     <S.ServeyFormContainer>
       <div>
-        <ul>
-          {questionList.slice(0, currentQuestionIndex + 1).map((question, index) => (
-            <>
-              <S.ServeyFormQuestionLi>
-                <h1>{question}</h1>
-              </S.ServeyFormQuestionLi>
+        <S.ServeyFormChatUl>
+          {questionList.map((question, index) => (
+            <S.ServeyFormQuestionLi key={index} opacity={opacity[index] || 0}>
+              <S.ServeyFormQuestionLiItem>{question}</S.ServeyFormQuestionLiItem>
               {index !== 0 && index !== questionList.length - 1 ? (
-                <S.ServeyFormQuestionLi key={index}>
-                  <>
-                    <div>
-                      <input
-                        type="radio"
-                        value="1"
-                        checked={answers[index] === "1"}
-                        onChange={() => handleAnswerChange(index, "1")}
-                      />
-                      <label>{answerList[0]}</label>
-                    </div>
-                    <div>
-                      <input
-                        type="radio"
-                        value="2"
-                        checked={answers[index] === "2"}
-                        onChange={() => handleAnswerChange(index, "2")}
-                      />
-                      <label>{answerList[1]}</label>
-                    </div>
-                    <button onClick={clickNext}>다음</button>
-                  </>
-                </S.ServeyFormQuestionLi>
+                <>
+                  {index < currentQuestionIndex && (
+                    <S.ServeyFormAnsweredItem>
+                      <span>{answers[index] === "yes" ? answerList[0] : answerList[1]}</span>
+                    </S.ServeyFormAnsweredItem>
+                  )}
+                  {index === currentQuestionIndex && (
+                    <S.ServeyFormQuestionItem>
+                      <div onClick={() => handleAnswerChange(index, "yes")}>
+                        <input type="radio" value="yes" checked={answers[index] === "yes"} />
+                        <label>{answerList[0]}</label>
+                      </div>
+                      <div onClick={() => handleAnswerChange(index, "no")}>
+                        <input type="radio" value="no" checked={answers[index] === "no"} />
+                        <label>{answerList[1]}</label>
+                      </div>
+                      <button onClick={clickNext}>다음</button>
+                    </S.ServeyFormQuestionItem>
+                  )}
+                </>
               ) : null}
-            </>
+            </S.ServeyFormQuestionLi>
           ))}
-        </ul>
+        </S.ServeyFormChatUl>
       </div>
     </S.ServeyFormContainer>
   );
