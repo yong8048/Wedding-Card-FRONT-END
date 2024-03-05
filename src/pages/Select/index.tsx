@@ -1,5 +1,11 @@
+import SelectForm from "@/components/SelectForm";
+import * as S from "./style";
 const Select = () => {
-  return <div>Select</div>;
+  return (
+    <S.SelectContainer>
+      <SelectForm />
+    </S.SelectContainer>
+  );
 };
 
 export default Select;

@@ -1,5 +1,7 @@
-import { userLogout } from "@/apis/kakao";
+import MainSwiper from "@/components/MainSwiper";
 import * as S from "./style";
+import { userLogout } from "@/apis/kakao";
+
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { removeCookie } from "@/utils/cookie";
 
@@ -17,6 +19,7 @@ const Home = () => {
   };
   return (
     <div>
+      <MainSwiper />
       <S.Logo src="/logo.png" alt="logo" onClick={clickLogout} />
     </div>
   );
