@@ -8,6 +8,8 @@ import { IKakaoAddress, ILatLon } from "@/types/kakao";
 import LocationCard from "@/components/Common/LocationCard";
 import { GetLatLon } from "@/hooks/useKakaoGetLatLon";
 
+const roadInfo = ["지하철", "버스", "자가용"];
+
 const WeddingSchedule = () => {
   const [weddingDate, setWeddingDate] = useState(new Date());
   const [address, setAddress] = useState("");
@@ -64,6 +66,23 @@ const WeddingSchedule = () => {
         </div>
         {latlon.latitude !== 0 && <LocationCard latitude={latlon.latitude} longitude={latlon.longitude} />}
       </S.WeddingHoleContainer>
+      <S.TrafficContainer>
+        <h2>교통편 및 주차 안내</h2>
+        <div>
+          {roadInfo.map((item, index) => (
+            <div className="Traffic-Input" key={index}>
+              <h3>{item}을 이용해 오시는 길</h3>
+              <input className="Transportation" value={item} disabled />
+              <textarea className="Description" placeholder="예) 수원역 5번 출구 도보 10분" />
+            </div>
+          ))}
+          <div className="Etc-Input">
+            <h3>기타 이동수단</h3>
+            <input className="Transportation" placeholder="교통수단 or 자가용" />
+            <textarea className="Description" placeholder="예) 수원역 5번 출구 도보 10분" />
+          </div>
+        </div>
+      </S.TrafficContainer>
     </S.Container>
   );
 };

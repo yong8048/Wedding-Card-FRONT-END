@@ -102,3 +102,64 @@ export const WeddingHoleContainer = styled.div`
     }
   }
 `;
+
+export const TrafficContainer = styled.div`
+  h2 {
+    font-size: 20px;
+    color: #242424;
+    font-weight: 600;
+    margin: 40px 0 0;
+  }
+  div {
+    font-size: 18px;
+    @media ${({ theme }) => theme.windowSize.md} {
+      font-size: 16px;
+    }
+    @media ${({ theme }) => theme.windowSize.sm} {
+      font-size: 14px;
+    }
+    .Traffic-Input,
+    .Etc-Input {
+      width: 70%;
+      margin: 0 auto;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom: 1px solid #dcdcdc;
+      font-size: inherit;
+
+      .Transportation {
+        padding: 5px 10px;
+        max-width: 150px;
+        font-size: inherit;
+      }
+      textarea {
+        height: 120px;
+        resize: none;
+        padding: 5px 10px;
+        font-size: inherit;
+      }
+    }
+
+    .Etc-Input {
+      position: relative;
+
+      #Close {
+        position: absolute;
+        top: 15px;
+        right: 5px;
+      }
+    }
+
+    #Add-Etc {
+      white-space: nowrap;
+      background-color: #567073;
+      margin: 10px 0;
+      padding: 10px 20px;
+      border-radius: 4px;
+      color: #ececec;
+      font-size: inherit;
+    }
+  }
+`;
