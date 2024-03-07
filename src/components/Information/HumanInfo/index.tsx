@@ -1,6 +1,37 @@
+import { IReqCreateInvitation, TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
 import * as S from "./style";
 
-const HumanInfo = () => {
+const HumanInfo = ({
+  setCreateInvitaionData,
+}: {
+  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
+}) => {
+  const handleDataChange = (e: React.ChangeEvent<HTMLDivElement>) => {
+    const divEl = e.currentTarget;
+    const inputEl = e.target as HTMLInputElement;
+    const concernedPerson = divEl.id as TconcernedPersonType;
+
+    const { name, value } = inputEl;
+    const concernedParent = name as TconcernedParentType;
+
+    if (name === "relationship") {
+      setCreateInvitaionData(previousData => ({
+        ...previousData,
+        [concernedPerson]: {
+          ...previousData[concernedPerson],
+          relationship: value,
+        },
+      }));
+    } else {
+      setCreateInvitaionData(previousData => ({
+        ...previousData,
+        [concernedPerson]: {
+          ...previousData[concernedPerson],
+          [concernedParent]: { ...previousData[concernedPerson][concernedParent], name: value },
+        },
+      }));
+    }
+  };
   return (
     <S.Container>
       {["신랑", "신부"].map((value, index) => (
@@ -9,11 +40,11 @@ const HumanInfo = () => {
             {value} 및 {value}측 혼주 정보를 작성해주세요.
           </h1>
           {/* <h3>반드시 반드시 반드시 설명 설명 설명</h3> */}
-          <div>
-            <input placeholder={`${value} 부`} />
-            <input placeholder={`${value} 모`} />
-            <input placeholder="관계" />
-            <input placeholder="본인" />
+          <div onChange={handleDataChange} id={value === "신랑" ? "husband" : "wife"}>
+            <input placeholder={`${value} 부`} name="father" />
+            <input placeholder={`${value} 모`} name="mother" />
+            <input placeholder="관계" name="relationship" />
+            <input placeholder="본인" name="me" />
           </div>
         </S.Wrapper>
       ))}
