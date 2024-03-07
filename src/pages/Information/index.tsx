@@ -9,6 +9,7 @@ import WeddingSchedule from "@/components/Information/WeddingSchedule";
 import { useEffect, useState } from "react";
 import { IReqCreateInvitation } from "@/types/invitation";
 import { InitialData_CreateInvitation } from "@/utils/InitialData";
+import TempSaveButton from "@/components/Information/TempSaveButton";
 
 const Information = () => {
   const [createInvitaionData, setCreateInvitaionData] = useState<IReqCreateInvitation>(InitialData_CreateInvitation);
@@ -30,11 +31,12 @@ const Information = () => {
     <S.Section>
       <ProgressBar />
       <MainPhoto />
-      <Greeting />
-      <HumanInfo />
-      <Contact />
-      <Account />
-      <WeddingSchedule />
+      <Greeting setCreateInvitaionData={setCreateInvitaionData} />
+      <HumanInfo setCreateInvitaionData={setCreateInvitaionData} />
+      <Contact setCreateInvitaionData={setCreateInvitaionData} />
+      <Account setCreateInvitaionData={setCreateInvitaionData} />
+      <WeddingSchedule setCreateInvitaionData={setCreateInvitaionData} />
+      <TempSaveButton temporaryData={createInvitaionData} />
     </S.Section>
   );
 };
