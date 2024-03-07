@@ -1,27 +1,87 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import * as S from "./style";
+import { IReqCreateInvitation, TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
 
-const family = ["신랑", "신랑 부", "신랑 모", "신부", "신부 부", "신부 모"];
+type TFamily = "신랑" | "신랑 부" | "신랑 모" | "신부" | "신부 부" | "신부 모";
+const family = {
+  신랑: {
+    who: "husband.me",
+    isChecked: false,
+  },
+  "신랑 부": {
+    who: "husband.father",
+    isChecked: false,
+  },
+  "신랑 모": {
+    who: "husband.mother",
+    isChecked: false,
+  },
+  신부: {
+    who: "wife.me",
+    isChecked: false,
+  },
+  "신부 부": {
+    who: "wife.father",
+    isChecked: false,
+  },
+  "신부 모": {
+    who: "wife.mother",
+    isChecked: false,
+  },
+};
 
-const Account = () => {
-  const checkBoxRefs = useRef<null[] | HTMLInputElement[]>([]);
-  const bankRefs = useRef<null[] | HTMLInputElement[]>([]);
-  const accountRefs = useRef<null[] | HTMLInputElement[]>([]);
+const Account = ({
+  setCreateInvitaionData,
+}: {
+  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
+}) => {
+  const [familyMemebers, setFamilyMemebers] = useState(family);
 
-  const [checkedEls, setCheckedEls] = useState<(number | undefined)[]>([]);
+  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const key = e.target.name as TFamily;
+    const who = e.target.id;
+    const [person, parent] = who.split(".");
+    const concernedPerson = person as TconcernedPersonType;
+    const concernedParent = parent as TconcernedParentType;
 
-  const handleCheck = () => {
-    const checkStatus = checkBoxRefs.current.filter(status => status?.checked);
-    const names = checkStatus.map(el => el?.name);
-    const index = names.map(item => family.indexOf(item as string));
+    setFamilyMemebers(previousData => ({
+      ...previousData,
+      [key]: { ...previousData[key], isChecked: e.target.checked },
+    }));
 
-    setCheckedEls(index);
+    setCreateInvitaionData(previousData => ({
+      ...previousData,
+      [person]: {
+        ...previousData[concernedPerson],
+        [concernedParent]: {
+          ...previousData[concernedPerson][concernedParent],
+          account: "",
+          bank: "",
+        },
+      },
+    }));
   };
 
-  useEffect(() => {
-    const filledInputs = checkedEls.map(el => bankRefs.current[el as number]);
-    console.log(filledInputs);
-  }, [checkedEls]);
+  const handleChange = (e: React.ChangeEvent<HTMLDivElement>) => {
+    const divEl = e.currentTarget;
+    const inputEl = e.target as HTMLInputElement;
+    const [person, parent] = divEl.id.split(".");
+
+    const concernedPerson = person as TconcernedPersonType;
+    const concernedParent = parent as TconcernedParentType;
+    const { name, value } = inputEl;
+
+    setCreateInvitaionData(previousData => ({
+      ...previousData,
+      [concernedPerson]: {
+        ...previousData[concernedPerson],
+        [concernedParent]: {
+          ...previousData[concernedPerson][concernedParent],
+          [name]: value,
+        },
+      },
+    }));
+  };
 
   return (
     <S.Container>
@@ -29,38 +89,28 @@ const Account = () => {
       <h3>계좌번호를 등록하실 분을 선택해주세요.</h3>
       <S.Wrapper>
         <div id="check-box">
-          {family.map((value, index) => (
+          {Object.entries(family).map(([key, value], index) => (
             <label key={index}>
-              <input
-                type="checkbox"
-                ref={element => (checkBoxRefs.current[index] = element)}
-                onChange={handleCheck}
-                name={value}
-              />
-              <span>{value}</span>
+              <input type="checkbox" onChange={handleCheck} name={key} id={value.who} />
+              <span>{key}</span>
             </label>
           ))}
         </div>
         <div id="input-area">
-          {checkedEls.length > 0 && <h3>' - '를 제외하고 입력해주세요.</h3>}
-          {checkedEls.map((order, index) => (
-            <div key={index} className="input-area-box">
-              <h2>{family[order as number]}</h2>
-              <div className="account-inputs">
-                <input
-                  placeholder="은행"
-                  className="account"
-                  ref={element => (bankRefs.current[order as number] = element)}
-                  name={String(order)}
-                />
-                <input
-                  placeholder="계좌번호 ( ' - ' 제외)"
-                  ref={element => (accountRefs.current[order as number] = element)}
-                  name={String(order)}
-                />
+          {Object.entries(familyMemebers).filter(([, value]) => value.isChecked).length > 0 && (
+            <h3>' - '를 제외하고 입력해주세요.</h3>
+          )}
+          {Object.entries(familyMemebers)
+            .filter(([, value]) => value.isChecked)
+            .map(([key, value], index) => (
+              <div key={index} className="input-area-box" onChange={handleChange} id={value.who}>
+                <h2>{key}</h2>
+                <div className="account-inputs">
+                  <input placeholder="은행" className="bank" name="bank" />
+                  <input placeholder="계좌번호 ( ' - ' 제외)" name="account" />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </S.Wrapper>
     </S.Container>
