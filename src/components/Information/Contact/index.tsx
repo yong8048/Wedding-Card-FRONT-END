@@ -32,10 +32,10 @@ const Contact = ({
         <S.Wrapper key={index} $isFirst={value === "신랑"}>
           <h1>{value} 및 혼주의 연락받을 연락처를 작성해주세요.</h1>
           <h3>' - '를 제외하고 입력해주세요.</h3>
-          <div onChange={handleDataChange} id={value === "신랑" ? "husband" : "wife"}>
-            <input placeholder={`${value} 전화번호`} name="me" type="number" />
-            <input placeholder={`${value} 부 전화번호`} name="father" type="number" />
-            <input placeholder={`${value} 모 전화번호`} name="mother" type="number" />
+          <div onChange={handleDataChange} id={value === "신랑" ? "HUSBAND" : "WIFE"}>
+            <input placeholder={`${value} 전화번호`} name="ME" type="number" />
+            <input placeholder={`${value} 부 전화번호`} name="FATHER" type="number" />
+            <input placeholder={`${value} 모 전화번호`} name="MOTHER" type="number" />
           </div>
         </S.Wrapper>
       ))}

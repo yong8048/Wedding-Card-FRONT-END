@@ -5,20 +5,20 @@ const InitialData_CreateInvitation: IReqCreateInvitation = {
   address: "",
   wedding_hall: "",
   welcome: "",
-  husband: {
-    me: {
+  HUSBAND: {
+    ME: {
       name: "",
       bank: "",
       account: "",
       contact: "",
     },
-    father: {
+    FATHER: {
       name: "",
       bank: "",
       account: "",
       contact: "",
     },
-    mother: {
+    MOTHER: {
       name: "",
       bank: "",
       account: "",
@@ -26,20 +26,20 @@ const InitialData_CreateInvitation: IReqCreateInvitation = {
     },
     relationship: "",
   },
-  wife: {
-    me: {
+  WIFE: {
+    ME: {
       name: "",
       bank: "",
       account: "",
       contact: "",
     },
-    father: {
+    FATHER: {
       name: "",
       bank: "",
       account: "",
       contact: "",
     },
-    mother: {
+    MOTHER: {
       name: "",
       bank: "",
       account: "",

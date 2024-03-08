@@ -3,20 +3,20 @@ interface IReqCreateInvitation {
   address: string;
   wedding_hall: string;
   welcome: string;
-  husband: {
-    me: {
+  HUSBAND: {
+    ME: {
       name: string;
       bank: string;
       account: string;
       contact: string;
     };
-    father: {
+    FATHER: {
       name: string;
       bank: string;
       account: string;
       contact: string;
     };
-    mother: {
+    MOTHER: {
       name: string;
       bank: string;
       account: string;
@@ -24,20 +24,20 @@ interface IReqCreateInvitation {
     };
     relationship: string;
   };
-  wife: {
-    me: {
+  WIFE: {
+    ME: {
       name: string;
       bank: string;
       account: string;
       contact: string;
     };
-    father: {
+    FATHER: {
       name: string;
       bank: string;
       account: string;
       contact: string;
     };
-    mother: {
+    MOTHER: {
       name: string;
       bank: string;
       account: string;
@@ -56,7 +56,7 @@ interface IReqCreateInvitation {
   };
 }
 
-type TconcernedPersonType = "husband" | "wife";
-type TconcernedParentType = "father" | "mother" | "me";
+type TconcernedPersonType = "HUSBAND" | "WIFE";
+type TconcernedParentType = "FATHER" | "MOTHER" | "ME";
 
 export type { IReqCreateInvitation, TconcernedPersonType, TconcernedParentType };

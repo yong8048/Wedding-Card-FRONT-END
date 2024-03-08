@@ -40,11 +40,11 @@ const HumanInfo = ({
             {value} 및 {value}측 혼주 정보를 작성해주세요.
           </h1>
           {/* <h3>반드시 반드시 반드시 설명 설명 설명</h3> */}
-          <div onChange={handleDataChange} id={value === "신랑" ? "husband" : "wife"}>
-            <input placeholder={`${value} 부`} name="father" />
-            <input placeholder={`${value} 모`} name="mother" />
+          <div onChange={handleDataChange} id={value === "신랑" ? "HUSBAND" : "WIFE"}>
+            <input placeholder={`${value} 부`} name="FATHER" />
+            <input placeholder={`${value} 모`} name="MOTHER" />
             <input placeholder="관계" name="relationship" />
-            <input placeholder="본인" name="me" />
+            <input placeholder="본인" name="ME" />
           </div>
         </S.Wrapper>
       ))}

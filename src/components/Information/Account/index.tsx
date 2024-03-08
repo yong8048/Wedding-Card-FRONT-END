@@ -1,32 +1,68 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./style";
 import { IReqCreateInvitation, TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
 
 type TFamily = "신랑" | "신랑 부" | "신랑 모" | "신부" | "신부 부" | "신부 모";
-const family = {
+type TFamilyKey = "HUSBAND.ME" | "HUSBAND.FATHER" | "HUSBAND.MOTHER" | "WIFE.ME" | "WIFE.FATHER" | "WIFE.MOTHER";
+
+interface IFamily {
+  [key: string]: {
+    who: TFamilyKey;
+    isChecked: boolean;
+  };
+}
+
+const family: IFamily = {
   신랑: {
-    who: "husband.me",
+    who: "HUSBAND.ME",
     isChecked: false,
   },
   "신랑 부": {
-    who: "husband.father",
+    who: "HUSBAND.FATHER",
     isChecked: false,
   },
   "신랑 모": {
-    who: "husband.mother",
+    who: "HUSBAND.MOTHER",
     isChecked: false,
   },
   신부: {
-    who: "wife.me",
+    who: "WIFE.ME",
     isChecked: false,
   },
   "신부 부": {
-    who: "wife.father",
+    who: "WIFE.FATHER",
     isChecked: false,
   },
   "신부 모": {
-    who: "wife.mother",
+    who: "WIFE.MOTHER",
     isChecked: false,
+  },
+};
+
+const initailData = {
+  "HUSBAND.ME": {
+    bank: "",
+    account: "",
+  },
+  "HUSBAND.FATHER": {
+    bank: "",
+    account: "",
+  },
+  "HUSBAND.MOTHER": {
+    bank: "",
+    account: "",
+  },
+  "WIFE.ME": {
+    bank: "",
+    account: "",
+  },
+  "WIFE.FATHER": {
+    bank: "",
+    account: "",
+  },
+  "WIFE.MOTHER": {
+    bank: "",
+    account: "",
   },
 };
 
@@ -36,6 +72,7 @@ const Account = ({
   setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
 }) => {
   const [familyMemebers, setFamilyMemebers] = useState(family);
+  const [inputValue, setInputValue] = useState(initailData);
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const key = e.target.name as TFamily;
@@ -47,6 +84,15 @@ const Account = ({
     setFamilyMemebers(previousData => ({
       ...previousData,
       [key]: { ...previousData[key], isChecked: e.target.checked },
+    }));
+
+    setInputValue(previousData => ({
+      ...previousData,
+      [who]: {
+        ...previousData[who as TFamilyKey],
+        bank: "",
+        account: "",
+      },
     }));
 
     setCreateInvitaionData(previousData => ({
@@ -62,26 +108,37 @@ const Account = ({
     }));
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLDivElement>) => {
-    const divEl = e.currentTarget;
-    const inputEl = e.target as HTMLInputElement;
-    const [person, parent] = divEl.id.split(".");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, id } = e.target;
 
-    const concernedPerson = person as TconcernedPersonType;
-    const concernedParent = parent as TconcernedParentType;
-    const { name, value } = inputEl;
-
-    setCreateInvitaionData(previousData => ({
+    setInputValue(previousData => ({
       ...previousData,
-      [concernedPerson]: {
-        ...previousData[concernedPerson],
-        [concernedParent]: {
-          ...previousData[concernedPerson][concernedParent],
-          [name]: value,
-        },
+      [id]: {
+        ...previousData[id as TFamilyKey],
+        [name]: value,
       },
     }));
   };
+
+  useEffect(() => {
+    Object.entries(inputValue).map(([key, value]) => {
+      const [person, parent] = key.split(".");
+      const concernedPerson = person as TconcernedPersonType;
+      const concernedParent = parent as TconcernedParentType;
+
+      setCreateInvitaionData(previousData => ({
+        ...previousData,
+        [concernedPerson]: {
+          ...previousData[concernedPerson],
+          [concernedParent]: {
+            ...previousData[concernedPerson][concernedParent],
+            bank: value.bank,
+            account: value.account,
+          },
+        },
+      }));
+    });
+  }, [inputValue]);
 
   return (
     <S.Container>
@@ -103,11 +160,24 @@ const Account = ({
           {Object.entries(familyMemebers)
             .filter(([, value]) => value.isChecked)
             .map(([key, value], index) => (
-              <div key={index} className="input-area-box" onChange={handleChange} id={value.who}>
+              <div key={index} className="input-area-box">
                 <h2>{key}</h2>
                 <div className="account-inputs">
-                  <input placeholder="은행" className="bank" name="bank" />
-                  <input placeholder="계좌번호 ( ' - ' 제외)" name="account" />
+                  <input
+                    placeholder="은행"
+                    className="bank"
+                    name="bank"
+                    id={value.who}
+                    value={inputValue[value.who].bank}
+                    onChange={handleChange}
+                  />
+                  <input
+                    placeholder="계좌번호 ( ' - ' 제외)"
+                    name="account"
+                    id={value.who}
+                    value={inputValue[value.who].account}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
             ))}
