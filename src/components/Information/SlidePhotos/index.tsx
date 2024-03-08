@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import * as S from "./style";
 import { IoMdClose, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { MdOutlineFileDownload } from "react-icons/md";
 
 const SlidePhotos = ({
   galleryImages,
@@ -89,6 +90,12 @@ const SlidePhotos = ({
       <h3>사진은 최대 15장까지 업로드할 수 있습니다.</h3>
       <h3>업로드 후에 사진의 순서를 변경할 수 있습니다.</h3>
       <S.ImageContainer onDrop={handleDrop} onDragOver={handleDropOver} id="Container">
+        {!galleryImages.length && (
+          <div className="notice-Drag">
+            <MdOutlineFileDownload size={100} />
+            <p>드래그하여 업로드를 할 수도 있습니다!</p>
+          </div>
+        )}
         <div className="grid" onDragLeave={e => e.stopPropagation()}>
           {galleryImages
             .sort((a, b) => a.index - b.index)

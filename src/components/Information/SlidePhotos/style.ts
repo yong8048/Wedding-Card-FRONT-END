@@ -39,10 +39,24 @@ export const Container = styled.div`
 `;
 
 export const ImageContainer = styled.div`
+  position: relative;
   border: 1px solid #acacac;
   height: 300px;
   overflow-y: scroll;
   padding: 10px;
+
+  .notice-Drag {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+
+    p {
+      font-weight: 600;
+      word-break: keep-all;
+    }
+  }
 
   .grid {
     display: grid;
