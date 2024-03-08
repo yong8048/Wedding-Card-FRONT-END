@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 
 const createInstance = (isServer: boolean) => {
   const instance = axios.create({
-    baseURL: isServer ? "" : "https://kapi.kakao.com",
+    baseURL: isServer ? import.meta.env.VITE_SERVER_URL : "https://kapi.kakao.com",
     timeout: 10000,
     headers: {
       "Content-Type": isServer ? "application/json" : "application/x-www-form-urlencoded;charset=utf-8",
