@@ -11,6 +11,7 @@ import TempSaveButton from "@/components/Information/TempSaveButton";
 import { useEffect, useState } from "react";
 import { IReqCreateInvitation } from "@/types/invitation";
 import { InitialData_CreateInvitation } from "@/utils/InitialData";
+import MasterPassword from "@/components/Information/MasterPassword";
 
 const Information = () => {
   const [createInvitaionData, setCreateInvitaionData] = useState<IReqCreateInvitation>(InitialData_CreateInvitation);
@@ -40,6 +41,7 @@ const Information = () => {
       <Account setCreateInvitaionData={setCreateInvitaionData} />
       <SlidePhotos galleryImages={galleryImages} setGalleryImages={setGalleryImages} />
       <WeddingSchedule setCreateInvitaionData={setCreateInvitaionData} />
+      <MasterPassword setCreateInvitaionData={setCreateInvitaionData} />
       <TempSaveButton temporaryData={createInvitaionData} galleryImages={galleryImages} />
     </S.Section>
   );

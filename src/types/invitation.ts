@@ -54,6 +54,7 @@ interface IReqCreateInvitation {
       info: string;
     };
   };
+  master_password: string;
 }
 
 type TconcernedPersonType = "HUSBAND" | "WIFE";
