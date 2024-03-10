@@ -39,8 +39,10 @@ export const Container = styled.div`
 
   .textarea {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin: 20px 0;
+
     textarea {
       font-family: "Pretendard";
       resize: none;
@@ -49,7 +51,7 @@ export const Container = styled.div`
       padding: 10px;
       font-size: 18px;
       border: 1px solid #acacac;
-      border-radius: 4px;
+      border-radius: 0px 0px 4px 4px !important;
 
       @media ${({ theme }) => theme.windowSize.md} {
         font-size: 14px;
@@ -60,5 +62,20 @@ export const Container = styled.div`
         outline: none;
       }
     }
+  }
+`;
+
+export const TextEditor = styled.div`
+  background-color: #ececec;
+  width: 80%;
+  padding: 10px;
+  height: 20px;
+  border-radius: 4px 4px 0 0;
+  border: 1px solid #acacac;
+  border-bottom: none;
+  text-align: left;
+
+  button {
+    margin-left: 6px;
   }
 `;

@@ -16,6 +16,9 @@ const Greeting = ({
       <h3>작성한 내용을 토대로 제작됩니다.</h3>
       <h3>띄어쓰기나 줄바꿈에 유의해주세요.</h3>
       <div className="textarea">
+        <S.TextEditor>
+          <button>가</button>
+        </S.TextEditor>
         <textarea placeholder="인사말 작성" onChange={handleDataChange} />
       </div>
     </S.Container>
