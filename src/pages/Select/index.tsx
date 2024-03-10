@@ -1,4 +1,4 @@
-import SelectForm from "@/components/SelectForm";
+import SelectForm from "@/components/Select/SelectForm";
 import * as S from "./style";
 const Select = () => {
   return (

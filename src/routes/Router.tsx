@@ -5,6 +5,7 @@ import Servey from "@/pages/Servey";
 import Auth from "@/pages/Auth";
 import Select from "@/pages/Select";
 import Information from "@/pages/Information";
+import Preview from "@/pages/Preview";
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
           <Route path="/servey" element={<Servey />} />
           <Route path="/select" element={<Select />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/preview" element={<Preview />} />
           <Route path="/information" element={<Information />} />
         </Route>
       </Routes>
