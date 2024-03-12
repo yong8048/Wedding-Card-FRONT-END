@@ -128,11 +128,11 @@ export const TrafficContainer = styled.div`
       border-bottom: 1px solid #dcdcdc;
       font-size: inherit;
 
-      #Etc-Input {
-        font-size: 18px;
-        margin-left: 6px;
-        width: 120px;
-        padding: 5px 10px;
+      @media ${({ theme }) => theme.windowSize.md} {
+        width: 80%;
+      }
+      @media ${({ theme }) => theme.windowSize.sm} {
+        width: 90%;
       }
 
       .Transportation {
@@ -146,32 +146,13 @@ export const TrafficContainer = styled.div`
           margin-left: 6px;
         }
       }
-      textarea {
-        height: 120px;
-        resize: none;
-        padding: 5px 10px;
+
+      #Etc-Input {
         font-size: inherit;
+        margin-left: 6px;
+        width: 120px;
+        padding: 5px 10px;
       }
-    }
-
-    .Etc-Input {
-      position: relative;
-
-      #Close {
-        position: absolute;
-        top: 15px;
-        right: 5px;
-      }
-    }
-
-    #Add-Etc {
-      white-space: nowrap;
-      background-color: #567073;
-      margin: 10px 0;
-      padding: 10px 20px;
-      border-radius: 4px;
-      color: #ececec;
-      font-size: inherit;
     }
   }
 `;
