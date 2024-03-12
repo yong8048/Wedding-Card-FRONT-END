@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { IReqCreateInvitation } from "@/types/invitation";
 import { InitialData_CreateInvitation } from "@/utils/InitialData";
 import MasterPassword from "@/components/Information/MasterPassword";
+import BackGroundMusic from "@/components/Information/BackGroundMusic";
 
 const Information = () => {
   const [createInvitaionData, setCreateInvitaionData] = useState<IReqCreateInvitation>(InitialData_CreateInvitation);
@@ -42,6 +43,7 @@ const Information = () => {
       <SlidePhotos galleryImages={galleryImages} setGalleryImages={setGalleryImages} />
       <WeddingSchedule setCreateInvitaionData={setCreateInvitaionData} />
       <MasterPassword setCreateInvitaionData={setCreateInvitaionData} />
+      <BackGroundMusic setCreateInvitaionData={setCreateInvitaionData} />
       <TempSaveButton temporaryData={createInvitaionData} galleryImages={galleryImages} />
     </S.Section>
   );
