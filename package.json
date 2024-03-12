@@ -14,6 +14,7 @@
     "@tanstack/react-query-devtools": "^5.24.0",
     "axios": "^1.6.7",
     "date-fns": "^3.3.1",
+    "draft-js": "^0.11.7",
     "react": "^18.2.0",
     "react-cookie": "^7.1.0",
     "react-datepicker": "^6.2.0",
@@ -26,6 +27,7 @@
     "swiper": "^11.0.6"
   },
   "devDependencies": {
+    "@types/draft-js": "^0.11.18",
     "@types/react": "^18.2.43",
     "@types/react-datepicker": "^6.0.3",
     "@types/react-dom": "^18.2.17",
