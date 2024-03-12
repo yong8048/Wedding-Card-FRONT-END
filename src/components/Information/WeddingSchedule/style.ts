@@ -131,8 +131,13 @@ export const TrafficContainer = styled.div`
 
       .Transportation {
         padding: 5px 10px;
-        max-width: 150px;
         font-size: inherit;
+        display: flex;
+        font-weight: 600;
+
+        span {
+          margin-left: 6px;
+        }
       }
       textarea {
         height: 120px;
@@ -162,4 +167,60 @@ export const TrafficContainer = styled.div`
       font-size: inherit;
     }
   }
+`;
+
+export const TextEditor = styled.div`
+  background-color: #ececec;
+  padding: 10px;
+  height: 30px;
+  border-radius: 4px 4px 0 0;
+  border: 1px solid #acacac;
+  border-bottom: none;
+  text-align: left;
+
+  display: flex;
+
+  button {
+    padding: 4px 6px;
+    &:hover {
+      background-color: #dcdcdc;
+    }
+
+    svg {
+      height: 22px;
+    }
+  }
+
+  #BOLD {
+    font-weight: 600;
+  }
+
+  #UNDERLINE {
+    span {
+      padding-bottom: 1px;
+      box-shadow: inset 0 -1px 0 #000;
+    }
+  }
+  #ITALIC {
+    span {
+      font-style: italic;
+    }
+  }
+
+  #divider {
+    width: 1px;
+    background-color: #cccccc;
+    height: 70%;
+    margin: auto 6px;
+  }
+`;
+
+export const EditorContainer = styled.div`
+  font-family: "Pretendard";
+  height: 150px;
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #acacac;
+  border-radius: 0px 0px 4px 4px !important;
+  margin-top: -10px;
 `;
