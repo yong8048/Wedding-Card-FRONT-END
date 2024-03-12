@@ -33,7 +33,7 @@ const MasterPassword = ({
 
     setCreateInvitaionData(previousData => ({
       ...previousData,
-      master_password: valid1 === valid2 && inputValue[0] === inputValue[1] ? inputValue[0] : "",
+      management_password: valid1 === valid2 && inputValue[0] === inputValue[1] ? inputValue[0] : "",
     }));
   }, [inputValue]);
 

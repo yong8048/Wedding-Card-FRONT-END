@@ -2,7 +2,7 @@ interface IReqCreateInvitation {
   date: string;
   address: string;
   wedding_hall: string;
-  welcome: string;
+  welcome: IEditorState[];
   HUSBAND: {
     ME: {
       name: string;
@@ -46,18 +46,27 @@ interface IReqCreateInvitation {
     relationship: string;
   };
   road: {
-    subway: string;
-    bus: string;
-    car: string;
+    subway: IEditorState[];
+    bus: IEditorState[];
+    car: IEditorState[];
     etc: {
       type: string;
-      info: string;
+      info: IEditorState[];
     };
   };
-  master_password: string;
+  management_password: string;
+}
+
+interface IEditorState {
+  text: string;
+  inline_style: {
+    offset: number;
+    length: number;
+    style: string;
+  }[];
 }
 
 type TconcernedPersonType = "HUSBAND" | "WIFE";
 type TconcernedParentType = "FATHER" | "MOTHER" | "ME";
 
-export type { IReqCreateInvitation, TconcernedPersonType, TconcernedParentType };
+export type { IReqCreateInvitation, IEditorState, TconcernedPersonType, TconcernedParentType };

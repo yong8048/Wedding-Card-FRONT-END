@@ -4,7 +4,7 @@ const InitialData_CreateInvitation: IReqCreateInvitation = {
   date: "",
   address: "",
   wedding_hall: "",
-  welcome: "",
+  welcome: [],
   HUSBAND: {
     ME: {
       name: "",
@@ -48,15 +48,15 @@ const InitialData_CreateInvitation: IReqCreateInvitation = {
     relationship: "",
   },
   road: {
-    subway: "",
-    bus: "",
-    car: "",
+    subway: [],
+    bus: [],
+    car: [],
     etc: {
       type: "",
-      info: "",
+      info: [],
     },
   },
-  master_password: "",
+  management_password: "",
 };
 
 export { InitialData_CreateInvitation };
