@@ -118,8 +118,7 @@ export const TrafficContainer = styled.div`
     @media ${({ theme }) => theme.windowSize.sm} {
       font-size: 14px;
     }
-    .Traffic-Input,
-    .Etc-Input {
+    .Traffic-Input {
       width: 70%;
       margin: 0 auto;
       padding: 20px 0;
@@ -129,10 +128,18 @@ export const TrafficContainer = styled.div`
       border-bottom: 1px solid #dcdcdc;
       font-size: inherit;
 
+      #Etc-Input {
+        font-size: 18px;
+        margin-left: 6px;
+        width: 120px;
+        padding: 5px 10px;
+      }
+
       .Transportation {
         padding: 5px 10px;
         font-size: inherit;
         display: flex;
+        align-items: center;
         font-weight: 600;
 
         span {

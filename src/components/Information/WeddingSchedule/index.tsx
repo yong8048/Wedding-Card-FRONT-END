@@ -95,9 +95,17 @@ const WeddingSchedule = ({
     setEditorState(newEditorStateArray);
   };
 
-  const testClick = () => {
-    const test = editorState.map(state => convertToRaw(state.getCurrentContent()));
-    console.log(test);
+  const handleChangeEtcType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCreateInvitationData(previousData => ({
+      ...previousData,
+      road: {
+        ...previousData.road,
+        etc: {
+          ...previousData.road.etc,
+          type: e.target.value,
+        },
+      },
+    }));
   };
 
   useEffect(() => {
@@ -105,7 +113,23 @@ const WeddingSchedule = ({
 
     Object.entries(roadInfo).map(([key], index) => {
       if (key === "etc") {
-        console.log("asdasd");
+        setCreateInvitationData(previousData => ({
+          ...previousData,
+          road: {
+            ...previousData.road,
+            etc: {
+              ...previousData.road.etc,
+              info: states[index].blocks.map(state => ({
+                text: state.text,
+                inline_style: state.inlineStyleRanges.map(inlineStyle => ({
+                  offset: inlineStyle.offset,
+                  length: inlineStyle.length,
+                  style: inlineStyle.style,
+                })),
+              })),
+            },
+          },
+        }));
       } else {
         setCreateInvitationData(previousData => ({
           ...previousData,
@@ -155,12 +179,15 @@ const WeddingSchedule = ({
       <S.TrafficContainer>
         <h2>교통편 및 주차 안내</h2>
         <div>
-          {Object.entries(roadInfo).map(([, value], index) => (
+          {Object.entries(roadInfo).map(([key, value], index) => (
             <div className="Traffic-Input" key={index}>
-              <h3>{value.name}을 이용해 오시는 길</h3>
               <div className="Transportation">
                 {value.icon}
-                <span>{value.name}</span>
+                {key === "etc" ? (
+                  <input placeholder="기타 이동수단" id="Etc-Input" onChange={handleChangeEtcType} />
+                ) : (
+                  <span>{value.name}</span>
+                )}
               </div>
               <S.TextEditor>
                 <button id="BOLD" onMouseDown={e => toggleInlineStyle(e, index)}>
@@ -184,9 +211,6 @@ const WeddingSchedule = ({
           ))}
         </div>
       </S.TrafficContainer>
-      <div onClick={testClick} style={{ cursor: "pointer" }}>
-        버튼버튼버튼
-      </div>
     </S.Container>
   );
 };
