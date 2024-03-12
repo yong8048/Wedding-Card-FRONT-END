@@ -55,6 +55,7 @@ interface IReqCreateInvitation {
     };
   };
   management_password: string;
+  bgm: number;
 }
 
 interface IEditorState {

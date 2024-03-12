@@ -57,6 +57,7 @@ const InitialData_CreateInvitation: IReqCreateInvitation = {
     },
   },
   management_password: "",
+  bgm: 0,
 };
 
 export { InitialData_CreateInvitation };

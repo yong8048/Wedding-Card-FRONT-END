@@ -37,3 +37,18 @@ export const Container = styled.div`
     }
   }
 `;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .audio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    audio {
+      margin-top: 10px;
+    }
+  }
+`;
