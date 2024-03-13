@@ -58,7 +58,7 @@ const InitialData_CreateInvitation: IReqCreateInvitation = {
     },
   },
   management_password: "",
-  video_url: "",
+  video_id: "",
   bgm: 0,
 };
 

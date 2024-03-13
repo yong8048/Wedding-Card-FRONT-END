@@ -56,7 +56,7 @@ interface IReqCreateInvitation {
     };
   };
   management_password: string;
-  video_url: string;
+  video_id: string;
   bgm: number;
 }
 
