@@ -13,6 +13,7 @@ import { IReqCreateInvitation } from "@/types/invitation";
 import { InitialData_CreateInvitation } from "@/utils/InitialData";
 import MasterPassword from "@/components/Information/MasterPassword";
 import BackGroundMusic from "@/components/Information/BackGroundMusic";
+import YoutubeVideo from "@/components/Information/YoutubeVideo";
 
 const Information = () => {
   const [createInvitaionData, setCreateInvitaionData] = useState<IReqCreateInvitation>(InitialData_CreateInvitation);
@@ -44,6 +45,7 @@ const Information = () => {
       <WeddingSchedule setCreateInvitaionData={setCreateInvitaionData} />
       <MasterPassword setCreateInvitaionData={setCreateInvitaionData} />
       <BackGroundMusic setCreateInvitaionData={setCreateInvitaionData} />
+      <YoutubeVideo setCreateInvitaionData={setCreateInvitaionData} />
       <TempSaveButton temporaryData={createInvitaionData} galleryImages={galleryImages} />
     </S.Section>
   );
