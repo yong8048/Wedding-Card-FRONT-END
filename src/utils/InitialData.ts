@@ -5,6 +5,7 @@ const InitialData_CreateInvitation: IReqCreateInvitation = {
   address: "",
   wedding_hall: "",
   welcome: [],
+  welcome_align: "left",
   HUSBAND: {
     ME: {
       name: "",
@@ -57,6 +58,7 @@ const InitialData_CreateInvitation: IReqCreateInvitation = {
     },
   },
   management_password: "",
+  video_url: "",
   bgm: 0,
 };
 

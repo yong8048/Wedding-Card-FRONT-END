@@ -1,11 +1,9 @@
-import { IReqCreateInvitation } from "@/types/invitation";
+import { DraftTextAlignment, IReqCreateInvitation } from "@/types/invitation";
 import * as S from "./style";
 import { CiTextAlignLeft, CiTextAlignCenter, CiTextAlignRight } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
-
-type DraftTextAlignment = "left" | "center" | "right";
 
 const Greeting = ({
   setCreateInvitaionData,
@@ -18,6 +16,10 @@ const Greeting = ({
   const chageTextAlign = (e: React.MouseEvent<HTMLButtonElement>) => {
     const value = e.currentTarget.id.split("-")[1] as DraftTextAlignment;
     setTextAlign(value);
+    setCreateInvitaionData(previousData => ({
+      ...previousData,
+      welcome_align: value,
+    }));
   };
 
   const toggleInlineStyle = (e: React.MouseEvent<HTMLButtonElement>) => {

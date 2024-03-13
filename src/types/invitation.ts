@@ -3,6 +3,7 @@ interface IReqCreateInvitation {
   address: string;
   wedding_hall: string;
   welcome: IEditorState[];
+  welcome_align: DraftTextAlignment;
   HUSBAND: {
     ME: {
       name: string;
@@ -55,6 +56,7 @@ interface IReqCreateInvitation {
     };
   };
   management_password: string;
+  video_url: string;
   bgm: number;
 }
 
@@ -69,5 +71,6 @@ interface IEditorState {
 
 type TconcernedPersonType = "HUSBAND" | "WIFE";
 type TconcernedParentType = "FATHER" | "MOTHER" | "ME";
+type DraftTextAlignment = "left" | "center" | "right";
 
-export type { IReqCreateInvitation, IEditorState, TconcernedPersonType, TconcernedParentType };
+export type { IReqCreateInvitation, IEditorState, TconcernedPersonType, TconcernedParentType, DraftTextAlignment };
