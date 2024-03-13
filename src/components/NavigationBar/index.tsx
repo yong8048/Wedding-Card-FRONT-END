@@ -23,11 +23,11 @@ const NavigationBar = () => {
           <img src="/logo.png" alt="logo" />
         </S.NavLinkEl>
       </div>
-      <div>
-        <S.SearchButton onClick={handleGetUserInfo}>
+      <div onClick={handleGetUserInfo}>
+        <S.NavLinkEl to={"/search"}>
           <FcSearch size={25} />
           <span>검색</span>
-        </S.SearchButton>
+        </S.NavLinkEl>
       </div>
       <div>
         <S.NavLinkEl to={"/preview"}>
