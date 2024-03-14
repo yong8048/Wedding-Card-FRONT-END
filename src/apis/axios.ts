@@ -1,20 +1,28 @@
 import { getCookie } from "@/utils/cookie";
 import axios, { AxiosError } from "axios";
 
-const createInstance = (isServer: boolean) => {
+const createInstance = (isServer: boolean, ContentType: string) => {
   const instance = axios.create({
     baseURL: isServer ? import.meta.env.VITE_SERVER_URL : "https://kapi.kakao.com",
     timeout: 10000,
-    headers: {
-      "Content-Type": isServer ? "application/json" : "application/x-www-form-urlencoded;charset=utf-8",
-    },
+    headers: isServer
+      ? {
+          "Content-Type": ContentType,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        }
+      : {
+          "Content-Type": ContentType,
+        },
   });
 
   instance.interceptors.request.use(
     request => {
-      const token = getCookie("WECA_access_token");
-      if (token) request.headers["authorization"] = `Bearer ${token}`;
-      else if (!token) request.headers["authorization"] = "";
+      if (!isServer) {
+        const token = getCookie("WECA_access_token");
+        if (token) request.headers["authorization"] = `Bearer ${token}`;
+        else if (!token) request.headers["authorization"] = "";
+      }
       return request;
     },
     (error: AxiosError) => {
@@ -56,5 +64,6 @@ const createInstance = (isServer: boolean) => {
 
   return instance;
 };
-export const instance = createInstance(true);
-export const kakaoInstance = createInstance(false);
+export const instance = createInstance(true, "application/json");
+export const formInstance = createInstance(true, "multipart/form-data");
+export const kakaoInstance = createInstance(false, "application/x-www-form-urlencoded;charset=utf-8");

@@ -1,5 +1,5 @@
 import { IReqCreateInvitation } from "@/types/invitation";
-import { instance } from "./axios";
+import { formInstance, instance } from "./axios";
 import { getUserInfo } from "./kakao";
 
 export const postData = async ({
@@ -27,7 +27,15 @@ export const postData = async ({
 
   formData.append("json", new Blob([JSON.stringify(JsonData)], { type: "application/json" }));
   const uid = await getUserInfo();
+  console.log(uid);
 
-  const res = await instance.post(`/save/${isTemp ? "information" : "temp"}`, formData, { headers: { uid: uid.id } });
+  const res = await formInstance.post(`/save/${isTemp ? "temp" : "information"}`, formData, {
+    headers: { uid: uid.id },
+  });
+  return res;
+};
+
+export const testData = async ({ JsonData }: { JsonData: IReqCreateInvitation }) => {
+  const res = await instance.post("/test", JsonData);
   return res;
 };

@@ -52,7 +52,7 @@ const YoutubeVideo = ({
         <div className="radio-container">
           <label>
             <input type="radio" onChange={handleCheckNotUse} ref={radioInputRef} defaultChecked={true} />
-            <span>사용 안함</span>
+            <span>해당 없음</span>
           </label>
         </div>
         <div className="input-container">

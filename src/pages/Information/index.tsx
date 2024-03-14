@@ -16,8 +16,9 @@ import BackGroundMusic from "@/components/Information/BackGroundMusic";
 import YoutubeVideo from "@/components/Information/YoutubeVideo";
 import NextStepButton from "@/components/Common/NextStepButton";
 import { useNavigate } from "react-router-dom";
-import { postData } from "@/apis/server";
+import { postData, testData } from "@/apis/server";
 import LiveWedding from "@/components/Information/LiveWedding";
+import Test from "@/components/Information/test";
 
 const Information = () => {
   const [createInvitaionData, setCreateInvitaionData] = useState<IReqCreateInvitation>(InitialData_CreateInvitation);
@@ -61,11 +62,8 @@ const Information = () => {
   };
 
   const handleClickTempSave = async () => {
-    const res = await postData({
+    const res = await testData({
       JsonData: createInvitaionData,
-      MainImage: mainImage,
-      GalleryImages: galleryImages,
-      isTemp: true,
     });
     console.log(res);
   };
@@ -84,6 +82,7 @@ const Information = () => {
       <BackGroundMusic setCreateInvitaionData={setCreateInvitaionData} />
       <YoutubeVideo setCreateInvitaionData={setCreateInvitaionData} />
       <LiveWedding setCreateInvitaionData={setCreateInvitaionData} />
+      <Test />
       <TempSaveButton FuncOnClick={handleClickTempSave} />
       <NextStepButton ArrowDirection="left" FuncOnClick={handleClickLeft} />
       <NextStepButton ArrowDirection="right" FuncOnClick={handleClickRight} />
