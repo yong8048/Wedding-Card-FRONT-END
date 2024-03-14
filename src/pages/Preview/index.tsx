@@ -1,9 +1,10 @@
+import TemplateList from "@/components/Common/TemplateList";
 import * as S from "./style";
-import SelectForm from "@/components/Select/SelectForm";
+
 const Preview = () => {
   return (
     <S.PreviewContainer>
-      <SelectForm />
+      <TemplateList />
     </S.PreviewContainer>
   );
 };
