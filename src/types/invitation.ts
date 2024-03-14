@@ -58,6 +58,7 @@ interface IReqCreateInvitation {
   management_password: string;
   video_id: string;
   bgm: number;
+  live_url: string;
 }
 
 interface IEditorState {

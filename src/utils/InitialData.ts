@@ -60,6 +60,7 @@ const InitialData_CreateInvitation: IReqCreateInvitation = {
   management_password: "",
   video_id: "",
   bgm: 0,
+  live_url: "",
 };
 
 export { InitialData_CreateInvitation };
