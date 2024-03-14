@@ -3,8 +3,8 @@ import { IoArrowForwardOutline, IoArrowBackOutline } from "react-icons/io5";
 
 const NextStepButton = ({ ArrowDirection, FuncOnClick }: { ArrowDirection: string; FuncOnClick: () => void }) => {
   return (
-    <S.Container $ArrowDirection={ArrowDirection === "left"}>
-      <S.Wrapper onClick={FuncOnClick}>
+    <S.Container>
+      <S.Wrapper onClick={FuncOnClick} $ArrowDirection={ArrowDirection === "left"}>
         {ArrowDirection === "left" ? (
           <IoArrowBackOutline size={30} color="#ececec" />
         ) : (
