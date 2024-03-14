@@ -48,12 +48,23 @@ const Information = () => {
     console.log(res);
     navigate(-1);
   };
+
   const handleClickRight = async () => {
     const res = await postData({
       JsonData: createInvitaionData,
       MainImage: mainImage,
       GalleryImages: galleryImages,
       isTemp: false,
+    });
+    console.log(res);
+  };
+
+  const handleClickTempSave = async () => {
+    const res = await postData({
+      JsonData: createInvitaionData,
+      MainImage: mainImage,
+      GalleryImages: galleryImages,
+      isTemp: true,
     });
     console.log(res);
   };
@@ -71,7 +82,7 @@ const Information = () => {
       <MasterPassword setCreateInvitaionData={setCreateInvitaionData} />
       <BackGroundMusic setCreateInvitaionData={setCreateInvitaionData} />
       <YoutubeVideo setCreateInvitaionData={setCreateInvitaionData} />
-      <TempSaveButton temporaryData={createInvitaionData} galleryImages={galleryImages} />
+      <TempSaveButton FuncOnClick={handleClickTempSave} />
       <NextStepButton ArrowDirection="left" FuncOnClick={handleClickLeft} />
       <NextStepButton ArrowDirection="right" FuncOnClick={handleClickRight} />
     </S.Section>
