@@ -3,7 +3,7 @@ import * as S from "./style";
 import React from "react";
 
 const Contact = ({
-  setCreateInvitationData: setCreateInvitaionData,
+  setCreateInvitationData,
 }: {
   setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
@@ -15,7 +15,7 @@ const Contact = ({
     const { name, value } = inputEl;
     const concernedParent = name as TconcernedParentType;
 
-    setCreateInvitaionData(previousData => ({
+    setCreateInvitationData(previousData => ({
       ...previousData,
       [concernedPerson]: {
         ...previousData[concernedPerson],

@@ -2,7 +2,7 @@ import { IReqInvitationJSON, TconcernedParentType, TconcernedPersonType } from "
 import * as S from "./style";
 
 const HumanInfo = ({
-  setCreateInvitationData: setCreateInvitaionData,
+  setCreateInvitationData,
 }: {
   setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
@@ -15,7 +15,7 @@ const HumanInfo = ({
     const concernedParent = name as TconcernedParentType;
 
     if (name === "relationship") {
-      setCreateInvitaionData(previousData => ({
+      setCreateInvitationData(previousData => ({
         ...previousData,
         [concernedPerson]: {
           ...previousData[concernedPerson],
@@ -23,7 +23,7 @@ const HumanInfo = ({
         },
       }));
     } else {
-      setCreateInvitaionData(previousData => ({
+      setCreateInvitationData(previousData => ({
         ...previousData,
         [concernedPerson]: {
           ...previousData[concernedPerson],

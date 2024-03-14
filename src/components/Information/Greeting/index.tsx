@@ -6,7 +6,7 @@ import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
 
 const Greeting = ({
-  setCreateInvitationData: setCreateInvitaionData,
+  setCreateInvitationData,
 }: {
   setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
@@ -16,7 +16,7 @@ const Greeting = ({
   const chageTextAlign = (e: React.MouseEvent<HTMLButtonElement>) => {
     const value = e.currentTarget.id.split("-")[1] as DraftTextAlignment;
     setTextAlign(value);
-    setCreateInvitaionData(previousData => ({
+    setCreateInvitationData(previousData => ({
       ...previousData,
       welcome_align: value,
     }));
@@ -30,7 +30,7 @@ const Greeting = ({
   useEffect(() => {
     const texts = convertToRaw(editorState.getCurrentContent());
 
-    setCreateInvitaionData(previousData => ({
+    setCreateInvitationData(previousData => ({
       ...previousData,
       welcome: texts.blocks.map(txt => ({
         text: txt.text,

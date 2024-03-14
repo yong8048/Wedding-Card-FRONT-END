@@ -67,7 +67,7 @@ const initailData = {
 };
 
 const Account = ({
-  setCreateInvitationData: setCreateInvitaionData,
+  setCreateInvitationData,
 }: {
   setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
@@ -95,7 +95,7 @@ const Account = ({
       },
     }));
 
-    setCreateInvitaionData(previousData => ({
+    setCreateInvitationData(previousData => ({
       ...previousData,
       [person]: {
         ...previousData[concernedPerson],
@@ -126,7 +126,7 @@ const Account = ({
       const concernedPerson = person as TconcernedPersonType;
       const concernedParent = parent as TconcernedParentType;
 
-      setCreateInvitaionData(previousData => ({
+      setCreateInvitationData(previousData => ({
         ...previousData,
         [concernedPerson]: {
           ...previousData[concernedPerson],

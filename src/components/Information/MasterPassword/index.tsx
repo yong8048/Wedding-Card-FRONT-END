@@ -7,7 +7,7 @@ const properties = ["first", "second"];
 const validPasswordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const MasterPassword = ({
-  setCreateInvitationData: setCreateInvitaionData,
+  setCreateInvitationData,
 }: {
   setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
@@ -31,7 +31,7 @@ const MasterPassword = ({
 
     setIsValid(valid1 === valid2 && inputValue[0] === inputValue[1]);
 
-    setCreateInvitaionData(previousData => ({
+    setCreateInvitationData(previousData => ({
       ...previousData,
       management_password: valid1 === valid2 && inputValue[0] === inputValue[1] ? inputValue[0] : "",
     }));

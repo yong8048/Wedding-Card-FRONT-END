@@ -3,7 +3,7 @@ import * as S from "./style";
 import { useRef } from "react";
 
 const LiveWedding = ({
-  setCreateInvitationData: setCreateInvitaionData,
+  setCreateInvitationData,
 }: {
   setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
@@ -14,7 +14,7 @@ const LiveWedding = ({
     if (radioInputRef.current) {
       radioInputRef.current.checked = e.target.value === "";
     }
-    setCreateInvitaionData(previousData => ({
+    setCreateInvitationData(previousData => ({
       ...previousData,
       live_url: e.target.value,
     }));
@@ -24,7 +24,7 @@ const LiveWedding = ({
     if (urlInputRef.current && e.target.checked) {
       urlInputRef.current.value = "";
 
-      setCreateInvitaionData(previousData => ({
+      setCreateInvitationData(previousData => ({
         ...previousData,
         live_url: "",
       }));

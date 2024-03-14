@@ -9,7 +9,7 @@ const Audios = {
 };
 
 const BackGroundMusic = ({
-  setCreateInvitationData: setCreateInvitaionData,
+  setCreateInvitationData,
 }: {
   setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
@@ -39,7 +39,7 @@ const BackGroundMusic = ({
 
   const handleChangeRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
     const bgmNumber = Number(e.target.id);
-    setCreateInvitaionData(previousData => ({
+    setCreateInvitationData(previousData => ({
       ...previousData,
       bgm: bgmNumber,
     }));

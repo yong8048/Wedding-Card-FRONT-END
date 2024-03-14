@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import YouTube from "react-youtube";
 
 const YoutubeVideo = ({
-  setCreateInvitationData: setCreateInvitaionData,
+  setCreateInvitationData,
 }: {
   setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
@@ -18,7 +18,7 @@ const YoutubeVideo = ({
       const watch = value.substring(value.indexOf("watch?v="));
       const videoID = watch.substring(watch.indexOf("=") + 1);
       setYoutubeURL(videoID);
-      setCreateInvitaionData(previousData => ({
+      setCreateInvitationData(previousData => ({
         ...previousData,
         video_id: videoID,
       }));

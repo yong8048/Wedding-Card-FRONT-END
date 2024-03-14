@@ -20,7 +20,7 @@ const roadInfo = {
 };
 
 const WeddingSchedule = ({
-  setCreateInvitationData: setCreateInvitationData,
+  setCreateInvitationData,
 }: {
   setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
