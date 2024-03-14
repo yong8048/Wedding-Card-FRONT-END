@@ -16,11 +16,24 @@ export const ServeyFormQuestionLi = styled.li<styleProps>`
   transition: opacity 0.5s ease-in-out;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 20px;
   margin: 30px 10px;
+
+  #goto-information {
+    background-color: #f2f2eb;
+    /* width: fit-content; */
+    width: 100%;
+    margin: 20px auto;
+    padding: 15px 0;
+    border-radius: 16px;
+    font-size: 20px;
+    color: #424242;
+    border: 1px solid #ccc;
+  }
 `;
 export const ServeyFormQuestionLiItem = styled.div`
   width: fit-content;
+  max-width: 70%;
   background-color: #818c7b;
   border-radius: 16px;
   display: flex;
@@ -29,6 +42,9 @@ export const ServeyFormQuestionLiItem = styled.div`
   padding: 15px 15px;
   color: white;
   transition: opacity 1s ease-in-out;
+  text-align: start;
+  word-break: keep-all;
+  line-height: 20px;
 `;
 export const ServeyFormQuestionItem = styled.div`
   width: 50%;
@@ -50,13 +66,14 @@ export const ServeyFormQuestionItem = styled.div`
     border-radius: 5px;
     padding: 5px 10px;
     border: none;
+    background-color: #f2f2eb;
   }
 `;
 export const ServeyFormAnsweredItem = styled.div`
   width: fit-content;
-  background-color: #818c7b;
+  background-color: #ffe4a6;
   border-radius: 16px;
   padding: 15px 15px;
-  color: white;
+  color: #424242;
   margin-left: auto;
 `;
