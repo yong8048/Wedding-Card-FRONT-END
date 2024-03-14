@@ -10,6 +10,13 @@ export const Container = styled.div`
   border-radius: 6px;
   z-index: 100;
   cursor: pointer;
+  transition-duration: 300ms;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translate(-50%, -10%);
+    }
+  }
 
   span {
     color: #363636;
