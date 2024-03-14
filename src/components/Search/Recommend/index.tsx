@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import * as S from "./style";
 import { IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const testWords = ["편안한", "색감있는", "심플", "흑백", "모던", "화려한"];
 const Recommend = () => {
   const [recentlyWords, setRecentWords] = useState<string[]>([""]);
   const [recommendWords, setRecommendWords] = useState([""]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     setRecommendWords(testWords);
 
@@ -25,6 +26,7 @@ const Recommend = () => {
 
   const clickRecommendWords = (word: string) => {
     console.log(word);
+    navigate(`/search/${word}`);
   };
 
   return (
