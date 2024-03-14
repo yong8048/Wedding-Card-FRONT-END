@@ -17,6 +17,7 @@ import YoutubeVideo from "@/components/Information/YoutubeVideo";
 import NextStepButton from "@/components/Common/NextStepButton";
 import { useNavigate } from "react-router-dom";
 import { postData } from "@/apis/server";
+import LiveWedding from "@/components/Information/LiveWedding";
 
 const Information = () => {
   const [createInvitaionData, setCreateInvitaionData] = useState<IReqCreateInvitation>(InitialData_CreateInvitation);
@@ -82,6 +83,7 @@ const Information = () => {
       <MasterPassword setCreateInvitaionData={setCreateInvitaionData} />
       <BackGroundMusic setCreateInvitaionData={setCreateInvitaionData} />
       <YoutubeVideo setCreateInvitaionData={setCreateInvitaionData} />
+      <LiveWedding setCreateInvitaionData={setCreateInvitaionData} />
       <TempSaveButton FuncOnClick={handleClickTempSave} />
       <NextStepButton ArrowDirection="left" FuncOnClick={handleClickLeft} />
       <NextStepButton ArrowDirection="right" FuncOnClick={handleClickRight} />
