@@ -1,10 +1,8 @@
-import { getUserInfo } from "@/apis/kakao";
 import * as S from "./style";
 import { FcSearch } from "react-icons/fc";
 import { FcTemplate } from "react-icons/fc";
 import { FcCollaboration } from "react-icons/fc";
 import { useState } from "react";
-import SearchContainer from "../SearchContainer";
 
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_KAKAO_REST_API_KEY}&redirect_uri=${import.meta.env.VITE_KAKAO_REDIRECT_URL}&response_type=code`;
 
@@ -14,11 +12,6 @@ const NavigationBar = () => {
   const getIsLogined = () => {
     return false;
   };
-
-  // const handleGetUserInfo = async () => {
-  //   const res = await getUserInfo();
-  //   console.log(res);
-  // };
 
   const clickSearch = () => {
     setSearchState(!searchState);
