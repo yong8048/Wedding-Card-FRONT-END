@@ -7,7 +7,7 @@ import { setHours, setMinutes } from "date-fns";
 import { IKakaoAddress, ILatLon } from "@/types/kakao";
 import LocationCard from "@/components/Common/LocationCard";
 import { GetLatLon } from "@/hooks/useKakaoGetLatLon";
-import { IReqCreateInvitation } from "@/types/invitation";
+import { IReqInvitationJSON } from "@/types/invitation";
 import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { IoIosSubway, IoIosBus, IoIosCar, IoMdQuote } from "react-icons/io";
@@ -22,7 +22,7 @@ const roadInfo = {
 const WeddingSchedule = ({
   setCreateInvitaionData: setCreateInvitationData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
+  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const [weddingDate, setWeddingDate] = useState(new Date());
   const [address, setAddress] = useState("");

@@ -8,8 +8,6 @@ const createInstance = (isServer: boolean, ContentType: string) => {
     headers: isServer
       ? {
           "Content-Type": ContentType,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": true,
         }
       : {
           "Content-Type": ContentType,

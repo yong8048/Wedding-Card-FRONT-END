@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import * as S from "./style";
-import { IReqCreateInvitation, TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
+import { IReqInvitationJSON, TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
 
 type TFamily = "신랑" | "신랑 부" | "신랑 모" | "신부" | "신부 부" | "신부 모";
 type TFamilyKey = "HUSBAND.ME" | "HUSBAND.FATHER" | "HUSBAND.MOTHER" | "WIFE.ME" | "WIFE.FATHER" | "WIFE.MOTHER";
@@ -69,7 +69,7 @@ const initailData = {
 const Account = ({
   setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
+  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const [familyMemebers, setFamilyMemebers] = useState(family);
   const [inputValue, setInputValue] = useState(initailData);

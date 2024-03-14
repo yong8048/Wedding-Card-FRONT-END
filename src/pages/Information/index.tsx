@@ -9,7 +9,7 @@ import SlidePhotos from "@/components/Information/SlidePhotos";
 import WeddingSchedule from "@/components/Information/WeddingSchedule";
 import TempSaveButton from "@/components/Information/TempSaveButton";
 import { useEffect, useState } from "react";
-import { IReqCreateInvitation } from "@/types/invitation";
+import { IReqInvitationJSON } from "@/types/invitation";
 import { InitialData_CreateInvitation } from "@/utils/InitialData";
 import MasterPassword from "@/components/Information/MasterPassword";
 import BackGroundMusic from "@/components/Information/BackGroundMusic";
@@ -19,9 +19,10 @@ import { useNavigate } from "react-router-dom";
 import { postData, testData } from "@/apis/server";
 import LiveWedding from "@/components/Information/LiveWedding";
 import Test from "@/components/Information/test";
+import ShareKakao from "@/components/Information/ShareKakao";
 
 const Information = () => {
-  const [createInvitaionData, setCreateInvitaionData] = useState<IReqCreateInvitation>(InitialData_CreateInvitation);
+  const [createInvitaionData, setCreateInvitaionData] = useState<IReqInvitationJSON>(InitialData_CreateInvitation);
   const [mainImage, setMainImage] = useState<File | undefined>();
   const [galleryImages, setGalleryImages] = useState<{ file: File; index: number }[]>([]);
 
@@ -82,6 +83,7 @@ const Information = () => {
       <BackGroundMusic setCreateInvitaionData={setCreateInvitaionData} />
       <YoutubeVideo setCreateInvitaionData={setCreateInvitaionData} />
       <LiveWedding setCreateInvitaionData={setCreateInvitaionData} />
+      <ShareKakao setCreateInvitaionData={setCreateInvitaionData} />
       <Test />
       <TempSaveButton FuncOnClick={handleClickTempSave} />
       <NextStepButton ArrowDirection="left" FuncOnClick={handleClickLeft} />

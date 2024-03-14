@@ -1,4 +1,4 @@
-import { IReqCreateInvitation } from "@/types/invitation";
+import { IReqInvitationJSON } from "@/types/invitation";
 import * as S from "./style";
 import { useEffect, useRef } from "react";
 
@@ -11,7 +11,7 @@ const Audios = {
 const BackGroundMusic = ({
   setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
+  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const audioRefs = useRef<HTMLAudioElement[]>([]);
 

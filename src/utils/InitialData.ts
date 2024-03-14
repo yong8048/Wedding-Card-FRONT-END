@@ -1,6 +1,6 @@
-import { IReqCreateInvitation } from "@/types/invitation";
+import { IReqInvitationJSON } from "@/types/invitation";
 
-const InitialData_CreateInvitation: IReqCreateInvitation = {
+const InitialData_CreateInvitation: IReqInvitationJSON = {
   date: "",
   address: "",
   wedding_hall: "",

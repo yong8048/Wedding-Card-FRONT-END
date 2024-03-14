@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import * as S from "./style";
 import { GrFormViewHide, GrFormView } from "react-icons/gr";
-import { IReqCreateInvitation } from "@/types/invitation";
+import { IReqInvitationJSON } from "@/types/invitation";
 
 const properties = ["first", "second"];
 const validPasswordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -9,7 +9,7 @@ const validPasswordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 const MasterPassword = ({
   setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
+  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const [isViewPW, setIsViewPW] = useState<boolean[]>([false, false]);
   const [inputValue, setInputValue] = useState<string[]>(["", ""]);

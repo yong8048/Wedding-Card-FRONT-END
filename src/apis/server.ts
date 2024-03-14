@@ -1,4 +1,4 @@
-import { IReqCreateInvitation } from "@/types/invitation";
+import { IReqInvitationJSON } from "@/types/invitation";
 import { formInstance, instance } from "./axios";
 import { getUserInfo } from "./kakao";
 
@@ -8,7 +8,7 @@ export const postData = async ({
   GalleryImages,
   isTemp,
 }: {
-  JsonData: IReqCreateInvitation;
+  JsonData: IReqInvitationJSON;
   MainImage: File | undefined;
   GalleryImages: { file: File; index: number }[];
   isTemp: boolean;
@@ -35,7 +35,7 @@ export const postData = async ({
   return res;
 };
 
-export const testData = async ({ JsonData }: { JsonData: IReqCreateInvitation }) => {
+export const testData = async ({ JsonData }: { JsonData: IReqInvitationJSON }) => {
   const res = await instance.post("/test", JsonData);
   return res;
 };

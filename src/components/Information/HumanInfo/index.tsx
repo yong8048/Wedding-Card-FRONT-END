@@ -1,10 +1,10 @@
-import { IReqCreateInvitation, TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
+import { IReqInvitationJSON, TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
 import * as S from "./style";
 
 const HumanInfo = ({
   setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
+  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const handleDataChange = (e: React.ChangeEvent<HTMLDivElement>) => {
     const divEl = e.currentTarget;

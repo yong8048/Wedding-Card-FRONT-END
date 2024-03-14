@@ -1,4 +1,4 @@
-interface IReqCreateInvitation {
+interface IReqInvitationJSON {
   date: string;
   address: string;
   wedding_hall: string;
@@ -61,6 +61,12 @@ interface IReqCreateInvitation {
   live_url: string;
 }
 
+interface IReqInvitationPhotos {
+  main_photo: File;
+  slide_photos: File[];
+  kakao_thumbnail: File;
+}
+
 interface IEditorState {
   text: string;
   inline_style: {
@@ -74,4 +80,11 @@ type TconcernedPersonType = "HUSBAND" | "WIFE";
 type TconcernedParentType = "FATHER" | "MOTHER" | "ME";
 type DraftTextAlignment = "left" | "center" | "right";
 
-export type { IReqCreateInvitation, IEditorState, TconcernedPersonType, TconcernedParentType, DraftTextAlignment };
+export type {
+  IReqInvitationJSON,
+  IReqInvitationPhotos,
+  IEditorState,
+  TconcernedPersonType,
+  TconcernedParentType,
+  DraftTextAlignment,
+};

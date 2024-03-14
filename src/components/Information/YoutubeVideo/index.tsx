@@ -1,4 +1,4 @@
-import { IReqCreateInvitation } from "@/types/invitation";
+import { IReqInvitationJSON } from "@/types/invitation";
 import * as S from "./style";
 import { useRef, useState } from "react";
 import YouTube from "react-youtube";
@@ -6,7 +6,7 @@ import YouTube from "react-youtube";
 const YoutubeVideo = ({
   setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
+  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const [youtubeURL, setYoutubeURL] = useState("");
   const urlInputRef = useRef<HTMLInputElement>(null);

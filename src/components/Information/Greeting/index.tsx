@@ -1,4 +1,4 @@
-import { DraftTextAlignment, IReqCreateInvitation } from "@/types/invitation";
+import { DraftTextAlignment, IReqInvitationJSON } from "@/types/invitation";
 import * as S from "./style";
 import { CiTextAlignLeft, CiTextAlignCenter, CiTextAlignRight } from "react-icons/ci";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import "draft-js/dist/Draft.css";
 const Greeting = ({
   setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
+  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const [textAlign, setTextAlign] = useState<DraftTextAlignment>("left");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
