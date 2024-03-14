@@ -1,5 +1,6 @@
 import { getCookie } from "@/utils/cookie";
 import axios, { AxiosError } from "axios";
+import { getUserInfo } from "./kakao";
 
 const createInstance = (isServer: boolean) => {
   const instance = axios.create({
@@ -14,7 +15,7 @@ const createInstance = (isServer: boolean) => {
     request => {
       const token = getCookie("WECA_access_token");
       if (token) request.headers["authorization"] = `Bearer ${token}`;
-      if (!token) request.headers["authorization"] = "";
+      else if (!token) request.headers["authorization"] = "";
       return request;
     },
     (error: AxiosError) => {

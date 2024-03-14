@@ -14,11 +14,16 @@ import { InitialData_CreateInvitation } from "@/utils/InitialData";
 import MasterPassword from "@/components/Information/MasterPassword";
 import BackGroundMusic from "@/components/Information/BackGroundMusic";
 import YoutubeVideo from "@/components/Information/YoutubeVideo";
+import NextStepButton from "@/components/Common/NextStepButton";
+import { useNavigate } from "react-router-dom";
+import { postData } from "@/apis/server";
 
 const Information = () => {
   const [createInvitaionData, setCreateInvitaionData] = useState<IReqCreateInvitation>(InitialData_CreateInvitation);
   const [mainImage, setMainImage] = useState<File | undefined>();
   const [galleryImages, setGalleryImages] = useState<{ file: File; index: number }[]>([]);
+
+  const navigate = useNavigate();
 
   const preventClose = (e: BeforeUnloadEvent) => {
     e.preventDefault();
@@ -32,6 +37,26 @@ const Information = () => {
       window.removeEventListener("beforeunload", preventClose);
     };
   }, []);
+
+  const handleClickLeft = async () => {
+    const res = await postData({
+      JsonData: createInvitaionData,
+      MainImage: mainImage,
+      GalleryImages: galleryImages,
+      isTemp: true,
+    });
+    console.log(res);
+    navigate(-1);
+  };
+  const handleClickRight = async () => {
+    const res = await postData({
+      JsonData: createInvitaionData,
+      MainImage: mainImage,
+      GalleryImages: galleryImages,
+      isTemp: false,
+    });
+    console.log(res);
+  };
 
   return (
     <S.Section>
@@ -47,6 +72,8 @@ const Information = () => {
       <BackGroundMusic setCreateInvitaionData={setCreateInvitaionData} />
       <YoutubeVideo setCreateInvitaionData={setCreateInvitaionData} />
       <TempSaveButton temporaryData={createInvitaionData} galleryImages={galleryImages} />
+      <NextStepButton ArrowDirection="left" FuncOnClick={handleClickLeft} />
+      <NextStepButton ArrowDirection="right" FuncOnClick={handleClickRight} />
     </S.Section>
   );
 };
