@@ -13,6 +13,7 @@ export const NavContainer = styled.nav`
   grid-template-rows: 70px;
 
   font-size: 14px;
+  z-index: 10000;
 
   div {
     position: relative;
