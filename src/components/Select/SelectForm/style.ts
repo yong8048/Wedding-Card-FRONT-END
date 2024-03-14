@@ -11,21 +11,28 @@ export const SelectFormItems = styled.div`
   flex-direction: column;
   padding: 10px;
   font-family: "Pretendard";
-  cursor: pointer;
 
+  font-size: 0.8rem;
   div {
+    cursor: pointer;
     /* min-height: 415px; */
     display: flex;
     background-color: #f1f1f1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
   }
 
   img {
-    box-shadow: 0px 0px 1px 0px;
-    border-radius: 10px;
+    box-shadow: 0px 2px 6px 1px;
+    border-radius: 15px;
     width: 70%;
     height: 80%;
   }
+`;
+
+export const SelectFormItemInfo = styled.div`
+  display: flex;
+  background-color: white;
 `;

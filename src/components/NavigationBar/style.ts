@@ -35,6 +35,10 @@ export const NavContainer = styled.nav`
   }
 `;
 
+export const SearchDiv = styled.div`
+  position: relative;
+`;
+
 export const SearchButton = styled.button`
   display: flex;
   flex-direction: column;
