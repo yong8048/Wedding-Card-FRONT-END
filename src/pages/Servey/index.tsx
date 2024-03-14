@@ -1,5 +1,4 @@
 import ServeyForm from "@/components/ServeyForm";
-import React from "react";
 
 const Servey = () => {
   return (

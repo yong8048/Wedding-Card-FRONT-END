@@ -94,7 +94,7 @@ export const Wrapper = styled.div`
           gap: 8px;
         }
 
-        .account {
+        .bank {
           width: 140px;
           @media ${({ theme }) => theme.windowSize.md} {
             width: auto;

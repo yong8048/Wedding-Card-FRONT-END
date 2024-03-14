@@ -1,5 +1,10 @@
 body {
   background-color: #f8f8f8;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
 }
 
 #root {
@@ -25,10 +30,32 @@ button {
   font-size: 1rem;
   background-color: transparent;
   cursor: pointer;
+  font-family: "Pretendard";
 }
 
 input:focus {
   outline: 1px solid black;
+}
+
+input:disabled {
+  pointer-events: none;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='radio']:focus {
+  outline: none;
+}
+
+input,
+textarea {
+  border: 1px solid #acacac;
+  border-radius: 4px;
+  font-family: "Pretendard";
 }
 
 @font-face {

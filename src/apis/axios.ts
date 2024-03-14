@@ -1,9 +1,10 @@
 import { getCookie } from "@/utils/cookie";
 import axios, { AxiosError } from "axios";
+// import { getUserInfo } from "./kakao";
 
 const createInstance = (isServer: boolean) => {
   const instance = axios.create({
-    baseURL: isServer ? "" : "https://kapi.kakao.com",
+    baseURL: isServer ? import.meta.env.VITE_SERVER_URL : "https://kapi.kakao.com",
     timeout: 10000,
     headers: {
       "Content-Type": isServer ? "application/json" : "application/x-www-form-urlencoded;charset=utf-8",
@@ -14,7 +15,7 @@ const createInstance = (isServer: boolean) => {
     request => {
       const token = getCookie("WECA_access_token");
       if (token) request.headers["authorization"] = `Bearer ${token}`;
-      if (!token) request.headers["authorization"] = "";
+      else if (!token) request.headers["authorization"] = "";
       return request;
     },
     (error: AxiosError) => {
