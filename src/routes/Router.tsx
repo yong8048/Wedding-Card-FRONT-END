@@ -6,6 +6,7 @@ import Auth from "@/pages/Auth";
 import Select from "@/pages/Select";
 import Information from "@/pages/Information";
 import Preview from "@/pages/Preview";
+import Search from "@/pages/Search";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/preview" element={<Preview />} />
           <Route path="/information" element={<Information />} />
+          <Route path="/search" element={<Search />} />
         </Route>
       </Routes>
     </BrowserRouter>

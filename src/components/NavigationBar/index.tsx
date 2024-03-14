@@ -26,34 +26,31 @@ const NavigationBar = () => {
   };
 
   return (
-    <>
-      <S.NavContainer>
-        <div>
-          <S.NavLinkEl to={"/"}>
-            <img src="/logo.png" alt="logo" />
-          </S.NavLinkEl>
-        </div>
-        <div>
-          <S.SearchButton onClick={clickSearch}>
-            <FcSearch size={25} />
-            <span>검색</span>
-          </S.SearchButton>
-        </div>
-        <div>
-          <S.NavLinkEl to={"/preview"}>
-            <FcTemplate size={30} />
-            <span>템플릿</span>
-          </S.NavLinkEl>
-        </div>
-        <div>
-          <S.NavLinkEl to={getIsLogined() ? "/mypage" : KAKAO_AUTH_URL}>
-            <FcCollaboration size={25} />
-            <span>MY</span>
-          </S.NavLinkEl>
-        </div>
-      </S.NavContainer>
-      {searchState ? <SearchContainer /> : null}
-    </>
+    <S.NavContainer>
+      <div>
+        <S.NavLinkEl to={"/"}>
+          <img src="/logo.png" alt="logo" />
+        </S.NavLinkEl>
+      </div>
+      <div onClick={clickSearch}>
+        <S.NavLinkEl to={"/search"}>
+          <FcSearch size={25} />
+          <span>검색</span>
+        </S.NavLinkEl>
+      </div>
+      <div>
+        <S.NavLinkEl to={"/preview"}>
+          <FcTemplate size={30} />
+          <span>템플릿</span>
+        </S.NavLinkEl>
+      </div>
+      <div>
+        <S.NavLinkEl to={getIsLogined() ? "/mypage" : KAKAO_AUTH_URL}>
+          <FcCollaboration size={25} />
+          <span>MY</span>
+        </S.NavLinkEl>
+      </div>
+    </S.NavContainer>
   );
 };
 

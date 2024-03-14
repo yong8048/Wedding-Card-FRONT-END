@@ -1,13 +1,12 @@
-import React from "react";
 import * as S from "./style";
+import Header from "@/components/Search/Header";
+import Recommend from "@/components/Search/Recommend";
 const Search = () => {
   return (
-    <S.SearchSection>
-      <div>
-        <div>뒤로가기</div>
-        <input type="text" placeholder="검색창" />
-      </div>
-    </S.SearchSection>
+    <S.SearchContainer>
+      <Header />
+      <Recommend />
+    </S.SearchContainer>
   );
 };
 
