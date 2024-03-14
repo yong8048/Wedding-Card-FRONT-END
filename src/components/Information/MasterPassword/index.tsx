@@ -7,9 +7,9 @@ const properties = ["first", "second"];
 const validPasswordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const MasterPassword = ({
-  setCreateInvitaionData,
+  setCreateInvitationData: setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
+  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const [isViewPW, setIsViewPW] = useState<boolean[]>([false, false]);
   const [inputValue, setInputValue] = useState<string[]>(["", ""]);

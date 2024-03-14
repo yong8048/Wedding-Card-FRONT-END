@@ -4,9 +4,9 @@ import { useRef, useState } from "react";
 import YouTube from "react-youtube";
 
 const YoutubeVideo = ({
-  setCreateInvitaionData,
+  setCreateInvitationData: setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
+  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const [youtubeURL, setYoutubeURL] = useState("");
   const urlInputRef = useRef<HTMLInputElement>(null);

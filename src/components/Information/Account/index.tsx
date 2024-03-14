@@ -67,9 +67,9 @@ const initailData = {
 };
 
 const Account = ({
-  setCreateInvitaionData,
+  setCreateInvitationData: setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
+  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const [familyMemebers, setFamilyMemebers] = useState(family);
   const [inputValue, setInputValue] = useState(initailData);

@@ -20,9 +20,9 @@ const roadInfo = {
 };
 
 const WeddingSchedule = ({
-  setCreateInvitaionData: setCreateInvitationData,
+  setCreateInvitationData: setCreateInvitationData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
+  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const [weddingDate, setWeddingDate] = useState(new Date());
   const [address, setAddress] = useState("");

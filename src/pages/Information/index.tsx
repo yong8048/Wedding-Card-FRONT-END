@@ -22,9 +22,10 @@ import Test from "@/components/Information/test";
 import ShareKakao from "@/components/Information/ShareKakao";
 
 const Information = () => {
-  const [createInvitaionData, setCreateInvitaionData] = useState<IReqInvitationJSON>(InitialData_CreateInvitation);
+  const [createInvitationData, setCreateInvitationData] = useState<IReqInvitationJSON>(InitialData_CreateInvitation);
   const [mainImage, setMainImage] = useState<File | undefined>();
   const [galleryImages, setGalleryImages] = useState<{ file: File; index: number }[]>([]);
+  // const [invi];
 
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ const Information = () => {
 
   const handleClickLeft = async () => {
     const res = await postData({
-      JsonData: createInvitaionData,
+      JsonData: createInvitationData,
       MainImage: mainImage,
       GalleryImages: galleryImages,
       isTemp: true,
@@ -54,7 +55,7 @@ const Information = () => {
 
   const handleClickRight = async () => {
     const res = await postData({
-      JsonData: createInvitaionData,
+      JsonData: createInvitationData,
       MainImage: mainImage,
       GalleryImages: galleryImages,
       isTemp: false,
@@ -64,7 +65,7 @@ const Information = () => {
 
   const handleClickTempSave = async () => {
     const res = await testData({
-      JsonData: createInvitaionData,
+      JsonData: createInvitationData,
     });
     console.log(res);
   };
@@ -73,17 +74,17 @@ const Information = () => {
     <S.Section>
       <ProgressBar />
       <MainPhoto mainImage={mainImage} setMainImage={setMainImage} />
-      <Greeting setCreateInvitaionData={setCreateInvitaionData} />
-      <HumanInfo setCreateInvitaionData={setCreateInvitaionData} />
-      <Contact setCreateInvitaionData={setCreateInvitaionData} />
-      <Account setCreateInvitaionData={setCreateInvitaionData} />
+      <Greeting setCreateInvitationData={setCreateInvitationData} />
+      <HumanInfo setCreateInvitationData={setCreateInvitationData} />
+      <Contact setCreateInvitationData={setCreateInvitationData} />
+      <Account setCreateInvitationData={setCreateInvitationData} />
       <SlidePhotos galleryImages={galleryImages} setGalleryImages={setGalleryImages} />
-      <WeddingSchedule setCreateInvitaionData={setCreateInvitaionData} />
-      <MasterPassword setCreateInvitaionData={setCreateInvitaionData} />
-      <BackGroundMusic setCreateInvitaionData={setCreateInvitaionData} />
-      <YoutubeVideo setCreateInvitaionData={setCreateInvitaionData} />
-      <LiveWedding setCreateInvitaionData={setCreateInvitaionData} />
-      <ShareKakao setCreateInvitaionData={setCreateInvitaionData} />
+      <WeddingSchedule setCreateInvitationData={setCreateInvitationData} />
+      <MasterPassword setCreateInvitationData={setCreateInvitationData} />
+      <BackGroundMusic setCreateInvitationData={setCreateInvitationData} />
+      <YoutubeVideo setCreateInvitationData={setCreateInvitationData} />
+      <LiveWedding setCreateInvitationData={setCreateInvitationData} />
+      <ShareKakao setCreateInvitationData={setCreateInvitationData} />
       <Test />
       <TempSaveButton FuncOnClick={handleClickTempSave} />
       <NextStepButton ArrowDirection="left" FuncOnClick={handleClickLeft} />

@@ -6,9 +6,9 @@ import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
 
 const Greeting = ({
-  setCreateInvitaionData,
+  setCreateInvitationData: setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
+  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const [textAlign, setTextAlign] = useState<DraftTextAlignment>("left");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());

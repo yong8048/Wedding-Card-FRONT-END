@@ -9,9 +9,9 @@ const Audios = {
 };
 
 const BackGroundMusic = ({
-  setCreateInvitaionData,
+  setCreateInvitationData: setCreateInvitaionData,
 }: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
+  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
 }) => {
   const audioRefs = useRef<HTMLAudioElement[]>([]);
 
