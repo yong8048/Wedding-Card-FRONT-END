@@ -1,6 +1,5 @@
 import { getCookie } from "@/utils/cookie";
 import axios, { AxiosError } from "axios";
-// import { getUserInfo } from "./kakao";
 
 const createInstance = (isServer: boolean) => {
   const instance = axios.create({
