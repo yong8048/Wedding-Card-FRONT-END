@@ -37,3 +37,47 @@ export const Container = styled.div`
     }
   }
 `;
+
+export const Wrapper = styled.div`
+  .radio-container {
+    margin-bottom: 10px;
+    label {
+      span {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+    font-size: 20px;
+    width: 70%;
+
+    @media ${({ theme }) => theme.windowSize.md} {
+      font-size: 16px;
+      width: 80%;
+    }
+    @media ${({ theme }) => theme.windowSize.sm} {
+      font-size: 14px;
+      width: 90%;
+    }
+    span {
+      white-space: nowrap;
+    }
+    input {
+      font-size: 18px;
+      width: 100%;
+      padding: 5px;
+      @media ${({ theme }) => theme.windowSize.md} {
+        font-size: 14px;
+      }
+      @media ${({ theme }) => theme.windowSize.sm} {
+        font-size: 12px;
+      }
+    }
+  }
+`;
