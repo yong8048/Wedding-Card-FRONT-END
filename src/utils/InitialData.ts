@@ -77,4 +77,12 @@ const InitialData_CreateInvitationPhotos: IReqInvitationPhotos = {
   kakao_thumbnail: undefined,
 };
 
-export { InitialData_CreateInvitationJSON, InitialData_CreateInvitationPhotos };
+const MAX_IMAGE_SIZE = 1024 * 1024 * 3;
+const MAX_UPLOAD_IMAGE_NUMBER = 15;
+
+export {
+  InitialData_CreateInvitationJSON,
+  InitialData_CreateInvitationPhotos,
+  MAX_IMAGE_SIZE,
+  MAX_UPLOAD_IMAGE_NUMBER,
+};

@@ -2,6 +2,7 @@ import { useRef } from "react";
 import * as S from "./style";
 import { useRecoilState } from "recoil";
 import { invitationPhotosState } from "@/stores/createInvitationPhotosStore";
+import { MAX_IMAGE_SIZE } from "@/utils/InitialData";
 
 const MainPhoto = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,11 +16,13 @@ const MainPhoto = () => {
 
   const handleSetImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? undefined;
-    if (file) {
+    if (file && file.size < MAX_IMAGE_SIZE) {
       setInvitationPhotos(previousData => ({
         ...previousData,
         main_photo: file,
       }));
+    } else {
+      alert(`사진첨부 사이즈는 ${MAX_IMAGE_SIZE / 1024 / 1024}MB 이내로 가능합니다.`);
     }
   };
   return (

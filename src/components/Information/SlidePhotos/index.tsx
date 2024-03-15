@@ -4,12 +4,12 @@ import { IoMdClose, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { useRecoilState } from "recoil";
 import { invitationPhotosState } from "@/stores/createInvitationPhotosStore";
+import { MAX_IMAGE_SIZE, MAX_UPLOAD_IMAGE_NUMBER } from "@/utils/InitialData";
 
 const SlidePhotos = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [invitationPhotos, setInvitationPhotos] = useRecoilState(invitationPhotosState);
 
-  console.log(invitationPhotos);
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const filesArray = Array.from(e.dataTransfer.files);
@@ -18,10 +18,15 @@ const SlidePhotos = () => {
     if (imageFiles.length > 0) {
       alert("이미지 파일만 업로드 할 수 있습니다.");
       return;
-    } else if (e.dataTransfer.getData("text/plain") !== "") {
+    } else if (filesArray.some(image => image.size > MAX_IMAGE_SIZE)) {
+      alert(`사진첨부 사이즈는 ${MAX_IMAGE_SIZE / 1024 / 1024}MB 이내로 가능합니다.`);
+      return;
+    } else if (invitationPhotos.slide_photos.length + filesArray.length > MAX_UPLOAD_IMAGE_NUMBER) {
+      alert(`갤러리 사진은 최대 ${MAX_UPLOAD_IMAGE_NUMBER}장까지만 업로드 가능합니다`);
       return;
     }
-    const newImages = Array.from(e.dataTransfer.files).map((file, index) => ({
+
+    const newImages = filesArray.map((file, index) => ({
       file,
       index: invitationPhotos.slide_photos.length + index,
     }));
@@ -41,14 +46,23 @@ const SlidePhotos = () => {
 
   const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const newImages = Array.from(e.target.files).map((file, index) => ({
-        file,
-        index: invitationPhotos.slide_photos.length + index,
-      }));
-      setInvitationPhotos(previousImages => ({
-        ...previousImages,
-        slide_photos: [...previousImages.slide_photos, ...newImages],
-      }));
+      const filesArray = Array.from(e.target.files);
+      if (filesArray.some(image => image.size > MAX_IMAGE_SIZE)) {
+        alert("사진첨부 사이즈는 3MB 이내로 가능합니다.");
+        return;
+      } else if (invitationPhotos.slide_photos.length + filesArray.length > MAX_UPLOAD_IMAGE_NUMBER) {
+        alert(`갤러리 사진은 최대 ${MAX_UPLOAD_IMAGE_NUMBER}장까지만 업로드 가능합니다`);
+        return;
+      } else {
+        const newImages = Array.from(e.target.files).map((file, index) => ({
+          file,
+          index: invitationPhotos.slide_photos.length + index,
+        }));
+        setInvitationPhotos(previousImages => ({
+          ...previousImages,
+          slide_photos: [...previousImages.slide_photos, ...newImages],
+        }));
+      }
     }
   };
 

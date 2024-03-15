@@ -23,6 +23,10 @@ export const postData = async ({
     });
   }
 
+  if (Images.kakao_thumbnail) {
+    formData.append("thumbnail", Images.kakao_thumbnail);
+  }
+
   formData.append("json", new Blob([JSON.stringify(JsonData)], { type: "application/json" }));
   const uid = await getUserInfo();
   console.log(uid);

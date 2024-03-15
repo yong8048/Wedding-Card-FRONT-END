@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 import { invitationPhotosState } from "@/stores/createInvitationPhotosStore";
+import { MAX_IMAGE_SIZE } from "@/utils/InitialData";
 
 const ShareKakao = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -17,11 +18,13 @@ const ShareKakao = () => {
 
   const handleSetImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? undefined;
-    if (file) {
+    if (file && file.size < MAX_IMAGE_SIZE) {
       setInvitationPhotos(previousData => ({
         ...previousData,
         kakao_thumbnail: file,
       }));
+    } else {
+      alert(`사진첨부 사이즈는 ${MAX_IMAGE_SIZE / 1024 / 1024}MB 이내로 가능합니다.`);
     }
   };
 
