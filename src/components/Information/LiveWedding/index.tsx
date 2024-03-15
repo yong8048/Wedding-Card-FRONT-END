@@ -16,7 +16,10 @@ const LiveWedding = ({
     }
     setCreateInvitationData(previousData => ({
       ...previousData,
-      live_url: e.target.value,
+      contents: {
+        ...previousData.contents,
+        live_url: e.target.value,
+      },
     }));
   };
 
@@ -26,7 +29,10 @@ const LiveWedding = ({
 
       setCreateInvitationData(previousData => ({
         ...previousData,
-        live_url: "",
+        contents: {
+          ...previousData.contents,
+          live_url: "",
+        },
       }));
     }
   };

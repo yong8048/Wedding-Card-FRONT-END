@@ -1,4 +1,4 @@
-import { IReqInvitationJSON } from "@/types/invitation";
+import { IReqInvitationJSON, IReqInvitationPhotos } from "@/types/invitation";
 
 const InitialData_CreateInvitation: IReqInvitationJSON = {
   date: "",
@@ -6,6 +6,14 @@ const InitialData_CreateInvitation: IReqInvitationJSON = {
   wedding_hall: "",
   welcome: [],
   welcome_align: "left",
+  contents: {
+    video_id: "",
+    bgm: 0,
+    live_url: "",
+  },
+  management: {
+    management_password: "",
+  },
   HUSBAND: {
     ME: {
       name: "",
@@ -57,10 +65,16 @@ const InitialData_CreateInvitation: IReqInvitationJSON = {
       info: [],
     },
   },
-  management_password: "",
-  video_id: "",
-  bgm: 0,
-  live_url: "",
+  open_graph: {
+    title: "",
+    subtitle: "",
+  },
 };
 
-export { InitialData_CreateInvitation };
+const InitialData_CreatePhotos: IReqInvitationPhotos = {
+  main_photo: undefined,
+  slide_photos: [],
+  kakao_thumbnail: undefined,
+};
+
+export { InitialData_CreateInvitation, InitialData_CreatePhotos };

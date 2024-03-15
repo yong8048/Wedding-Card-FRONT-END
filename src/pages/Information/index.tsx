@@ -7,25 +7,23 @@ import Contact from "@/components/Information/Contact";
 import Account from "@/components/Information/Account";
 import SlidePhotos from "@/components/Information/SlidePhotos";
 import WeddingSchedule from "@/components/Information/WeddingSchedule";
-import TempSaveButton from "@/components/Information/TempSaveButton";
-import { useEffect, useState } from "react";
-import { IReqInvitationJSON } from "@/types/invitation";
-import { InitialData_CreateInvitation } from "@/utils/InitialData";
 import MasterPassword from "@/components/Information/MasterPassword";
 import BackGroundMusic from "@/components/Information/BackGroundMusic";
 import YoutubeVideo from "@/components/Information/YoutubeVideo";
+import LiveWedding from "@/components/Information/LiveWedding";
+import ShareKakao from "@/components/Information/ShareKakao";
 import NextStepButton from "@/components/Common/NextStepButton";
+import TempSaveButton from "@/components/Information/TempSaveButton";
+import { useEffect, useState } from "react";
+import { IReqInvitationJSON, IReqInvitationPhotos } from "@/types/invitation";
+import { InitialData_CreateInvitation, InitialData_CreatePhotos } from "@/utils/InitialData";
 import { useNavigate } from "react-router-dom";
 import { postData, testData } from "@/apis/server";
-import LiveWedding from "@/components/Information/LiveWedding";
 import Test from "@/components/Information/test";
-import ShareKakao from "@/components/Information/ShareKakao";
 
 const Information = () => {
   const [createInvitationData, setCreateInvitationData] = useState<IReqInvitationJSON>(InitialData_CreateInvitation);
-  const [mainImage, setMainImage] = useState<File | undefined>();
-  const [galleryImages, setGalleryImages] = useState<{ file: File; index: number }[]>([]);
-  // const [invi];
+  const [invitationPhotos, setInvitationPhotos] = useState<IReqInvitationPhotos>(InitialData_CreatePhotos);
 
   const navigate = useNavigate();
 
@@ -45,8 +43,7 @@ const Information = () => {
   const handleClickLeft = async () => {
     const res = await postData({
       JsonData: createInvitationData,
-      MainImage: mainImage,
-      GalleryImages: galleryImages,
+      Images: invitationPhotos,
       isTemp: true,
     });
     console.log(res);
@@ -56,35 +53,39 @@ const Information = () => {
   const handleClickRight = async () => {
     const res = await postData({
       JsonData: createInvitationData,
-      MainImage: mainImage,
-      GalleryImages: galleryImages,
+      Images: invitationPhotos,
       isTemp: false,
     });
     console.log(res);
   };
 
   const handleClickTempSave = async () => {
-    const res = await testData({
-      JsonData: createInvitationData,
-    });
-    console.log(res);
+    console.log(createInvitationData, invitationPhotos);
+    // const res = await testData({
+    //   JsonData: createInvitationData,
+    // });
+    // console.log(res);
   };
 
   return (
     <S.Section>
       <ProgressBar />
-      <MainPhoto mainImage={mainImage} setMainImage={setMainImage} />
+      <MainPhoto invitationPhotos={invitationPhotos} setInvitationPhotos={setInvitationPhotos} />
       <Greeting setCreateInvitationData={setCreateInvitationData} />
       <HumanInfo setCreateInvitationData={setCreateInvitationData} />
       <Contact setCreateInvitationData={setCreateInvitationData} />
       <Account setCreateInvitationData={setCreateInvitationData} />
-      <SlidePhotos galleryImages={galleryImages} setGalleryImages={setGalleryImages} />
+      <SlidePhotos invitationPhotos={invitationPhotos} setInvitationPhotos={setInvitationPhotos} />
       <WeddingSchedule setCreateInvitationData={setCreateInvitationData} />
       <MasterPassword setCreateInvitationData={setCreateInvitationData} />
       <BackGroundMusic setCreateInvitationData={setCreateInvitationData} />
       <YoutubeVideo setCreateInvitationData={setCreateInvitationData} />
       <LiveWedding setCreateInvitationData={setCreateInvitationData} />
-      <ShareKakao setCreateInvitationData={setCreateInvitationData} />
+      <ShareKakao
+        setCreateInvitationData={setCreateInvitationData}
+        invitationPhotos={invitationPhotos}
+        setInvitationPhotos={setInvitationPhotos}
+      />
       <Test />
       <TempSaveButton FuncOnClick={handleClickTempSave} />
       <NextStepButton ArrowDirection="left" FuncOnClick={handleClickLeft} />

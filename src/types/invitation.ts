@@ -4,6 +4,14 @@ interface IReqInvitationJSON {
   wedding_hall: string;
   welcome: IEditorState[];
   welcome_align: DraftTextAlignment;
+  contents: {
+    video_id: string;
+    bgm: number;
+    live_url: string;
+  };
+  management: {
+    management_password: string;
+  };
   HUSBAND: {
     ME: {
       name: string;
@@ -55,16 +63,19 @@ interface IReqInvitationJSON {
       info: IEditorState[];
     };
   };
-  management_password: string;
-  video_id: string;
-  bgm: number;
-  live_url: string;
+  open_graph: {
+    title: string;
+    subtitle: string;
+  };
 }
 
 interface IReqInvitationPhotos {
-  main_photo: File;
-  slide_photos: File[];
-  kakao_thumbnail: File;
+  main_photo: File | undefined;
+  slide_photos: {
+    file: File;
+    index: number;
+  }[];
+  kakao_thumbnail: File | undefined;
 }
 
 interface IEditorState {

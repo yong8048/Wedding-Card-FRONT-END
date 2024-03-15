@@ -1,26 +1,24 @@
-import { IReqInvitationJSON } from "@/types/invitation";
+import { IReqInvitationJSON, IReqInvitationPhotos } from "@/types/invitation";
 import { formInstance, instance } from "./axios";
 import { getUserInfo } from "./kakao";
 
 export const postData = async ({
   JsonData,
-  MainImage,
-  GalleryImages,
+  Images,
   isTemp,
 }: {
   JsonData: IReqInvitationJSON;
-  MainImage: File | undefined;
-  GalleryImages: { file: File; index: number }[];
+  Images: IReqInvitationPhotos;
   isTemp: boolean;
 }) => {
   const formData = new FormData();
 
-  if (MainImage) {
-    formData.append("mainImage", MainImage);
+  if (Images.main_photo) {
+    formData.append("mainImage", Images.main_photo);
   }
 
-  if (GalleryImages) {
-    GalleryImages.forEach(image => {
+  if (Images.slide_photos) {
+    Images.slide_photos.forEach(image => {
       formData.append(`images${image.index + 1}`, image.file);
     });
   }

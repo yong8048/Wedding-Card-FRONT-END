@@ -2,20 +2,14 @@ import { useRef } from "react";
 import * as S from "./style";
 import { IoMdClose, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { MdOutlineFileDownload } from "react-icons/md";
+import { IReqInvitationPhotos } from "@/types/invitation";
 
 const SlidePhotos = ({
-  galleryImages,
-  setGalleryImages,
+  invitationPhotos,
+  setInvitationPhotos,
 }: {
-  galleryImages: { file: File; index: number }[];
-  setGalleryImages: React.Dispatch<
-    React.SetStateAction<
-      {
-        file: File;
-        index: number;
-      }[]
-    >
-  >;
+  invitationPhotos: IReqInvitationPhotos;
+  setInvitationPhotos: React.Dispatch<React.SetStateAction<IReqInvitationPhotos>>;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -32,9 +26,12 @@ const SlidePhotos = ({
     }
     const newImages = Array.from(e.dataTransfer.files).map((file, index) => ({
       file,
-      index: galleryImages.length + index,
+      index: invitationPhotos.slide_photos.length + index,
     }));
-    setGalleryImages(previousImages => [...previousImages, ...newImages]);
+    setInvitationPhotos(previousImages => ({
+      ...previousImages,
+      slide_photos: [...previousImages.slide_photos, ...newImages],
+    }));
   };
 
   const handleDropOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -49,38 +46,56 @@ const SlidePhotos = ({
     if (e.target.files) {
       const newImages = Array.from(e.target.files).map((file, index) => ({
         file,
-        index: galleryImages.length + index,
+        index: invitationPhotos.slide_photos.length + index,
       }));
-      setGalleryImages(previousImages => [...previousImages, ...newImages]);
+      setInvitationPhotos(previousImages => ({
+        ...previousImages,
+        slide_photos: [...previousImages.slide_photos, ...newImages],
+      }));
     }
   };
 
   const handleRemoveImage = (removeIndex: number) => {
-    if (confirm("사진을 삭제하시게습니까?")) {
-      setGalleryImages(previousImages =>
-        previousImages.filter((_, index) => index !== removeIndex).map((image, index) => ({ ...image, index })),
-      );
+    if (confirm("사진을 삭제하시겠습니까?")) {
+      setInvitationPhotos(previousImages => ({
+        ...previousImages,
+        slide_photos: previousImages.slide_photos
+          .filter((_, index) => index !== removeIndex)
+          .map((image, index) => ({ ...image, index })),
+      }));
     }
   };
 
   const handleMoveForward = (index: number) => {
-    setGalleryImages(previousImages => {
-      const newImages = [...previousImages];
+    setInvitationPhotos(previousImages => {
+      const newImages = [...previousImages.slide_photos];
       if (index < newImages.length - 1) {
-        newImages[index].index = index + 1;
-        newImages[index + 1].index = index;
+        const temp = newImages[index];
+        newImages[index] = newImages[index + 1];
+        newImages[index + 1] = temp;
+        newImages[index].index = index;
+        newImages[index + 1].index = index + 1;
       }
-      return newImages;
+      return {
+        ...previousImages,
+        slide_photos: newImages,
+      };
     });
   };
   const handleMoveBack = (index: number) => {
-    setGalleryImages(previousImages => {
-      const newImages = [...previousImages];
+    setInvitationPhotos(previousImages => {
+      const newImages = [...previousImages.slide_photos];
       if (index > 0) {
-        newImages[index].index = index - 1;
-        newImages[index - 1].index = index;
+        const temp = newImages[index];
+        newImages[index] = newImages[index - 1];
+        newImages[index - 1] = temp;
+        newImages[index].index = index;
+        newImages[index - 1].index = index - 1;
       }
-      return newImages;
+      return {
+        ...previousImages,
+        slide_photos: newImages,
+      };
     });
   };
 
@@ -90,14 +105,14 @@ const SlidePhotos = ({
       <h3>사진은 최대 15장까지 업로드할 수 있습니다.</h3>
       <h3>업로드 후에 사진의 순서를 변경할 수 있습니다.</h3>
       <S.ImageContainer onDrop={handleDrop} onDragOver={handleDropOver} id="Container">
-        {!galleryImages.length && (
+        {!invitationPhotos.slide_photos.length && (
           <div className="notice-Drag">
             <MdOutlineFileDownload size={100} />
             <p>드래그하여 업로드를 할 수도 있습니다!</p>
           </div>
         )}
         <div className="grid" onDragLeave={e => e.stopPropagation()}>
-          {galleryImages
+          {invitationPhotos.slide_photos
             .sort((a, b) => a.index - b.index)
             .map((image, index) => (
               <div key={index} className="image-Conatiner">

@@ -1,12 +1,13 @@
 import { useRef } from "react";
 import * as S from "./style";
+import { IReqInvitationPhotos } from "@/types/invitation";
 
 const MainPhoto = ({
-  mainImage,
-  setMainImage,
+  invitationPhotos,
+  setInvitationPhotos,
 }: {
-  mainImage: File | undefined;
-  setMainImage: React.Dispatch<React.SetStateAction<File | undefined>>;
+  invitationPhotos: IReqInvitationPhotos;
+  setInvitationPhotos: React.Dispatch<React.SetStateAction<IReqInvitationPhotos>>;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -16,8 +17,12 @@ const MainPhoto = ({
   };
 
   const handleSetImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setMainImage(e.target.files[0]);
+    const file = e.target.files?.[0] ?? undefined;
+    if (file) {
+      setInvitationPhotos(previousData => ({
+        ...previousData,
+        kakao_thumbnail: file,
+      }));
     }
   };
   return (
@@ -27,8 +32,10 @@ const MainPhoto = ({
       <h3>* 2번설명 2번설명 2번설명 2번설명 2번설명</h3>
       <S.ImageForm onSubmit={handleSubmit}>
         <div className="img-container">
-          {mainImage && <img src={URL.createObjectURL(mainImage)} alt="MainPhoto" />}
-          {!mainImage && <span>이미지를 업로드 해주세요.</span>}
+          {invitationPhotos.main_photo && (
+            <img src={URL.createObjectURL(invitationPhotos.main_photo)} alt="MainPhoto" />
+          )}
+          {!invitationPhotos.main_photo && <span>이미지를 업로드 해주세요.</span>}
         </div>
         <input type="file" ref={inputRef} onChange={handleSetImage} />
         <button>사진 업로드</button>

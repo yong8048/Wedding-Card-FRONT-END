@@ -20,7 +20,10 @@ const YoutubeVideo = ({
       setYoutubeURL(videoID);
       setCreateInvitationData(previousData => ({
         ...previousData,
-        video_id: videoID,
+        contents: {
+          ...previousData.contents,
+          video_id: videoID,
+        },
       }));
     }
   };

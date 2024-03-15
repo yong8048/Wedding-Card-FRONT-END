@@ -41,7 +41,10 @@ const BackGroundMusic = ({
     const bgmNumber = Number(e.target.id);
     setCreateInvitationData(previousData => ({
       ...previousData,
-      bgm: bgmNumber,
+      contents: {
+        ...previousData.contents,
+        bgm: bgmNumber,
+      },
     }));
   };
 
