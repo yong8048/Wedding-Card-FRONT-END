@@ -16,13 +16,18 @@ const MainPhoto = () => {
 
   const handleSetImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? undefined;
-    if (file && file.size < MAX_IMAGE_SIZE) {
-      setInvitationPhotos(previousData => ({
-        ...previousData,
-        main_photo: file,
-      }));
-    } else {
-      alert(`사진첨부 사이즈는 ${MAX_IMAGE_SIZE / 1024 / 1024}MB 이내로 가능합니다.`);
+
+    if (file) {
+      if (file.size > MAX_IMAGE_SIZE) {
+        alert(`사진첨부 사이즈는 ${MAX_IMAGE_SIZE / 1024 / 1024}MB 이내로 가능합니다.`);
+      } else if (!file.type.match(/image.*/)) {
+        alert("이미지 파일만 업로드 할 수 있습니다.");
+      } else {
+        setInvitationPhotos(previousData => ({
+          ...previousData,
+          main_photo: file,
+        }));
+      }
     }
   };
   return (
