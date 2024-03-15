@@ -170,7 +170,7 @@ const WeddingSchedule = ({
           <input placeholder="예식장 명" name="hallName" onChange={handleWeddingHallChange} />
           <input placeholder="층과 홀" name="hallDetail" onChange={handleWeddingHallChange} />
           <div className="WeddingHole-address">
-            <input placeholder="주소" disabled value={address} />
+            <input placeholder="검색버튼을 눌러주세요." disabled value={address} />
             <button onClick={handleSearch}>검색</button>
           </div>
         </div>
