@@ -21,14 +21,14 @@ const MainPhoto = ({
     if (file) {
       setInvitationPhotos(previousData => ({
         ...previousData,
-        kakao_thumbnail: file,
+        main_photo: file,
       }));
     }
   };
   return (
     <S.Container>
       <h1>메인 사진을 선택해 주세요.</h1>
-      <h3>* 1번설명 1번설명 1번설명</h3>
+      <h3>청첩장의 메인 이미지입니다.</h3>
       <h3>* 2번설명 2번설명 2번설명 2번설명 2번설명</h3>
       <S.ImageForm onSubmit={handleSubmit}>
         <div className="img-container">
