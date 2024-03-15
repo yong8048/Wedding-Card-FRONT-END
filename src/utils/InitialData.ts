@@ -1,6 +1,6 @@
 import { IReqInvitationJSON, IReqInvitationPhotos } from "@/types/invitation";
 
-const InitialData_CreateInvitation: IReqInvitationJSON = {
+const InitialData_CreateInvitationJSON: IReqInvitationJSON = {
   date: "",
   address: "",
   wedding_hall: "",
@@ -71,10 +71,10 @@ const InitialData_CreateInvitation: IReqInvitationJSON = {
   },
 };
 
-const InitialData_CreatePhotos: IReqInvitationPhotos = {
+const InitialData_CreateInvitationPhotos: IReqInvitationPhotos = {
   main_photo: undefined,
   slide_photos: [],
   kakao_thumbnail: undefined,
 };
 
-export { InitialData_CreateInvitation, InitialData_CreatePhotos };
+export { InitialData_CreateInvitationJSON, InitialData_CreateInvitationPhotos };

@@ -1,20 +1,18 @@
-import { IReqInvitationJSON } from "@/types/invitation";
+import { useSetRecoilState } from "recoil";
 import * as S from "./style";
 import { useRef } from "react";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 
-const LiveWedding = ({
-  setCreateInvitationData,
-}: {
-  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
-}) => {
+const LiveWedding = () => {
   const urlInputRef = useRef<HTMLInputElement>(null);
   const radioInputRef = useRef<HTMLInputElement>(null);
+  const setInvitationData = useSetRecoilState(invitationJSONState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (radioInputRef.current) {
       radioInputRef.current.checked = e.target.value === "";
     }
-    setCreateInvitationData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       contents: {
         ...previousData.contents,
@@ -27,7 +25,7 @@ const LiveWedding = ({
     if (urlInputRef.current && e.target.checked) {
       urlInputRef.current.value = "";
 
-      setCreateInvitationData(previousData => ({
+      setInvitationData(previousData => ({
         ...previousData,
         contents: {
           ...previousData.contents,

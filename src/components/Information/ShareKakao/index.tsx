@@ -1,17 +1,14 @@
-import { IReqInvitationJSON, IReqInvitationPhotos } from "@/types/invitation";
 import * as S from "./style";
 import { useRef } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
+import { invitationPhotosState } from "@/stores/createInvitationPhotosStore";
 
-const ShareKakao = ({
-  setCreateInvitationData,
-  invitationPhotos,
-  setInvitationPhotos,
-}: {
-  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
-  invitationPhotos: IReqInvitationPhotos;
-  setInvitationPhotos: React.Dispatch<React.SetStateAction<IReqInvitationPhotos>>;
-}) => {
+const ShareKakao = () => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const setInvitationData = useSetRecoilState(invitationJSONState);
+
+  const [invitationPhotos, setInvitationPhotos] = useRecoilState(invitationPhotosState);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +26,7 @@ const ShareKakao = ({
   };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCreateInvitationData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       open_graph: {
         ...previousData.open_graph,
@@ -59,7 +56,7 @@ const ShareKakao = ({
           )}
           {!invitationPhotos?.kakao_thumbnail && <span>이미지를 업로드 해주세요.</span>}
         </div>
-        <input type="file" ref={inputRef} onChange={handleSetImage} />
+        <input type="file" ref={inputRef} onChange={handleSetImage} accept="image/*" />
         <button>사진 업로드</button>
       </S.ImageForm>
     </S.Container>

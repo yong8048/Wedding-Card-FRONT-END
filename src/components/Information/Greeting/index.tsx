@@ -1,22 +1,21 @@
-import { DraftTextAlignment, IReqInvitationJSON } from "@/types/invitation";
+import { DraftTextAlignment } from "@/types/invitation";
 import * as S from "./style";
 import { CiTextAlignLeft, CiTextAlignCenter, CiTextAlignRight } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
+import { useSetRecoilState } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 
-const Greeting = ({
-  setCreateInvitationData,
-}: {
-  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
-}) => {
+const Greeting = () => {
   const [textAlign, setTextAlign] = useState<DraftTextAlignment>("left");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const setInvitationData = useSetRecoilState(invitationJSONState);
 
   const chageTextAlign = (e: React.MouseEvent<HTMLButtonElement>) => {
     const value = e.currentTarget.id.split("-")[1] as DraftTextAlignment;
     setTextAlign(value);
-    setCreateInvitationData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       welcome_align: value,
     }));
@@ -30,7 +29,7 @@ const Greeting = ({
   useEffect(() => {
     const texts = convertToRaw(editorState.getCurrentContent());
 
-    setCreateInvitationData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       welcome: texts.blocks.map(txt => ({
         text: txt.text,

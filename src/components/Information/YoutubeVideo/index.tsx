@@ -1,16 +1,14 @@
-import { IReqInvitationJSON } from "@/types/invitation";
 import * as S from "./style";
 import { useRef, useState } from "react";
 import YouTube from "react-youtube";
+import { useSetRecoilState } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 
-const YoutubeVideo = ({
-  setCreateInvitationData,
-}: {
-  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
-}) => {
+const YoutubeVideo = () => {
   const [youtubeURL, setYoutubeURL] = useState("");
   const urlInputRef = useRef<HTMLInputElement>(null);
   const radioInputRef = useRef<HTMLInputElement>(null);
+  const setInvitationData = useSetRecoilState(invitationJSONState);
 
   const handleClickRegist = () => {
     if (urlInputRef.current) {
@@ -18,7 +16,7 @@ const YoutubeVideo = ({
       const watch = value.substring(value.indexOf("watch?v="));
       const videoID = watch.substring(watch.indexOf("=") + 1);
       setYoutubeURL(videoID);
-      setCreateInvitationData(previousData => ({
+      setInvitationData(previousData => ({
         ...previousData,
         contents: {
           ...previousData.contents,

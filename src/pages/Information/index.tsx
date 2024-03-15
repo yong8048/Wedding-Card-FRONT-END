@@ -14,16 +14,17 @@ import LiveWedding from "@/components/Information/LiveWedding";
 import ShareKakao from "@/components/Information/ShareKakao";
 import NextStepButton from "@/components/Common/NextStepButton";
 import TempSaveButton from "@/components/Information/TempSaveButton";
-import { useEffect, useState } from "react";
-import { IReqInvitationJSON, IReqInvitationPhotos } from "@/types/invitation";
-import { InitialData_CreateInvitation, InitialData_CreatePhotos } from "@/utils/InitialData";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { postData, testData } from "@/apis/server";
+import { postData } from "@/apis/server";
 import Test from "@/components/Information/test";
+import { useRecoilValue } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
+import { invitationPhotosState } from "@/stores/createInvitationPhotosStore";
 
 const Information = () => {
-  const [createInvitationData, setCreateInvitationData] = useState<IReqInvitationJSON>(InitialData_CreateInvitation);
-  const [invitationPhotos, setInvitationPhotos] = useState<IReqInvitationPhotos>(InitialData_CreatePhotos);
+  const createInvitationData = useRecoilValue(invitationJSONState);
+  const createInvitationPhotos = useRecoilValue(invitationPhotosState);
 
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ const Information = () => {
   const handleClickLeft = async () => {
     const res = await postData({
       JsonData: createInvitationData,
-      Images: invitationPhotos,
+      Images: createInvitationPhotos,
       isTemp: true,
     });
     console.log(res);
@@ -53,14 +54,15 @@ const Information = () => {
   const handleClickRight = async () => {
     const res = await postData({
       JsonData: createInvitationData,
-      Images: invitationPhotos,
+      Images: createInvitationPhotos,
       isTemp: false,
     });
     console.log(res);
   };
 
   const handleClickTempSave = async () => {
-    console.log(createInvitationData, invitationPhotos);
+    console.log(createInvitationData, createInvitationPhotos);
+    // console.log(createInvitationData, invitationPhotos);
     // const res = await testData({
     //   JsonData: createInvitationData,
     // });
@@ -70,22 +72,18 @@ const Information = () => {
   return (
     <S.Section>
       <ProgressBar />
-      <MainPhoto invitationPhotos={invitationPhotos} setInvitationPhotos={setInvitationPhotos} />
-      <Greeting setCreateInvitationData={setCreateInvitationData} />
-      <HumanInfo setCreateInvitationData={setCreateInvitationData} />
-      <Contact setCreateInvitationData={setCreateInvitationData} />
-      <Account setCreateInvitationData={setCreateInvitationData} />
-      <SlidePhotos invitationPhotos={invitationPhotos} setInvitationPhotos={setInvitationPhotos} />
-      <WeddingSchedule setCreateInvitationData={setCreateInvitationData} />
-      <MasterPassword setCreateInvitationData={setCreateInvitationData} />
-      <BackGroundMusic setCreateInvitationData={setCreateInvitationData} />
-      <YoutubeVideo setCreateInvitationData={setCreateInvitationData} />
-      <LiveWedding setCreateInvitationData={setCreateInvitationData} />
-      <ShareKakao
-        setCreateInvitationData={setCreateInvitationData}
-        invitationPhotos={invitationPhotos}
-        setInvitationPhotos={setInvitationPhotos}
-      />
+      <MainPhoto />
+      <Greeting />
+      <HumanInfo />
+      <Contact />
+      <Account />
+      <SlidePhotos />
+      <WeddingSchedule />
+      <MasterPassword />
+      <BackGroundMusic />
+      <YoutubeVideo />
+      <LiveWedding />
+      <ShareKakao />
       <Test />
       <TempSaveButton FuncOnClick={handleClickTempSave} />
       <NextStepButton ArrowDirection="left" FuncOnClick={handleClickLeft} />

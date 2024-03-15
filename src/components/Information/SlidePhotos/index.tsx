@@ -2,17 +2,14 @@ import { useRef } from "react";
 import * as S from "./style";
 import { IoMdClose, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { MdOutlineFileDownload } from "react-icons/md";
-import { IReqInvitationPhotos } from "@/types/invitation";
+import { useRecoilState } from "recoil";
+import { invitationPhotosState } from "@/stores/createInvitationPhotosStore";
 
-const SlidePhotos = ({
-  invitationPhotos,
-  setInvitationPhotos,
-}: {
-  invitationPhotos: IReqInvitationPhotos;
-  setInvitationPhotos: React.Dispatch<React.SetStateAction<IReqInvitationPhotos>>;
-}) => {
+const SlidePhotos = () => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [invitationPhotos, setInvitationPhotos] = useRecoilState(invitationPhotosState);
 
+  console.log(invitationPhotos);
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const filesArray = Array.from(e.dataTransfer.files);
@@ -70,11 +67,9 @@ const SlidePhotos = ({
     setInvitationPhotos(previousImages => {
       const newImages = [...previousImages.slide_photos];
       if (index < newImages.length - 1) {
-        const temp = newImages[index];
-        newImages[index] = newImages[index + 1];
+        const temp = { ...newImages[index], index: index + 1 };
+        newImages[index] = { ...newImages[index + 1], index: index };
         newImages[index + 1] = temp;
-        newImages[index].index = index;
-        newImages[index + 1].index = index + 1;
       }
       return {
         ...previousImages,
@@ -86,11 +81,9 @@ const SlidePhotos = ({
     setInvitationPhotos(previousImages => {
       const newImages = [...previousImages.slide_photos];
       if (index > 0) {
-        const temp = newImages[index];
-        newImages[index] = newImages[index - 1];
+        const temp = { ...newImages[index], index: index - 1 };
+        newImages[index] = { ...newImages[index - 1], index: index };
         newImages[index - 1] = temp;
-        newImages[index].index = index;
-        newImages[index - 1].index = index - 1;
       }
       return {
         ...previousImages,
@@ -112,7 +105,7 @@ const SlidePhotos = ({
           </div>
         )}
         <div className="grid" onDragLeave={e => e.stopPropagation()}>
-          {invitationPhotos.slide_photos
+          {[...invitationPhotos.slide_photos]
             .sort((a, b) => a.index - b.index)
             .map((image, index) => (
               <div key={index} className="image-Conatiner">

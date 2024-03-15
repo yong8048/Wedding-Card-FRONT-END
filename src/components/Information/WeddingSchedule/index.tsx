@@ -7,10 +7,11 @@ import { setHours, setMinutes } from "date-fns";
 import { IKakaoAddress, ILatLon } from "@/types/kakao";
 import LocationCard from "@/components/Common/LocationCard";
 import { GetLatLon } from "@/hooks/useKakaoGetLatLon";
-import { IReqInvitationJSON } from "@/types/invitation";
 import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { IoIosSubway, IoIosBus, IoIosCar, IoMdQuote } from "react-icons/io";
+import { useSetRecoilState } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 
 const roadInfo = {
   subway: { name: "지하철", icon: <IoIosSubway />, placeholder: "수원역 5번 출구에서 도보 5~10분" },
@@ -19,11 +20,7 @@ const roadInfo = {
   etc: { name: "기타 이동수단", icon: <IoMdQuote />, placeholder: "전세버스 등등" },
 };
 
-const WeddingSchedule = ({
-  setCreateInvitationData,
-}: {
-  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
-}) => {
+const WeddingSchedule = () => {
   const [weddingDate, setWeddingDate] = useState(new Date());
   const [address, setAddress] = useState("");
   const [hallData, setHallData] = useState({ hallName: "", hallDetail: "" });
@@ -32,6 +29,8 @@ const WeddingSchedule = ({
     new Array(Object.entries(roadInfo).length).fill(EditorState.createEmpty()),
   );
 
+  const setInvitationData = useSetRecoilState(invitationJSONState);
+
   const handleDateChange = (date: Date) => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -39,10 +38,11 @@ const WeddingSchedule = ({
     const hour = date.getHours();
     const minute = date.getMinutes();
     const dayOfWeek = ["일", "월", "화", "수", "목", "금", "토"][date.getDay()];
-
+    // console.log(date.toISOString().substring(0, 16));
+    console.log(date.toLocaleString().split(" "));
     const convertDate = `${year}-${month}-${day}-${dayOfWeek}-${hour}-${minute}`;
 
-    setCreateInvitationData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       date: convertDate,
     }));
@@ -61,7 +61,7 @@ const WeddingSchedule = ({
   };
 
   useEffect(() => {
-    setCreateInvitationData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       wedding_hall: `${hallData.hallName} ${hallData.hallDetail}`,
     }));
@@ -74,7 +74,7 @@ const WeddingSchedule = ({
         const res = await GetLatLon(data.userSelectedType === "J" ? data.jibunAddress : data.roadAddress);
         setLatlon({ latitude: res.documents[0].y, longitude: res.documents[0].x });
 
-        setCreateInvitationData(previousData => ({
+        setInvitationData(previousData => ({
           ...previousData,
           address: data.userSelectedType === "J" ? data.jibunAddress : data.roadAddress,
         }));
@@ -96,7 +96,7 @@ const WeddingSchedule = ({
   };
 
   const handleChangeEtcType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCreateInvitationData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       road: {
         ...previousData.road,
@@ -113,7 +113,7 @@ const WeddingSchedule = ({
 
     Object.entries(roadInfo).map(([key], index) => {
       if (key === "etc") {
-        setCreateInvitationData(previousData => ({
+        setInvitationData(previousData => ({
           ...previousData,
           road: {
             ...previousData.road,
@@ -131,7 +131,7 @@ const WeddingSchedule = ({
           },
         }));
       } else {
-        setCreateInvitationData(previousData => ({
+        setInvitationData(previousData => ({
           ...previousData,
           road: {
             ...previousData.road,

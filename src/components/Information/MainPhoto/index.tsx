@@ -1,15 +1,12 @@
 import { useRef } from "react";
 import * as S from "./style";
-import { IReqInvitationPhotos } from "@/types/invitation";
+import { useRecoilState } from "recoil";
+import { invitationPhotosState } from "@/stores/createInvitationPhotosStore";
 
-const MainPhoto = ({
-  invitationPhotos,
-  setInvitationPhotos,
-}: {
-  invitationPhotos: IReqInvitationPhotos;
-  setInvitationPhotos: React.Dispatch<React.SetStateAction<IReqInvitationPhotos>>;
-}) => {
+const MainPhoto = () => {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const [invitationPhotos, setInvitationPhotos] = useRecoilState(invitationPhotosState);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,7 +34,7 @@ const MainPhoto = ({
           )}
           {!invitationPhotos.main_photo && <span>이미지를 업로드 해주세요.</span>}
         </div>
-        <input type="file" ref={inputRef} onChange={handleSetImage} />
+        <input type="file" ref={inputRef} onChange={handleSetImage} accept="image/*" />
         <button>사진 업로드</button>
       </S.ImageForm>
     </S.Container>

@@ -1,12 +1,12 @@
-import { IReqInvitationJSON, TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
+import { TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
 import * as S from "./style";
 import React from "react";
+import { useSetRecoilState } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 
-const Contact = ({
-  setCreateInvitationData,
-}: {
-  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
-}) => {
+const Contact = () => {
+  const setInvitationData = useSetRecoilState(invitationJSONState);
+
   const handleDataChange = (e: React.ChangeEvent<HTMLDivElement>) => {
     const divEl = e.currentTarget;
     const inputEl = e.target as HTMLInputElement;
@@ -15,7 +15,7 @@ const Contact = ({
     const { name, value } = inputEl;
     const concernedParent = name as TconcernedParentType;
 
-    setCreateInvitationData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       [concernedPerson]: {
         ...previousData[concernedPerson],

@@ -1,19 +1,17 @@
 import React, { Fragment, useEffect, useState } from "react";
 import * as S from "./style";
 import { GrFormViewHide, GrFormView } from "react-icons/gr";
-import { IReqInvitationJSON } from "@/types/invitation";
+import { useSetRecoilState } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 
 const properties = ["first", "second"];
 const validPasswordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-const MasterPassword = ({
-  setCreateInvitationData,
-}: {
-  setCreateInvitationData: React.Dispatch<React.SetStateAction<IReqInvitationJSON>>;
-}) => {
+const MasterPassword = () => {
   const [isViewPW, setIsViewPW] = useState<boolean[]>([false, false]);
   const [inputValue, setInputValue] = useState<string[]>(["", ""]);
   const [isValid, setIsValid] = useState(false);
+  const setInvitationData = useSetRecoilState(invitationJSONState);
 
   const handleClickViewPW = (stateIndex: number) => {
     setIsViewPW(isViewPW.map((view, index) => (index === stateIndex ? !view : view)));
@@ -31,7 +29,7 @@ const MasterPassword = ({
 
     setIsValid(valid1 === valid2 && inputValue[0] === inputValue[1]);
 
-    setCreateInvitationData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       management: {
         ...previousData.management,
