@@ -6,6 +6,7 @@ import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { useSetRecoilState } from "recoil";
 import { invitationJSONState } from "@/stores/createInvitationJSONStore";
+import { stateToMarkdown } from "draft-js-export-markdown";
 
 const Greeting = () => {
   const [textAlign, setTextAlign] = useState<DraftTextAlignment>("left");
@@ -42,6 +43,11 @@ const Greeting = () => {
     }));
   }, [editorState]);
 
+  const exportToMarkdown = () => {
+    const contentState = editorState.getCurrentContent();
+    console.log(stateToMarkdown(contentState));
+  };
+
   return (
     <S.Container $textAlign={textAlign}>
       <h1>인사말을 작성해 주세요.</h1>
@@ -68,6 +74,7 @@ const Greeting = () => {
           <button id="align-right" onClick={chageTextAlign}>
             <CiTextAlignRight />
           </button>
+          <button onClick={exportToMarkdown}>맠</button>
         </S.TextEditor>
         <S.EditorContainer>
           <Editor
