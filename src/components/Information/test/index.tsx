@@ -1,18 +1,17 @@
-// import MDEditor from "@uiw/react-md-editor";
-import * as S from "./style";
-// import { useState } from "react";
-// import { Editor } from "@toast-ui/react-editor";
-// import "@toast-ui/editor/dist/toastui-editor.css";
+import { marked } from "marked";
+import parse from "html-react-parser";
 
-const Test = () => {
-  // const [value, setValue] = useState<string | undefined>("");
+const markdownText: string = "**Bold text** \n and _italic text_\n ++included++ \n in markdown example.";
+const MarkdownRenderer = () => {
+  const test = markdownText.replace("++", "<u>");
+  const test2 = test.replace("++", "</u>");
+  // 마크다운을 HTML로 변환
+  const htmlText = marked.parse(test2);
 
-  return (
-    <S.Container>
-      {/* <MDEditor height={300} value={value} onChange={setValue} /> */}
-      {/* <Editor initialValue="" /> */}
-    </S.Container>
-  );
+  // HTML 문자열을 React 컴포넌트로 변환
+  const htmlComponents = parse(htmlText as string);
+
+  return <div>{htmlComponents}</div>;
 };
 
-export default Test;
+export default MarkdownRenderer;

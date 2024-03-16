@@ -17,7 +17,7 @@ import TempSaveButton from "@/components/Information/TempSaveButton";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { postData } from "@/apis/server";
-import Test from "@/components/Information/test";
+// import Test from "@/components/Information/test";
 import { useRecoilValue } from "recoil";
 import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 import { invitationPhotosState } from "@/stores/createInvitationPhotosStore";
@@ -84,7 +84,7 @@ const Information = () => {
       <YoutubeVideo />
       <LiveWedding />
       <ShareKakao />
-      <Test />
+      {/* <Test /> */}
       <TempSaveButton FuncOnClick={handleClickTempSave} />
       <NextStepButton ArrowDirection="left" FuncOnClick={handleClickLeft} />
       <NextStepButton ArrowDirection="right" FuncOnClick={handleClickRight} />
