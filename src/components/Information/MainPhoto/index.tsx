@@ -3,6 +3,7 @@ import * as S from "./style";
 import { useRecoilState } from "recoil";
 import { invitationPhotosState } from "@/stores/createInvitationPhotosStore";
 import { MAX_IMAGE_SIZE } from "@/utils/InitialData";
+import Resizer from "react-image-file-resizer";
 
 const MainPhoto = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -14,7 +15,12 @@ const MainPhoto = () => {
     inputRef.current?.click();
   };
 
-  const handleSetImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const resizeFile = (file: File) =>
+    new Promise(res => {
+      Resizer.imageFileResizer(file, 1500, 1500, "JPEG", 50, 0, uri => res(uri), "file");
+    });
+
+  const handleSetImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? undefined;
 
     if (file) {
@@ -23,13 +29,15 @@ const MainPhoto = () => {
       } else if (!file.type.match(/image.*/)) {
         alert("이미지 파일만 업로드 할 수 있습니다.");
       } else {
+        const resizedImage = (await resizeFile(file)) as File;
         setInvitationPhotos(previousData => ({
           ...previousData,
-          main_photo: file,
+          main_photo: resizedImage,
         }));
       }
     }
   };
+
   return (
     <S.Container>
       <h1>메인 사진을 선택해 주세요.</h1>
