@@ -13,10 +13,11 @@ const MainSwiper = () => {
   const images = ["img1.png", "img2.png", "img3.png", "img4.png"];
   const imgName = ["모던웨딩", "서울숲", "성수웨딩", "강남웨딩"];
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [triggerAnimation, setTriggerAnimation] = useState<boolean[]>([false, false, false, false]);
+  const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
+
   const handleChangeSwiper = (e: { realIndex: number }) => {
     setCurrentIndex(e.realIndex + 1);
-    setTriggerAnimation(triggerAnimation.map((_, index) => index === e.realIndex));
+    setCurrentAnimationIndex(e.realIndex);
   };
 
   return (
@@ -26,14 +27,14 @@ const MainSwiper = () => {
         effect="fade"
         modules={[Navigation, Autoplay, EffectFade]}
         slidesPerView={1}
-        // autoplay={{ delay: 500 }}
+        autoplay={{ delay: 500 }}
         loop={true}
         onSlideChange={handleChangeSwiper}
       >
         {images.map((img, index) => (
           <SwiperSlide key={index} className="swiperslide">
             <S.SwiperImage src={img} alt="" />
-            <S.SwiperImageTag animate={triggerAnimation[index]}>{imgName[index]}</S.SwiperImageTag>
+            <S.SwiperImageTag animate={currentAnimationIndex === index}>{imgName[index]}</S.SwiperImageTag>
           </SwiperSlide>
         ))}
         <span>

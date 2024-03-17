@@ -11,7 +11,6 @@ const Home = () => {
   const clickLogout = async () => {
     if (userInfo) {
       const res = await userLogout(userInfo?.id);
-      console.log(res);
       if (res.status === 200) {
         removeCookie("WECA_access_token");
       }

@@ -25,7 +25,6 @@ const Recommend = () => {
   };
 
   const clickRecommendWords = (word: string) => {
-    console.log(word);
     navigate(`/search/${word}`);
   };
 

@@ -15,7 +15,6 @@ const NavigationBar = () => {
 
   const clickSearch = () => {
     setSearchState(!searchState);
-    console.log(searchState);
   };
 
   return (

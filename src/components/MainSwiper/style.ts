@@ -63,14 +63,19 @@ export const SwiperImage = styled.img`
 
 export const SwiperImageTag = styled.p<{ animate: boolean }>`
   position: absolute;
-  opacity: ${props => (props.animate ? "1" : "0")};
-  transform: ${props => (props.animate ? "translateY(0%)" : "translateY(100%)")};
-  /* animation: ${props => (props.animate ? slideUp : "none")} 1s ease-out both; */
+  opacity: 0;
+  transform: translateY(100%);
   transition: all 1s ease-out;
   transition-delay: 0.4s;
   left: 45px;
   bottom: 30px;
-  /* color: #000; */
   font-size: 30px;
   font-weight: 700;
+
+  ${props =>
+    props.animate &&
+    `
+    opacity: 1;
+    transform: translateY(0%);
+  `}
 `;

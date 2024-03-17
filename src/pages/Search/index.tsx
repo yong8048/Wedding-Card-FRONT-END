@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 
 const Search = () => {
   const { word } = useParams();
-  console.log(word);
 
   return (
     <S.SearchContainer>
