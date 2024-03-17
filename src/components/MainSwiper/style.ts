@@ -1,19 +1,4 @@
-import styled, { keyframes } from "styled-components";
-
-// interface StyledProps {
-//   animate: boolean;
-// }
-
-const slideUp = keyframes`
-  0% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
+import styled from "styled-components";
 
 export const SwiperContainer = styled.div`
   position: relative;

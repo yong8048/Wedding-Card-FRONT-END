@@ -10,7 +10,7 @@ const Header = () => {
   const [storageData, setStorageData] = useState<string[]>([]);
   const { word } = useParams();
   const navigate = useNavigate();
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const savedSearches = localStorage.getItem("searchData");

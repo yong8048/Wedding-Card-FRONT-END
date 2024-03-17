@@ -23,6 +23,7 @@ export const RecentlyUl = styled.ul`
     border-radius: 15px;
     font-size: 16px;
     text-align: left;
+    cursor: pointer;
 
     span {
       width: 100%;
