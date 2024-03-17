@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const Header = () => {
   const [searchData, setSearchData] = useState("");
   const [storageData, setStorageData] = useState<string[]>([]);
-  const [isWord, setIsWord] = useState(false);
+  // const [isWord, setIsWord] = useState(false);
   const { word } = useParams();
   const navigate = useNavigate();
 
@@ -37,10 +37,12 @@ const Header = () => {
       navigate(`/search/${searchData}`);
     }
   };
-
+  const clickBack = () => {
+    navigate(-1);
+  };
   return (
     <S.Container>
-      <S.BackLink to={"/"}>
+      <S.BackLink onClick={clickBack}>
         <IoArrowBackOutline size={26} />
       </S.BackLink>
       <input type="text" onChange={changeSearchData} value={searchData} />

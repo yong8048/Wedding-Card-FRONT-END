@@ -9,7 +9,7 @@ const Result = () => {
         <h1>" {word} "</h1>
         <p>검색한 결과 입니다.</p>
       </div>
-      <TemplateList />
+      <TemplateList search={true} />
     </S.Container>
   );
 };

@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -27,9 +26,10 @@ export const Container = styled.div`
   margin-bottom: 20px;
 `;
 
-export const BackLink = styled(NavLink)`
+export const BackLink = styled.div`
   width: 10%;
   text-align: left;
+  cursor: pointer;
   svg {
     text-align: left;
   }
