@@ -1,33 +1,43 @@
-import { IReqCreateInvitation } from "@/types/invitation";
-import { instance } from "./axios";
+import { IReqInvitationJSON, IReqInvitationPhotos } from "@/types/invitation";
+import { formInstance, instance } from "./axios";
 import { getUserInfo } from "./kakao";
 
 export const postData = async ({
   JsonData,
-  MainImage,
-  GalleryImages,
+  Images,
   isTemp,
 }: {
-  JsonData: IReqCreateInvitation;
-  MainImage: File | undefined;
-  GalleryImages: { file: File; index: number }[];
+  JsonData: IReqInvitationJSON;
+  Images: IReqInvitationPhotos;
   isTemp: boolean;
 }) => {
   const formData = new FormData();
 
-  if (MainImage) {
-    formData.append("mainImage", MainImage);
+  if (Images.main_photo) {
+    formData.append("mainImage", Images.main_photo);
   }
 
-  if (GalleryImages) {
-    GalleryImages.forEach(image => {
+  if (Images.slide_photos) {
+    Images.slide_photos.forEach(image => {
       formData.append(`images${image.index + 1}`, image.file);
     });
   }
 
+  if (Images.kakao_thumbnail) {
+    formData.append("thumbnail", Images.kakao_thumbnail);
+  }
+
   formData.append("json", new Blob([JSON.stringify(JsonData)], { type: "application/json" }));
   const uid = await getUserInfo();
+  console.log(uid);
 
-  const res = await instance.post(`/save/${isTemp ? "information" : "temp"}`, formData, { headers: { uid: uid.id } });
+  const res = await formInstance.post(`/save/${isTemp ? "temp" : "information"}`, formData, {
+    headers: { uid: uid.id },
+  });
+  return res;
+};
+
+export const testData = async ({ JsonData }: { JsonData: IReqInvitationJSON }) => {
+  const res = await instance.post("/test", JsonData);
   return res;
 };

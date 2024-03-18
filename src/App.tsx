@@ -4,6 +4,7 @@ import Router from "./routes/Router";
 import theme from "./styles/theme";
 import ReactQueryProvider from "./components/Common/ReactQueryProvider";
 import { useEffect } from "react";
+import { RecoilRoot } from "recoil";
 
 function App() {
   useEffect(() => {
@@ -12,11 +13,13 @@ function App() {
     };
   }, []);
   return (
-    <ReactQueryProvider>
-      <ThemeProvider theme={theme}>
-        <Router />
-      </ThemeProvider>
-    </ReactQueryProvider>
+    <RecoilRoot>
+      <ReactQueryProvider>
+        <ThemeProvider theme={theme}>
+          <Router />
+        </ThemeProvider>
+      </ReactQueryProvider>
+    </RecoilRoot>
   );
 }
 

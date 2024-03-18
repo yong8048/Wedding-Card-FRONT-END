@@ -1,11 +1,19 @@
-import { IReqCreateInvitation } from "@/types/invitation";
+import { IReqInvitationJSON, IReqInvitationPhotos } from "@/types/invitation";
 
-const InitialData_CreateInvitation: IReqCreateInvitation = {
+const InitialData_CreateInvitationJSON: IReqInvitationJSON = {
   date: "",
   address: "",
   wedding_hall: "",
   welcome: [],
   welcome_align: "left",
+  contents: {
+    video_id: "",
+    bgm: 0,
+    live_url: "",
+  },
+  management: {
+    management_password: "",
+  },
   HUSBAND: {
     ME: {
       name: "",
@@ -57,9 +65,24 @@ const InitialData_CreateInvitation: IReqCreateInvitation = {
       info: [],
     },
   },
-  management_password: "",
-  video_id: "",
-  bgm: 0,
+  open_graph: {
+    title: "",
+    subtitle: "",
+  },
 };
 
-export { InitialData_CreateInvitation };
+const InitialData_CreateInvitationPhotos: IReqInvitationPhotos = {
+  main_photo: undefined,
+  slide_photos: [],
+  kakao_thumbnail: undefined,
+};
+
+const MAX_IMAGE_SIZE = 1024 * 1024 * 3;
+const MAX_UPLOAD_IMAGE_NUMBER = 15;
+
+export {
+  InitialData_CreateInvitationJSON,
+  InitialData_CreateInvitationPhotos,
+  MAX_IMAGE_SIZE,
+  MAX_UPLOAD_IMAGE_NUMBER,
+};

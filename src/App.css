@@ -58,6 +58,14 @@ textarea {
   font-family: "Pretendard";
 }
 
+strong {
+  font-weight: 600 !important;
+}
+
+em {
+  font-style: italic !important;
+}
+
 @font-face {
   font-family: "Pretendard";
   font-style: normal;

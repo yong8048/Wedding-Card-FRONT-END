@@ -1,6 +1,7 @@
-import { IReqCreateInvitation } from "@/types/invitation";
 import * as S from "./style";
 import { useEffect, useRef } from "react";
+import { useSetRecoilState } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 
 const Audios = {
   Angel: { index: 1, src: "/BGM/Angel.mp3" },
@@ -8,12 +9,9 @@ const Audios = {
   Hopeful: { index: 3, src: "/BGM/Hopeful.mp3" },
 };
 
-const BackGroundMusic = ({
-  setCreateInvitaionData,
-}: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
-}) => {
+const BackGroundMusic = () => {
   const audioRefs = useRef<HTMLAudioElement[]>([]);
+  const setInvitationData = useSetRecoilState(invitationJSONState);
 
   useEffect(() => {
     audioRefs.current.map(audio => (audio.volume = 0.5));
@@ -39,9 +37,12 @@ const BackGroundMusic = ({
 
   const handleChangeRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
     const bgmNumber = Number(e.target.id);
-    setCreateInvitaionData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
-      bgm: bgmNumber,
+      contents: {
+        ...previousData.contents,
+        bgm: bgmNumber,
+      },
     }));
   };
 

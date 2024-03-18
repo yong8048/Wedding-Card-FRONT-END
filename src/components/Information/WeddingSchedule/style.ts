@@ -90,6 +90,7 @@ export const WeddingHoleContainer = styled.div`
       display: flex;
       gap: 20px;
       input {
+        background-color: #e8e8e8;
         width: 100%;
       }
       button {

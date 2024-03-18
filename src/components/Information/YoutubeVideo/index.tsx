@@ -1,16 +1,14 @@
-import { IReqCreateInvitation } from "@/types/invitation";
 import * as S from "./style";
 import { useRef, useState } from "react";
 import YouTube from "react-youtube";
+import { useSetRecoilState } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 
-const YoutubeVideo = ({
-  setCreateInvitaionData,
-}: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
-}) => {
+const YoutubeVideo = () => {
   const [youtubeURL, setYoutubeURL] = useState("");
   const urlInputRef = useRef<HTMLInputElement>(null);
   const radioInputRef = useRef<HTMLInputElement>(null);
+  const setInvitationData = useSetRecoilState(invitationJSONState);
 
   const handleClickRegist = () => {
     if (urlInputRef.current) {
@@ -18,9 +16,12 @@ const YoutubeVideo = ({
       const watch = value.substring(value.indexOf("watch?v="));
       const videoID = watch.substring(watch.indexOf("=") + 1);
       setYoutubeURL(videoID);
-      setCreateInvitaionData(previousData => ({
+      setInvitationData(previousData => ({
         ...previousData,
-        video_id: videoID,
+        contents: {
+          ...previousData.contents,
+          video_id: videoID,
+        },
       }));
     }
   };
@@ -45,14 +46,14 @@ const YoutubeVideo = ({
 
   return (
     <S.Container>
-      <h1>웨딩 동영상</h1>
+      <h1>청첩장에 첨부할 동영상 링크를 입력해주세요.</h1>
       <h3>유튜브에 업로드한 영상의 URL을 입력하세요.</h3>
       <h3>청첩장에서 재생할 수 있도록 '퍼가기 허용'을 설정하세요.</h3>
       <S.Wrapper>
         <div className="radio-container">
           <label>
             <input type="radio" onChange={handleCheckNotUse} ref={radioInputRef} defaultChecked={true} />
-            <span>사용 안함</span>
+            <span>해당 없음</span>
           </label>
         </div>
         <div className="input-container">
