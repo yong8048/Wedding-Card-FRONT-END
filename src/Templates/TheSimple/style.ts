@@ -1,4 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const Container = styled.div`
   font-size: 0.9rem;
@@ -6,6 +17,7 @@ export const Container = styled.div`
   position: relative;
 
   background-color: #fbfbfb;
+  overflow: hidden;
 `;
 
 export const AudioWrapper = styled.div`
@@ -19,6 +31,10 @@ export const AudioWrapper = styled.div`
 `;
 
 export const MainWrapper = styled.div`
+  &.visible {
+    animation: ${fadeIn} 1.5s ease-out forwards;
+  }
+  opacity: 0;
   font-family: "CrimsonPro";
   padding: 40px 0;
 
@@ -88,6 +104,10 @@ export const MainWrapper = styled.div`
 `;
 
 export const GreetingWrapper = styled.div`
+  &.visible {
+    animation: ${fadeIn} 1.5s ease-out forwards;
+  }
+  opacity: 0;
   padding: 40px 0;
 
   img {
@@ -110,6 +130,10 @@ export const GreetingWrapper = styled.div`
 `;
 
 export const HumanWrapper = styled.div`
+  &.visible {
+    animation: ${fadeIn} 1.5s ease-out forwards;
+  }
+  opacity: 0;
   padding: 40px 0;
   font-family: "GowunDodum", serif;
 
@@ -141,6 +165,80 @@ export const HumanWrapper = styled.div`
 
     svg {
       margin-right: 10px;
+    }
+  }
+`;
+
+export const CalendarWrapper = styled.div`
+  &.visible {
+    animation: ${fadeIn} 1.5s ease-out forwards;
+  }
+  opacity: 0;
+  padding: 80px 0;
+  background-color: #f6f5f5;
+
+  .date {
+    color: #524548;
+
+    .yymmdd {
+      font-family: "CrimsonPro", serif;
+      font-size: 24px;
+      letter-spacing: 3px;
+      margin-bottom: 14px;
+    }
+    .ddhhmm {
+      font-family: "GowunDodum", serif;
+      font-size: 16px;
+    }
+  }
+  .calendar {
+    .react-calendar {
+      margin: 30px auto;
+      padding: 20px 0;
+      border: 1px solid #e8dfdf;
+      border-left: none;
+      border-right: none;
+      background-color: transparent;
+      abbr {
+        font-weight: 400;
+        font-size: 16px;
+        font-family: "GowunDodum", serif;
+        text-decoration: none;
+      }
+
+      .react-calendar__navigation {
+        display: none;
+      }
+      .react-calendar__tile {
+        pointer-events: none;
+        padding: 10px;
+      }
+      .react-calendar__tile--active {
+        background-color: #cec3c3;
+        border-radius: 100%;
+
+        abbr {
+          color: white;
+        }
+      }
+      .saturday {
+        color: inherit;
+      }
+      .react-calendar__month-view__weekdays abbr[title="일요일"] {
+        color: red;
+      }
+      .react-calendar__month-view__days__day--neighboringMonth {
+        visibility: hidden;
+      }
+    }
+  }
+
+  .d-day {
+    font-size: 16px;
+    font-family: "GowunDodum", serif;
+
+    span {
+      color: #ea7664;
     }
   }
 `;
