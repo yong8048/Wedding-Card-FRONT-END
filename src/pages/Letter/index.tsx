@@ -1,5 +1,5 @@
 import * as S from "./style";
-import TheSimple from "@/templates/TheSimple";
+import TheSimple from "@/Templates/TheSimple";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 
