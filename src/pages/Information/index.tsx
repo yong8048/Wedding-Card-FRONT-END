@@ -16,7 +16,7 @@ import NextStepButton from "@/components/Common/NextStepButton";
 import TempSaveButton from "@/components/Information/TempSaveButton";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { postData } from "@/apis/server";
+import { postData, testData } from "@/apis/server";
 // import Test from "@/components/Information/test";
 import { useRecoilValue } from "recoil";
 import { invitationJSONState } from "@/stores/createInvitationJSONStore";
@@ -48,7 +48,7 @@ const Information = () => {
       isTemp: true,
     });
     console.log(res);
-    navigate(-1);
+    navigate("/servey");
   };
 
   const handleClickRight = async () => {
@@ -63,10 +63,10 @@ const Information = () => {
   const handleClickTempSave = async () => {
     console.log(createInvitationData, createInvitationPhotos);
     // console.log(createInvitationData, invitationPhotos);
-    // const res = await testData({
-    //   JsonData: createInvitationData,
-    // });
-    // console.log(res);
+    const res = await testData({
+      JsonData: createInvitationData,
+    });
+    console.log(res);
   };
 
   return (
