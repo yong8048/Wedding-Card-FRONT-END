@@ -6,11 +6,13 @@ import TemplateData from "@/constants/TemplateData.json";
 const Result = () => {
   const { word } = useParams();
 
-  const clickItem = (title: string) => {
-    console.log(title);
-  };
+  // const clickItem = (title: string) => {
+  //   console.log(title);
+  // };
 
   const filteredData = Object.entries(TemplateData).filter(([_, data]) => {
+    console.log(_);
+
     if (!word) return true;
     return data.tag.some(tag => tag.toLowerCase().includes(word.toLowerCase()));
   });

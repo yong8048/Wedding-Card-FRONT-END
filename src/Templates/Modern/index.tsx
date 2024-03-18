@@ -1,12 +1,8 @@
 import * as S from "./style";
-import { Helmet } from "react-helmet-async";
+
 const Modern = () => {
   return (
     <S.Container>
-      <Helmet>
-        <title>모던 웨딩카드</title>
-        <meta name="description" content="모던한 디자인의 웨딩카드를 만들어 보세요." />
-      </Helmet>
       <S.Page1Div>
         <S.Page1Date>
           <p>02月24日</p>
