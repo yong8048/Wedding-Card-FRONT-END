@@ -4,12 +4,39 @@ import { PiSpeakerHighDuotone, PiSpeakerXDuotone } from "react-icons/pi";
 import { Audios } from "@/constants/AudioData";
 import { BsTelephoneFill, BsChatText } from "react-icons/bs";
 import sampleData from "@/mock/sampleData.json";
-import { getDate, getDayEng, getFullDate, getMonth, getYear } from "@/utils/parseDate";
+import { FcLike } from "react-icons/fc";
+import {
+  getDate,
+  getDateWithDots,
+  getDayEng,
+  getDayWithTime,
+  getDday,
+  getFullDate,
+  getMonth,
+  getYear,
+} from "@/utils/parseDate";
+import "react-calendar/dist/Calendar.css";
+import Calendar from "react-calendar";
 
 type InlineStyle = {
   offset: number;
   length: number;
   style: string;
+};
+
+const tileClassName = ({ date, view }: { date: Date; view: string }) => {
+  // 달력 뷰가 'month'일 때만 요일 색상을 변경
+  if (view === "month") {
+    // getDay()는 일요일을 0으로 반환
+    if (date.getDay() === 6) {
+      // 일요일인 경우
+      return "saturday";
+    }
+  }
+};
+
+const formatDay = (locale: string | undefined, date: Date) => {
+  return date.getDate().toString(); // '일' 없이 날짜만 반환
 };
 
 const applyStyles = (text: string, styles: InlineStyle[]) => {
@@ -65,7 +92,15 @@ const wrapTextWithStyles = (text: string, styles: Array<string>) => {
 const TheSimple = () => {
   const [isAudioPlay, setIsAudioPlay] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const audioRefs = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const containerRef = useRef<HTMLInputElement>(null);
+  const itemRefs = useRef<HTMLDivElement[]>([]);
+
+  const addItemRef = (el: HTMLDivElement) => {
+    if (el && !itemRefs.current.includes(el)) {
+      itemRefs.current.push(el);
+    }
+  };
 
   const handleClickAudio = () => {
     setIsAudioPlay(!isAudioPlay);
@@ -83,24 +118,52 @@ const TheSimple = () => {
   };
 
   useEffect(() => {
-    if (audioRefs.current) {
-      audioRefs.current.volume = 0.5;
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5;
     }
   }, []);
 
   useEffect(() => {
-    isAudioPlay ? audioRefs.current?.play() : audioRefs.current?.pause();
+    if (itemRefs.current.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px", threshold: 0.1 },
+    );
+
+    itemRefs.current.forEach(el => {
+      observer.observe(el);
+    });
+
+    return () => {
+      itemRefs.current.forEach(el => {
+        observer.unobserve(el);
+      });
+    };
+  }, [itemRefs.current.length]);
+
+  useEffect(() => {
+    isAudioPlay ? audioRef.current?.play() : audioRef.current?.pause();
   }, [isAudioPlay]);
 
   return (
-    <S.Container>
+    <S.Container ref={containerRef}>
       <S.AudioWrapper>
-        <audio src={Audios[sampleData.contents.bgm - 1]} ref={audioRefs} />
+        <audio src={Audios[sampleData.contents.bgm - 1]} ref={audioRef} />
         <div className="audio-image" onClick={handleClickAudio}>
           {isAudioPlay ? <PiSpeakerHighDuotone size={20} /> : <PiSpeakerXDuotone size={20} />}
         </div>
       </S.AudioWrapper>
-      <S.MainWrapper>
+      <S.MainWrapper ref={addItemRef}>
         <div className="date">
           <div className="date-yymmdd">
             <span>{getYear(new Date(sampleData.date))}</span>
@@ -128,7 +191,7 @@ const TheSimple = () => {
           </div>
         </div>
       </S.MainWrapper>
-      <S.GreetingWrapper>
+      <S.GreetingWrapper ref={addItemRef}>
         <img src="/Template/icon_flower.png" />
         <div className="text">
           {sampleData.welcome.map(({ text, inline_style }, index) => (
@@ -136,7 +199,7 @@ const TheSimple = () => {
           ))}
         </div>
       </S.GreetingWrapper>
-      <S.HumanWrapper>
+      <S.HumanWrapper ref={addItemRef}>
         <div className="humanInfo">
           <p>
             김장인
@@ -160,6 +223,26 @@ const TheSimple = () => {
           연락하기
         </button>
       </S.HumanWrapper>
+      <S.CalendarWrapper ref={addItemRef}>
+        <div className="date">
+          <p className="yymmdd">{getDateWithDots(new Date(sampleData.date))}</p>
+          <p className="ddhhmm">{getDayWithTime(new Date(sampleData.date))}</p>
+        </div>
+        <div className="calendar">
+          <Calendar
+            value={new Date(sampleData.date)}
+            formatDay={formatDay}
+            calendarType="gregory"
+            tileClassName={tileClassName}
+          />
+        </div>
+        <div className="d-day">
+          <p>
+            {sampleData.HUSBAND.ME.name} <FcLike /> {sampleData.WIFE.ME.name}의 결혼식이{" "}
+            <span>{getDday(new Date(sampleData.date))}일</span> 남았습니다.
+          </p>
+        </div>
+      </S.CalendarWrapper>
       {isContactModalOpen && (
         <S.ContactModalContainer onClick={handleCloseModal}>
           <div className="wrapper">
