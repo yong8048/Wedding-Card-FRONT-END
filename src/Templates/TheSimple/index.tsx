@@ -137,7 +137,7 @@ const TheSimple = () => {
           }
         });
       },
-      { rootMargin: "0px", threshold: 0.1 },
+      { rootMargin: "0px", threshold: 0.2 },
     );
 
     itemRefs.current.forEach(el => {
