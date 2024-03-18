@@ -24,6 +24,7 @@ export const AudioWrapper = styled.div`
   position: absolute;
   top: 10px;
   right: 20px;
+  z-index: 100;
 
   .audio-image {
     cursor: pointer;
@@ -176,6 +177,7 @@ export const CalendarWrapper = styled.div`
   opacity: 0;
   padding: 80px 0;
   background-color: #f6f5f5;
+  margin: 20px 0;
 
   .date {
     color: #524548;
@@ -239,6 +241,28 @@ export const CalendarWrapper = styled.div`
 
     span {
       color: #ea7664;
+    }
+  }
+`;
+
+export const LocationContainer = styled.div`
+  margin: 20px 0;
+  padding: 40px 0;
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 0;
+    .eng {
+      font-family: "CrimsonPro";
+      letter-spacing: 3px;
+      color: #c2b2b2;
+    }
+    .kor {
+      font-family: "GowunDodum", serif;
+      font-size: 20px;
+      color: #89757a;
     }
   }
 `;

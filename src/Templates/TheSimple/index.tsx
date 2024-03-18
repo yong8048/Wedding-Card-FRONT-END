@@ -243,6 +243,12 @@ const TheSimple = () => {
           </p>
         </div>
       </S.CalendarWrapper>
+      <S.LocationContainer ref={addItemRef}>
+        <div className="title">
+          <span className="eng">LOCATION</span>
+          <span className="kor">오시는 길</span>
+        </div>
+      </S.LocationContainer>
       {isContactModalOpen && (
         <S.ContactModalContainer onClick={handleCloseModal}>
           <div className="wrapper">
