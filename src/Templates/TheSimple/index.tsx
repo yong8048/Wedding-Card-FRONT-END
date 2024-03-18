@@ -35,7 +35,7 @@ const tileClassName = ({ date, view }: { date: Date; view: string }) => {
   }
 };
 
-const formatDay = (locale: string | undefined, date: Date) => {
+const formatDay = (_locale: string | undefined, date: Date) => {
   return date.getDate().toString(); // '일' 없이 날짜만 반환
 };
 
