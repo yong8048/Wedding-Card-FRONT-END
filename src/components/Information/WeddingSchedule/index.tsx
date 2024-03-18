@@ -102,7 +102,7 @@ const WeddingSchedule = () => {
         ...previousData.road,
         etc: {
           ...previousData.road.etc,
-          type: e.target.value,
+          transport_type: e.target.value,
         },
       },
     }));

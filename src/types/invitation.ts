@@ -59,7 +59,7 @@ interface IReqInvitationJSON {
     bus: IEditorState[];
     car: IEditorState[];
     etc: {
-      type: string;
+      transport_type: string;
       info: IEditorState[];
     };
   };

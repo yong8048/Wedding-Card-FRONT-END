@@ -61,7 +61,7 @@ const InitialData_CreateInvitationJSON: IReqInvitationJSON = {
     bus: [],
     car: [],
     etc: {
-      type: "",
+      transport_type: "",
       info: [],
     },
   },
