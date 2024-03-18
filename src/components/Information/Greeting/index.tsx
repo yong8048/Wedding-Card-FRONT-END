@@ -1,22 +1,22 @@
-import { DraftTextAlignment, IReqCreateInvitation } from "@/types/invitation";
+import { DraftTextAlignment } from "@/types/invitation";
 import * as S from "./style";
 import { CiTextAlignLeft, CiTextAlignCenter, CiTextAlignRight } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
+import { useSetRecoilState } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
+import { stateToMarkdown } from "draft-js-export-markdown";
 
-const Greeting = ({
-  setCreateInvitaionData,
-}: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
-}) => {
+const Greeting = () => {
   const [textAlign, setTextAlign] = useState<DraftTextAlignment>("left");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const setInvitationData = useSetRecoilState(invitationJSONState);
 
   const chageTextAlign = (e: React.MouseEvent<HTMLButtonElement>) => {
     const value = e.currentTarget.id.split("-")[1] as DraftTextAlignment;
     setTextAlign(value);
-    setCreateInvitaionData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       welcome_align: value,
     }));
@@ -30,7 +30,7 @@ const Greeting = ({
   useEffect(() => {
     const texts = convertToRaw(editorState.getCurrentContent());
 
-    setCreateInvitaionData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       welcome: texts.blocks.map(txt => ({
         text: txt.text,
@@ -42,6 +42,11 @@ const Greeting = ({
       })),
     }));
   }, [editorState]);
+
+  const exportToMarkdown = () => {
+    const contentState = editorState.getCurrentContent();
+    console.log(stateToMarkdown(contentState));
+  };
 
   return (
     <S.Container $textAlign={textAlign}>
@@ -69,6 +74,7 @@ const Greeting = ({
           <button id="align-right" onClick={chageTextAlign}>
             <CiTextAlignRight />
           </button>
+          <button onClick={exportToMarkdown}>맠</button>
         </S.TextEditor>
         <S.EditorContainer>
           <Editor
