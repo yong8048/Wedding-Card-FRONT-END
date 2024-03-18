@@ -24,6 +24,7 @@ const Home = () => {
       <MainSwiper />
       <Description />
       <S.Logo src="/logo.png" alt="logo" onClick={clickLogout} />
+      <iframe src="https://disearch.vercel.app"></iframe>
     </div>
   );
 };
