@@ -1,7 +1,6 @@
 import MainSwiper from "@/components/Home/MainSwiper";
 import * as S from "./style";
 import { userLogout } from "@/apis/kakao";
-
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { removeCookie } from "@/utils/cookie";
 import Description from "@/components/Home/Description";
@@ -17,7 +16,6 @@ const Home = () => {
       }
     }
   };
-
   return (
     <div>
       <MainSwiper />
