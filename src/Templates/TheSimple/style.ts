@@ -246,6 +246,10 @@ export const CalendarWrapper = styled.div`
 `;
 
 export const LocationContainer = styled.div`
+  &.visible {
+    animation: ${fadeIn} 1.5s ease-out forwards;
+  }
+  opacity: 0;
   margin: 20px 0;
   padding: 40px 0;
   .title {
@@ -265,8 +269,59 @@ export const LocationContainer = styled.div`
       color: #89757a;
     }
   }
+  .subtitle {
+    font-family: "GowunDodum", serif;
+    margin: 20px 0 40px;
+    .wedding-hall {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .address {
+      color: #797979;
+      font-size: 18px;
+    }
+  }
 
   .roadmap {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid #ececec;
+    .map-container {
+      width: 100%;
+      border-radius: 0;
+      border: none;
+      #__react-kakao-maps-sdk___Map {
+        border-radius: 0 !important;
+      }
+    }
+    .roadmap-nav {
+      background-color: #f2eeee;
+
+      height: 42px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      div {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+        border-right: 1px solid rgba(97, 80, 67, 0.2);
+
+        &:last-child {
+          border: none;
+        }
+
+        img {
+          width: 16px;
+        }
+      }
+    }
   }
 `;
 

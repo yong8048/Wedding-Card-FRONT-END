@@ -115,6 +115,29 @@ const TheSimple = () => {
     }
   };
 
+  const handleClickNaverMap = (e: React.MouseEvent<HTMLDivElement>) => {
+    let target = e.target as HTMLElement;
+    while (target !== null && target.id === "") {
+      target = target.parentNode as HTMLElement;
+    }
+    console.log(target);
+    let url = "";
+    switch (target.id) {
+      case "naver":
+        url = `https://map.naver.com/v5/search/${encodeURIComponent(sampleData.location.address)}`;
+        break;
+      case "kakao":
+        url = `https://map.kakao.com/?q=${encodeURIComponent(sampleData.location.address)}`;
+        break;
+      case "tmap":
+        url = `https://apis.openapi.sk.com/tmap/app/routes?appKey=${import.meta.env.VITE_TMAP_APP_KEY}&name=${sampleData.location.address}&lon=${sampleData.location.longitude}&lat=${sampleData.location.latitude}`;
+        break;
+      default:
+        return;
+    }
+    window.open(url, "_blank");
+  };
+
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = 0.5;
@@ -246,8 +269,26 @@ const TheSimple = () => {
           <span className="eng">LOCATION</span>
           <span className="kor">오시는 길</span>
         </div>
+        <div className="subtitle">
+          <p className="wedding-hall">{sampleData.location.wedding_hall}</p>
+          <p className="address">{sampleData.location.address}</p>
+        </div>
         <div className="roadmap">
           {<LocationCard latitude={sampleData.location.latitude} longitude={sampleData.location.longitude} />}
+          <div className="roadmap-nav" onClick={handleClickNaverMap}>
+            <div id="naver">
+              <img src="/Template/icon_navermap.png" />
+              <span>네이버 지도</span>
+            </div>
+            <div id="kakao">
+              <img src="/Template/icon_kakaonavi.png" />
+              <span>카카오 내비</span>
+            </div>
+            <div id="tmap">
+              <img src="/Template/icon_tmap.png" />
+              <span>티맵</span>
+            </div>
+          </div>
         </div>
       </S.LocationContainer>
       {isContactModalOpen && (
