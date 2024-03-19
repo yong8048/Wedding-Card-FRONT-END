@@ -1,7 +1,11 @@
 {
   "date": "2025-04-26T14:30",
-  "address": "경기 수원시 팔달구 권광로 132",
-  "wedding_hall": "이비스호텔 15층 베르사유 홀",
+  "location": {
+    "wedding_hall": "이비스호텔 15층 베르사유 홀",
+    "address": "경기 수원시 팔달구 권광로 132",
+    "latitude": 37.2591458,
+    "longitude": 127.03139
+  },
   "welcome": [
     {
       "text": "살랑이는 바람결에",

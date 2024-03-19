@@ -63,7 +63,10 @@ const WeddingSchedule = () => {
   useEffect(() => {
     setInvitationData(previousData => ({
       ...previousData,
-      wedding_hall: `${hallData.hallName} ${hallData.hallDetail}`,
+      location: {
+        ...previousData.location,
+        wedding_hall: `${hallData.hallName} ${hallData.hallDetail}`,
+      },
     }));
   }, [hallData]);
 
@@ -73,10 +76,14 @@ const WeddingSchedule = () => {
         setAddress(data.userSelectedType === "J" ? data.jibunAddress : data.roadAddress);
         const res = await GetLatLon(data.userSelectedType === "J" ? data.jibunAddress : data.roadAddress);
         setLatlon({ latitude: res.documents[0].y, longitude: res.documents[0].x });
-
         setInvitationData(previousData => ({
           ...previousData,
-          address: data.userSelectedType === "J" ? data.jibunAddress : data.roadAddress,
+          location: {
+            ...previousData.location,
+            address: data.userSelectedType === "J" ? data.jibunAddress : data.roadAddress,
+            latitude: res.documents[0].y,
+            longitude: res.documents[0].x,
+          },
         }));
       },
     }).open();
