@@ -2,8 +2,12 @@ import { IReqInvitationJSON, IReqInvitationPhotos } from "@/types/invitation";
 
 const InitialData_CreateInvitationJSON: IReqInvitationJSON = {
   date: "",
-  address: "",
-  wedding_hall: "",
+  location: {
+    wedding_hall: "",
+    address: "",
+    latitude: 37.2591458,
+    longitude: 127.031397,
+  },
   welcome: [],
   welcome_align: "left",
   contents: {
@@ -61,7 +65,7 @@ const InitialData_CreateInvitationJSON: IReqInvitationJSON = {
     bus: [],
     car: [],
     etc: {
-      type: "",
+      transport_type: "",
       info: [],
     },
   },

@@ -1,7 +1,11 @@
 interface IReqInvitationJSON {
   date: string;
-  address: string;
-  wedding_hall: string;
+  location: {
+    wedding_hall: string;
+    address: string;
+    latitude: number;
+    longitude: number;
+  };
   welcome: IEditorState[];
   welcome_align: DraftTextAlignment;
   contents: {
@@ -59,7 +63,7 @@ interface IReqInvitationJSON {
     bus: IEditorState[];
     car: IEditorState[];
     etc: {
-      type: string;
+      transport_type: string;
       info: IEditorState[];
     };
   };

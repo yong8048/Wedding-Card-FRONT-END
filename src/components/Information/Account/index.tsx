@@ -154,7 +154,7 @@ const Account = () => {
         </div>
         <div id="input-area">
           {Object.entries(familyMemebers).filter(([, value]) => value.isChecked).length > 0 && (
-            <h3>' - '를 제외하고 입력해주세요.</h3>
+            <h3>' - '를 포함하여 입력해주세요.</h3>
           )}
           {Object.entries(familyMemebers)
             .filter(([, value]) => value.isChecked)
@@ -171,7 +171,7 @@ const Account = () => {
                     onChange={handleChange}
                   />
                   <input
-                    placeholder="계좌번호 ( ' - ' 제외)"
+                    placeholder="계좌번호 ( ' - ' 필수)"
                     name="account"
                     id={value.who}
                     value={inputValue[value.who].account}
