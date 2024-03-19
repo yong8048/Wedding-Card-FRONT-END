@@ -17,6 +17,7 @@ import {
 } from "@/utils/parseDate";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
+import LocationCard from "@/components/Common/LocationCard";
 
 type InlineStyle = {
   offset: number;
@@ -187,7 +188,7 @@ const TheSimple = () => {
             <span>{getFullDate(new Date(sampleData.date))}</span>
           </div>
           <div className="wedding-info-hall">
-            <span>{sampleData.wedding_hall}</span>
+            <span>{sampleData.location.wedding_hall}</span>
           </div>
         </div>
       </S.MainWrapper>
@@ -247,6 +248,9 @@ const TheSimple = () => {
         <div className="title">
           <span className="eng">LOCATION</span>
           <span className="kor">오시는 길</span>
+        </div>
+        <div className="roadmap">
+          {<LocationCard latitude={sampleData.location.latitude} longitude={sampleData.location.longitude} />}
         </div>
       </S.LocationContainer>
       {isContactModalOpen && (

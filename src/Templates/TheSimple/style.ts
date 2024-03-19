@@ -265,6 +265,9 @@ export const LocationContainer = styled.div`
       color: #89757a;
     }
   }
+
+  .roadmap {
+  }
 `;
 
 export const ContactModalContainer = styled.div`
