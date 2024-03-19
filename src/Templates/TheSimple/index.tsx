@@ -26,18 +26,15 @@ type InlineStyle = {
 };
 
 const tileClassName = ({ date, view }: { date: Date; view: string }) => {
-  // 달력 뷰가 'month'일 때만 요일 색상을 변경
   if (view === "month") {
-    // getDay()는 일요일을 0으로 반환
     if (date.getDay() === 6) {
-      // 일요일인 경우
       return "saturday";
     }
   }
 };
 
 const formatDay = (_locale: string | undefined, date: Date) => {
-  return date.getDate().toString(); // '일' 없이 날짜만 반환
+  return date.getDate().toString();
 };
 
 const applyStyles = (text: string, styles: InlineStyle[]) => {
