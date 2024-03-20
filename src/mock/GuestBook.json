@@ -1,0 +1,18 @@
+{
+  "guestbook": [
+    {
+      "id": 1,
+      "name": "이병욱",
+      "date": "2024-03-05T23:50",
+      "content": "결혼 축하해요~",
+      "management_password": "asdf1234"
+    },
+    {
+      "id": 2,
+      "name": "이승용",
+      "date": "2024-03-12T23:50",
+      "content": "축하해~😁",
+      "management_password": "qwer1234"
+    }
+  ]
+}

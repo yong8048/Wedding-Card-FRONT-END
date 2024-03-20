@@ -250,7 +250,7 @@ export const LocationContainer = styled.div`
     animation: ${fadeIn} 1.5s ease-out forwards;
   }
   opacity: 0;
-  margin: 20px 0;
+  margin: 20px 0 0;
   padding: 40px 0;
   .title {
     display: flex;
@@ -325,6 +325,249 @@ export const LocationContainer = styled.div`
   }
 `;
 
+export const WayToComeContainer = styled.div`
+  margin-bottom: 40px;
+  .traffic {
+    &.visible {
+      animation: ${fadeIn} 1.5s ease-out forwards;
+    }
+    opacity: 0;
+    margin: 8px 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid #e9e5e5;
+
+    font-family: "GowunDodum", serif;
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 18px;
+      color: #89757a;
+      .icon {
+        background-color: #f2eeee;
+        padding: 10px;
+        border-radius: 100%;
+      }
+    }
+
+    .description {
+      padding-left: 70px;
+      text-align: left;
+      color: #544f4f;
+
+      p {
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+    }
+  }
+`;
+
+export const GalleryContainer = styled.div`
+  &.visible {
+    animation: ${fadeIn} 1.5s ease-out forwards;
+  }
+  opacity: 0;
+  padding: 0 20px;
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 0;
+    .eng {
+      font-family: "CrimsonPro";
+      letter-spacing: 3px;
+      color: #c2b2b2;
+    }
+    .kor {
+      font-family: "GowunDodum", serif;
+      font-size: 20px;
+      color: #89757a;
+    }
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-content: center;
+    gap: 8px;
+    padding: 20px 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+    }
+  }
+`;
+
+export const GuestBookContainer = styled.div`
+  &.visible {
+    animation: ${fadeIn} 1.5s ease-out forwards;
+  }
+  opacity: 0;
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 0;
+    .eng {
+      font-family: "CrimsonPro";
+      letter-spacing: 3px;
+      color: #c2b2b2;
+    }
+    .kor {
+      font-family: "GowunDodum", serif;
+      font-size: 20px;
+      color: #89757a;
+    }
+  }
+  .guestbook-container {
+    padding: 0 40px;
+
+    .guestbook-wrapper {
+      position: relative;
+      text-align: left;
+      box-shadow: 1px 1px 2px rgb(0 0 0/5%);
+      border-radius: 8px;
+      background: hsla(0, 0%, 100%, 0.75);
+      padding: 20px;
+      margin-bottom: 10px;
+
+      h2 {
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        color: #aaa;
+
+        font-size: 12px;
+
+        svg {
+          cursor: pointer;
+          margin-left: 6px;
+        }
+      }
+    }
+  }
+  .tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 40px;
+    .pagination {
+      padding: 0 10px;
+    }
+
+    .write-button {
+      background-color: #d0b9b9;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+    }
+  }
+`;
+
+export const GuestBookPaginationSpan = styled.span<{ $isActiveIndex: boolean }>`
+  display: inline-block;
+  width: 30px;
+  cursor: pointer;
+  color: #89757a;
+  opacity: ${({ $isActiveIndex }) => ($isActiveIndex ? 1 : 0.35)};
+  font-weight: ${({ $isActiveIndex }) => ($isActiveIndex ? "600" : "400")};
+`;
+
+export const AccountContainer = styled.div`
+  padding: 40px;
+  &.visible {
+    animation: ${fadeIn} 1.5s ease-out forwards;
+  }
+  opacity: 0;
+
+  img {
+    width: 25px;
+    margin-bottom: 20px;
+  }
+  .title {
+    font-family: "GowunDodum", serif;
+    font-size: 20px;
+    color: #89757a;
+  }
+
+  .wrapper {
+    margin: 20px;
+    border: 1px solid #f2eeee;
+    border-radius: 6px;
+
+    .title {
+      position: relative;
+      h3 {
+        font-family: "GowunDodum", serif;
+        background-color: #f2eeee;
+        font-size: 18px;
+        height: 45px;
+        line-height: 45px;
+        border-radius: 6px 6px 0 0;
+      }
+
+      .open-button {
+        position: absolute;
+        top: 50%;
+        right: 5%;
+        transform: translateY(-50%);
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        span {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+`;
+
+export const FooterContainer = styled.div`
+  padding: 40px;
+  background-color: #f2eeee;
+  font-family: "GowunDodum", serif;
+
+  &.visible {
+    animation: ${fadeIn} 1.5s ease-out forwards;
+  }
+  opacity: 0;
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 14px;
+  }
+
+  p {
+    margin-top: 20px;
+    font-family: "CrimsonPro";
+    letter-spacing: 1.5px;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 12px;
+    span {
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
+`;
+
 export const ContactModalContainer = styled.div`
   position: fixed;
   top: 0;
@@ -350,7 +593,7 @@ export const ContactModalContainer = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 320px;
+    width: 350px;
     background-color: white;
 
     .title {
@@ -398,6 +641,92 @@ export const ContactModalContainer = styled.div`
           color: #ce7373;
         }
       }
+    }
+  }
+`;
+
+export const AccountModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+
+  background-color: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 300ms ease-out forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    background-color: white;
+    border-radius: 6px;
+
+    .title {
+      h2 {
+        font-family: "GowunDodum", serif;
+        background-color: #f2eeee;
+
+        color: #89757a;
+        font-size: 18px;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 6px 6px 0 0;
+      }
+    }
+
+    .inner {
+      position: relative;
+      padding: 16px 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      .bank-account {
+        text-align: left;
+        margin-bottom: 10px;
+        .bank {
+          &::after {
+            content: "";
+            display: inline-block;
+            width: 1px;
+            height: 10px;
+            margin: 0 6px;
+            background-color: #e5e5e5;
+          }
+        }
+      }
+
+      .copy-button {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+
+        padding: 6px 12px;
+        border: 1px solid #e1e1e1;
+        color: #333;
+        font-size: 12px;
+        border-radius: 4px;
+
+        display: flex;
+        align-items: center;
+
+        svg {
+          margin-right: 4px;
+        }
+      }
+    }
+    .name {
+      text-align: left;
     }
   }
 `;
