@@ -47,8 +47,8 @@ export const ImageForm = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 475px;
-    height: 250px;
+    width: 500px;
+    height: 500px;
     position: relative;
     background-color: #ede6eb;
     border: 1px solid #d2d2d2;
@@ -85,8 +85,8 @@ export const ImageForm = styled.form`
 
   @media ${({ theme }) => theme.windowSize.md} {
     .img-container {
-      width: 380px;
-      height: 200px;
+      width: 400px;
+      height: 400px;
       span {
         font-size: 20px;
       }
@@ -99,8 +99,8 @@ export const ImageForm = styled.form`
 
   @media ${({ theme }) => theme.windowSize.sm} {
     .img-container {
-      width: 285px;
-      height: 150px;
+      width: 300px;
+      height: 300px;
       span {
         font-size: 16px;
       }

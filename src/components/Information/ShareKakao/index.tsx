@@ -47,7 +47,6 @@ const ShareKakao = () => {
     <S.Container>
       <h1>카카오톡 공유 썸네일을 설정해주세요.</h1>
       <h3>청첩장 하단의 [카카오톡 공유하기]로 전달할 때 표시됩니다.</h3>
-      <h3>카카오톡 공유 썸네일은 190:100 비율을 권장합니다.</h3>
       <S.TextWrapper onChange={handleChangeInput}>
         <div className="input-container">
           <span>제목</span>
