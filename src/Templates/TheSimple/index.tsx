@@ -30,7 +30,7 @@ import {
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import LocationCard from "@/components/Common/LocationCard";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 type InlineStyle = {
   offset: number;
@@ -251,7 +251,10 @@ const TheSimple = () => {
         <meta name="description" content={`${sampleData.open_graph.title} 결혼합니다`} />
         <meta property="og:title" content={sampleData.open_graph.title} />
         <meta property="og:description" content={`${sampleData.open_graph.title} 결혼합니다`} />
-        <meta property="og:image" content="https://avatars.githubusercontent.com/u/75530371?v=4" />
+        <meta
+          property="og:image"
+          content="https://images.velog.io/images/anjoy/post/7886527b-8b11-4ccc-a90f-012aeb196297/image.png"
+        />
         <meta property="og:url" content="페이지 URL" />
       </Helmet>
       <S.AudioWrapper>

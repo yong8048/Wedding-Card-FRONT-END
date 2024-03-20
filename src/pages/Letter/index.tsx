@@ -2,10 +2,7 @@ import * as S from "./style";
 import TheSimple from "@/Templates/TheSimple";
 import { useParams } from "react-router";
 import { useEffect } from "react";
-
-// const TEMPLATES = {
-
-// }
+import { HelmetProvider } from "react-helmet-async";
 
 const Letter = () => {
   const { id } = useParams();
@@ -27,7 +24,9 @@ const Letter = () => {
 
   return (
     <S.Main>
-      <TheSimple />
+      <HelmetProvider>
+        <TheSimple />
+      </HelmetProvider>
     </S.Main>
   );
 };
