@@ -358,7 +358,9 @@ export const WayToComeContainer = styled.div`
 
       p {
         margin-bottom: 10px;
-        font-size: 16px;
+        font-size: 14px;
+        word-break: keep-all;
+        line-height: 1.1;
       }
     }
   }
@@ -399,6 +401,7 @@ export const GalleryContainer = styled.div`
       width: 100%;
       height: 100%;
       border-radius: 6px;
+      cursor: pointer;
     }
   }
 `;
