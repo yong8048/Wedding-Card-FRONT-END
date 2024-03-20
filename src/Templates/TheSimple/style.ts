@@ -69,7 +69,7 @@ export const MainWrapper = styled.div`
     padding: 20px;
     img {
       width: 100%;
-      height: min-content;
+      height: fit-content;
     }
   }
 
