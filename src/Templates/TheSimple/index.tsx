@@ -103,12 +103,27 @@ const wrapTextWithStyles = (text: string, styles: Array<string>) => {
 const TheSimple = () => {
   const [isAudioPlay, setIsAudioPlay] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const [isActiveGuestBook, setIsActiveGuestBook] = useState(1);
+  const [currentGuestBookPage, setCurrentGuestBookPage] = useState(1);
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
-  const [isOpenAccount, setIsOpenAccount] = useState("");
+  const [isOpenAccountWho, setIsOpenAccountWho] = useState("");
+  const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const containerRef = useRef<HTMLInputElement>(null);
   const itemRefs = useRef<HTMLDivElement[]>([]);
+  const fieldsRef = useRef<{
+    name: HTMLInputElement | null;
+    password: HTMLInputElement | null;
+    content: HTMLTextAreaElement | null;
+  }>({
+    name: null,
+    password: null,
+    content: null,
+  });
+
+  const itemsPerPage = 5;
+  const indexOfLastItem = currentGuestBookPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = guestBook.guestbook.slice(indexOfFirstItem, indexOfLastItem);
 
   const addItemRef = (el: HTMLDivElement) => {
     if (el && !itemRefs.current.includes(el)) {
@@ -129,6 +144,7 @@ const TheSimple = () => {
     if (element.classList.contains("container")) {
       setIsContactModalOpen(false);
       setIsAccountModalOpen(false);
+      setIsWriteModalOpen(false);
     }
   };
 
@@ -156,7 +172,7 @@ const TheSimple = () => {
   };
 
   const handleClickGuestBookPagination = (index: number) => {
-    setIsActiveGuestBook(index);
+    setCurrentGuestBookPage(index);
   };
 
   const handleClickCopyAccount = (account: string) => {
@@ -171,7 +187,7 @@ const TheSimple = () => {
   };
 
   const handleClickOpenAccount = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsOpenAccount(e.currentTarget.id);
+    setIsOpenAccountWho(e.currentTarget.id);
     setIsAccountModalOpen(true);
   };
 
@@ -201,6 +217,23 @@ const TheSimple = () => {
       .catch(err => {
         console.error("클립보드 복사에 실패했습니다.", err);
       });
+  };
+
+  const handleClickOpenWrite = () => {
+    setIsWriteModalOpen(true);
+  };
+
+  const handleClickWriteComplete = () => {
+    const { name, password, content } = fieldsRef.current;
+
+    if (!name?.value || !password?.value || !content?.value) {
+      alert("내용을 채워주세요.");
+      return;
+    } else {
+      console.log(name.value);
+      console.log(password.value);
+      console.log(content.value);
+    }
   };
 
   useEffect(() => {
@@ -339,7 +372,15 @@ const TheSimple = () => {
         <div className="d-day">
           <p>
             {sampleData.HUSBAND.ME.name} <FcLike /> {sampleData.WIFE.ME.name}의 결혼식이{" "}
-            <span>{getDday(new Date(sampleData.date))}일</span> 남았습니다.
+            {getDday(new Date(sampleData.date)) === 0 ? (
+              <>
+                <span>오늘</span>입니다.
+              </>
+            ) : (
+              <>
+                <span>{getDday(new Date(sampleData.date))}일</span> 남았습니다.
+              </>
+            )}
           </p>
         </div>
       </S.CalendarWrapper>
@@ -463,7 +504,7 @@ const TheSimple = () => {
           <span className="kor">방명록</span>
         </div>
         <div className="guestbook-container">
-          {guestBook.guestbook.map(item => (
+          {currentItems.map(item => (
             <div key={item.id} className="guestbook-wrapper">
               <h2>{item.name}</h2>
               <p>{item.content}</p>
@@ -476,18 +517,20 @@ const TheSimple = () => {
         </div>
         <div className="tools">
           <div className="pagination">
-            {new Array(Math.floor(guestBook.guestbook.length / 5) + 2).fill(0).map((_, index) => (
+            {new Array(Math.floor(guestBook.guestbook.length / 5) + 1).fill(0).map((_, index) => (
               <S.GuestBookPaginationSpan
-                $isActiveIndex={isActiveGuestBook === index + 1}
+                $isActiveIndex={currentGuestBookPage === index + 1}
                 key={index}
-                onClick={() => handleClickGuestBookPagination(index)}
+                onClick={() => handleClickGuestBookPagination(index + 1)}
                 id={index.toString()}
               >
                 {index + 1}
               </S.GuestBookPaginationSpan>
             ))}
           </div>
-          <button className="write-button">작성하기</button>
+          <button className="write-button" onClick={handleClickOpenWrite}>
+            작성하기
+          </button>
         </div>
       </S.GuestBookContainer>
       <S.FooterContainer ref={addItemRef}>
@@ -500,7 +543,7 @@ const TheSimple = () => {
           <span>링크주소 복사하기</span>
         </div>
         <p>
-          Copyright {new Date().getFullYear()}.<span>WECA&nbsp;</span>All rights reserver
+          Copyright {new Date().getFullYear()}.<span>WECA&nbsp;</span>All rights reserved
         </p>
       </S.FooterContainer>
       {isContactModalOpen && (
@@ -601,7 +644,7 @@ const TheSimple = () => {
       )}
       {isAccountModalOpen && (
         <S.AccountModalContainer onClick={handleCloseModal} className="container">
-          {isOpenAccount === "husband" ? (
+          {isOpenAccountWho === "husband" ? (
             <div className="wrapper">
               <div className="title">
                 <h2>신랑측 계좌번호</h2>
@@ -705,6 +748,34 @@ const TheSimple = () => {
             </div>
           )}
         </S.AccountModalContainer>
+      )}
+      {isWriteModalOpen && (
+        <S.WriteModalContainer>
+          <div className="wrapper">
+            <div className="title">
+              <span>방명록</span>
+              <button onClick={() => setIsWriteModalOpen(false)}>
+                <IoCloseOutline size={25} />
+              </button>
+            </div>
+            <div className="inner">
+              <div className="name">
+                <span>이름</span>
+                <input ref={el => (fieldsRef.current.name = el)} />
+              </div>
+              <div className="password">
+                <span>비밀번호</span>
+                <input ref={el => (fieldsRef.current.password = el)} />
+              </div>
+              <div className="content">
+                <textarea placeholder="100자 이내로 작성해주세요" ref={el => (fieldsRef.current.content = el)} />
+              </div>
+            </div>
+            <button className="write-button" onClick={handleClickWriteComplete}>
+              작성하기
+            </button>
+          </div>
+        </S.WriteModalContainer>
       )}
     </S.Container>
   );

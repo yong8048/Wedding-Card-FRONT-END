@@ -232,6 +232,12 @@ export const CalendarWrapper = styled.div`
       .react-calendar__month-view__days__day--neighboringMonth {
         visibility: hidden;
       }
+      .react-calendar__tile--now {
+        background-color: transparent;
+        abbr {
+          color: blue;
+        }
+      }
     }
   }
 
@@ -491,6 +497,7 @@ export const GuestBookPaginationSpan = styled.span<{ $isActiveIndex: boolean }>`
 
 export const AccountContainer = styled.div`
   padding: 40px;
+  margin: 20px 0;
   &.visible {
     animation: ${fadeIn} 1.5s ease-out forwards;
   }
@@ -730,6 +737,93 @@ export const AccountModalContainer = styled.div`
     }
     .name {
       text-align: left;
+    }
+  }
+`;
+
+export const WriteModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+
+  background-color: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 300ms ease-out forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    background-color: white;
+    border-radius: 6px;
+
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      font-size: 18px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .inner {
+      .name,
+      .password {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+
+        span {
+          color: #989898;
+        }
+        input {
+          border: none;
+          font-size: 18px;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .content {
+        padding: 20px;
+        textarea {
+          padding: 12px 16px;
+          width: calc(100% - 40px);
+          height: 150px;
+          resize: none;
+          background-color: #fcfcfc;
+          border-radius: 6px;
+          border: 1px solid #eee;
+          outline: none;
+          font-size: 18px;
+          &::placeholder {
+            color: #d1d1d1;
+          }
+        }
+      }
+    }
+
+    .write-button {
+      padding: 20px 0;
+      background-color: #d0b9b9;
+      width: 100%;
+      border-radius: 0 0 6px 6px;
+      color: #fff;
+      font-size: 18px;
     }
   }
 `;
