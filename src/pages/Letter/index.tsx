@@ -1,7 +1,8 @@
 import * as S from "./style";
-import TheSimple from "@/Templates/TheSimple";
+
 import { useParams } from "react-router";
 import { useEffect } from "react";
+import Modern from "@/Templates/Modern";
 
 // const TEMPLATES = {
 
@@ -27,7 +28,7 @@ const Letter = () => {
 
   return (
     <S.Main>
-      <TheSimple />
+      <Modern />
     </S.Main>
   );
 };

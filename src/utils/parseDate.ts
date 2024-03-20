@@ -37,6 +37,13 @@ export const getDateWithDots = (date: Date) => {
   return `${year}.${month}.${day}`;
 };
 
+export const getDateMonthDay = (date: Date) => {
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  return `${month < 10 ? "0" + month : month}${day < 10 ? "0" + day : day}`;
+};
+
 export const getDayWithTime = (date: Date) => {
   const dayOfWeek = ["일", "월", "화", "수", "목", "금", "토"][date.getDay()];
   const hour = date.getHours();
