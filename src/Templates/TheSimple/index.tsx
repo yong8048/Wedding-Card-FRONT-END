@@ -401,23 +401,25 @@ const TheSimple = () => {
           ))}
         </div>
       </S.GalleryContainer>
-      <S.WeddingVideoContainer ref={addItemRef} className="observer">
-        <div className="title">
-          <span className="eng">WEDDING VIDEO</span>
-          <span className="kor">웨딩 영상</span>
-        </div>
-        <YouTube
-          videoId={sampleData.contents.video_id}
-          className="youtube"
-          opts={{
-            width: "100%",
-            height: "300px",
-            playerVars: {
-              autoplay: 1,
-            },
-          }}
-        />
-      </S.WeddingVideoContainer>
+      {sampleData.contents.video_id && (
+        <S.WeddingVideoContainer ref={addItemRef} className="observer">
+          <div className="title">
+            <span className="eng">WEDDING VIDEO</span>
+            <span className="kor">웨딩 영상</span>
+          </div>
+          <YouTube
+            videoId={sampleData.contents.video_id}
+            className="youtube"
+            opts={{
+              width: "100%",
+              height: "300px",
+              playerVars: {
+                autoplay: 1,
+              },
+            }}
+          />
+        </S.WeddingVideoContainer>
+      )}
       {sampleData.contents.live_url && (
         <S.LiveWeddingContainer ref={addItemRef} className="observer">
           <div className="title">
