@@ -1,7 +1,9 @@
 import * as S from "./style";
-import TheSimple from "@/Templates/TheSimple";
+
 import { useParams } from "react-router";
 import { useEffect } from "react";
+import Modern from "@/Templates/Modern";
+
 import { HelmetProvider } from "react-helmet-async";
 
 const Letter = () => {
@@ -25,7 +27,7 @@ const Letter = () => {
   return (
     <S.Main>
       <HelmetProvider>
-        <TheSimple />
+        <Modern />
       </HelmetProvider>
     </S.Main>
   );
