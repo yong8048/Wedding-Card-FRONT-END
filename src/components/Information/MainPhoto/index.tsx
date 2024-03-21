@@ -4,11 +4,14 @@ import { useRecoilState } from "recoil";
 import { invitationPhotosState } from "@/stores/createInvitationPhotosStore";
 import { MAX_IMAGE_SIZE } from "@/utils/InitialData";
 import Resizer from "react-image-file-resizer";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
+import { Effects } from "@/constants/ContentsData";
 
 const MainPhoto = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [invitationPhotos, setInvitationPhotos] = useRecoilState(invitationPhotosState);
+  const [invitationJSON, setInvitationJSON] = useRecoilState(invitationJSONState);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,6 +41,16 @@ const MainPhoto = () => {
     }
   };
 
+  const handleChangeEffect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInvitationJSON(previousData => ({
+      ...previousData,
+      contents: {
+        ...previousData.contents,
+        effect: Number(e.target.id),
+      },
+    }));
+  };
+
   return (
     <S.Container>
       <h1>메인 사진을 선택해 주세요.</h1>
@@ -49,10 +62,33 @@ const MainPhoto = () => {
             <img src={URL.createObjectURL(invitationPhotos.main_photo)} alt="MainPhoto" />
           )}
           {!invitationPhotos.main_photo && <span>이미지를 업로드 해주세요.</span>}
+          {invitationJSON.contents.effect !== 0 && (
+            <div className="background-video">
+              <video key={Effects[invitationJSON.contents.effect - 1]} muted autoPlay loop>
+                <source src={Effects[invitationJSON.contents.effect - 1]} type="video/mp4" />
+              </video>
+            </div>
+          )}
         </div>
         <input type="file" ref={inputRef} onChange={handleSetImage} accept="image/*" />
         <button>사진 업로드</button>
       </S.ImageForm>
+      <h1>사진에 어울리는 이펙트를 선택해주세요.</h1>
+      <h3>이펙트를 선택하시면 위의 사진에 미리보기가 적용됩니다.</h3>
+      <S.EffectForm>
+        <label>
+          <input type="radio" name="effect" id="0" defaultChecked={true} onChange={handleChangeEffect} />
+          <span>사용 안함</span>
+        </label>
+        <label>
+          <input type="radio" name="effect" id="1" onChange={handleChangeEffect} />
+          <span>벚꽃잎</span>
+        </label>
+        <label>
+          <input type="radio" name="effect" id="2" onChange={handleChangeEffect} />
+          <span>눈송이</span>
+        </label>
+      </S.EffectForm>
     </S.Container>
   );
 };
