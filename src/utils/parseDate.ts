@@ -54,3 +54,15 @@ export const getDday = (date: Date) => {
 
   return dDay;
 };
+
+export const tileClassName = ({ date, view }: { date: Date; view: string }) => {
+  if (view === "month") {
+    if (date.getDay() === 6) {
+      return "saturday";
+    }
+  }
+};
+
+export const formatDay = (_locale: string | undefined, date: Date) => {
+  return date.getDate().toString();
+};
