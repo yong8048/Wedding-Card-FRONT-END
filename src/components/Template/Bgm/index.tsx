@@ -1,4 +1,4 @@
-import { Audios } from "@/constants/AudioData";
+import { Audios } from "@/constants/ContentsData";
 import * as S from "./style";
 import { useEffect, useRef, useState } from "react";
 import { PiSpeakerHighDuotone, PiSpeakerXDuotone } from "react-icons/pi";
