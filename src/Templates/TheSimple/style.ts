@@ -18,24 +18,15 @@ export const Container = styled.div`
 
   background-color: #fbfbfb;
   overflow: hidden;
-`;
-
-export const AudioWrapper = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  z-index: 100;
-
-  .audio-image {
-    cursor: pointer;
+  .observer {
+    &.visible {
+      animation: ${fadeIn} 1.5s ease-out forwards;
+    }
+    opacity: 0;
   }
 `;
 
 export const MainWrapper = styled.div`
-  &.visible {
-    animation: ${fadeIn} 1.5s ease-out forwards;
-  }
-  opacity: 0;
   font-family: "CrimsonPro";
   padding: 40px 0;
 
@@ -105,10 +96,6 @@ export const MainWrapper = styled.div`
 `;
 
 export const GreetingWrapper = styled.div`
-  &.visible {
-    animation: ${fadeIn} 1.5s ease-out forwards;
-  }
-  opacity: 0;
   padding: 40px 0;
 
   img {
@@ -126,15 +113,10 @@ export const GreetingWrapper = styled.div`
     font-size: 18px;
     font-family: "GowunDodum", serif;
     color: #544f4f;
-    /* font-weight: 600; */
   }
 `;
 
 export const HumanWrapper = styled.div`
-  &.visible {
-    animation: ${fadeIn} 1.5s ease-out forwards;
-  }
-  opacity: 0;
   padding: 40px 0;
   font-family: "GowunDodum", serif;
 
@@ -171,10 +153,6 @@ export const HumanWrapper = styled.div`
 `;
 
 export const CalendarWrapper = styled.div`
-  &.visible {
-    animation: ${fadeIn} 1.5s ease-out forwards;
-  }
-  opacity: 0;
   padding: 80px 0;
   background-color: #f6f5f5;
   margin: 20px 0;
@@ -252,10 +230,6 @@ export const CalendarWrapper = styled.div`
 `;
 
 export const LocationContainer = styled.div`
-  &.visible {
-    animation: ${fadeIn} 1.5s ease-out forwards;
-  }
-  opacity: 0;
   margin: 20px 0 0;
   padding: 40px 0;
   .title {
@@ -334,10 +308,6 @@ export const LocationContainer = styled.div`
 export const WayToComeContainer = styled.div`
   margin-bottom: 40px;
   .traffic {
-    &.visible {
-      animation: ${fadeIn} 1.5s ease-out forwards;
-    }
-    opacity: 0;
     margin: 8px 32px;
     padding: 20px 0;
     border-bottom: 1px solid #e9e5e5;
@@ -373,11 +343,7 @@ export const WayToComeContainer = styled.div`
 `;
 
 export const GalleryContainer = styled.div`
-  &.visible {
-    animation: ${fadeIn} 1.5s ease-out forwards;
-  }
-  opacity: 0;
-  padding: 0 20px;
+  padding: 40px 20px;
   .title {
     display: flex;
     flex-direction: column;
@@ -408,15 +374,75 @@ export const GalleryContainer = styled.div`
       height: 100%;
       border-radius: 6px;
       cursor: pointer;
+      object-fit: cover;
+    }
+  }
+`;
+
+export const WeddingVideoContainer = styled.div`
+  padding: 0 20px;
+  margin: 60px 0;
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0;
+    .eng {
+      font-family: "CrimsonPro";
+      letter-spacing: 3px;
+      color: #c2b2b2;
+    }
+    .kor {
+      font-family: "GowunDodum", serif;
+      font-size: 20px;
+      color: #89757a;
+    }
+  }
+
+  .youtube {
+    padding: 40px 0;
+  }
+`;
+
+export const LiveWeddingContainer = styled.div`
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0;
+    .eng {
+      font-family: "CrimsonPro";
+      letter-spacing: 3px;
+      color: #c2b2b2;
+    }
+    .kor {
+      font-family: "GowunDodum", serif;
+      font-size: 20px;
+      color: #89757a;
+    }
+  }
+  .inner {
+    text-align: center;
+    font-family: "GowunDodum", serif;
+    span {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    .view-button {
+      font-family: "GowunDodum", serif;
+      padding: 20px 60px;
+      background-color: #f2eeee;
+      color: #89757a;
+      border-radius: 32px;
+      margin: 20px 0 40px;
     }
   }
 `;
 
 export const GuestBookContainer = styled.div`
-  &.visible {
-    animation: ${fadeIn} 1.5s ease-out forwards;
-  }
-  opacity: 0;
   .title {
     display: flex;
     flex-direction: column;
@@ -498,10 +524,6 @@ export const GuestBookPaginationSpan = styled.span<{ $isActiveIndex: boolean }>`
 export const AccountContainer = styled.div`
   padding: 40px;
   margin: 20px 0;
-  &.visible {
-    animation: ${fadeIn} 1.5s ease-out forwards;
-  }
-  opacity: 0;
 
   img {
     width: 25px;
@@ -551,11 +573,6 @@ export const FooterContainer = styled.div`
   padding: 40px;
   background-color: #f2eeee;
   font-family: "GowunDodum", serif;
-
-  &.visible {
-    animation: ${fadeIn} 1.5s ease-out forwards;
-  }
-  opacity: 0;
 
   .wrapper {
     display: flex;
@@ -818,6 +835,70 @@ export const WriteModalContainer = styled.div`
     }
 
     .write-button {
+      padding: 20px 0;
+      background-color: #d0b9b9;
+      width: 100%;
+      border-radius: 0 0 6px 6px;
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+`;
+
+export const DeleteModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+
+  background-color: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 300ms ease-out forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    background-color: white;
+    border-radius: 6px;
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      font-size: 18px;
+      border-bottom: 1px solid #eee;
+    }
+    .password {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+
+      span {
+        color: #989898;
+      }
+      input {
+        border: none;
+        font-size: 18px;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .delete-button {
       padding: 20px 0;
       background-color: #d0b9b9;
       width: 100%;

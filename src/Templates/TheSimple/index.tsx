@@ -1,7 +1,5 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as S from "./style";
-import { PiSpeakerHighDuotone, PiSpeakerXDuotone } from "react-icons/pi";
-import { Audios } from "@/constants/AudioData";
 import { BsTelephoneFill, BsChatText } from "react-icons/bs";
 import {
   IoBusOutline,
@@ -16,8 +14,10 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import { HiOutlineLink } from "react-icons/hi";
 import sampleData from "@/mock/JSONData.json";
 import guestBook from "@/mock/GuestBook.json";
+import galleryImages from "@/mock/GalleryImages.json";
 import { FcLike } from "react-icons/fc";
 import {
+  formatDay,
   getDate,
   getDateWithDots,
   getDayEng,
@@ -26,98 +26,39 @@ import {
   getFullDate,
   getMonth,
   getYear,
+  tileClassName,
 } from "@/utils/parseDate";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import LocationCard from "@/components/Common/LocationCard";
 import { Helmet } from "react-helmet-async";
-
-type InlineStyle = {
-  offset: number;
-  length: number;
-  style: string;
-};
-
-const tileClassName = ({ date, view }: { date: Date; view: string }) => {
-  if (view === "month") {
-    if (date.getDay() === 6) {
-      return "saturday";
-    }
-  }
-};
-
-const formatDay = (_locale: string | undefined, date: Date) => {
-  return date.getDate().toString();
-};
-
-const applyStyles = (text: string, styles: InlineStyle[]) => {
-  const styleMap: Array<Array<string>> = Array(text.length)
-    .fill(null)
-    .map(() => []);
-
-  styles.forEach(({ offset, length, style }) => {
-    for (let i = offset; i < offset + length; i++) {
-      styleMap[i].push(style);
-    }
-  });
-
-  const result: React.ReactNode[] = [];
-  let currentStyledText = "";
-  let currentStyles: Array<string> = [];
-
-  styleMap.forEach((stylesAtIndex, index) => {
-    const char = text.charAt(index);
-    if (stylesAtIndex.join() === currentStyles.join()) {
-      currentStyledText += char;
-    } else {
-      if (currentStyledText) {
-        result.push(<Fragment key={index}>{wrapTextWithStyles(currentStyledText, currentStyles)}</Fragment>);
-      }
-      currentStyledText = char;
-      currentStyles = stylesAtIndex;
-    }
-  });
-
-  if (currentStyledText) {
-    result.push(<Fragment key={text.length}>{wrapTextWithStyles(currentStyledText, currentStyles)}</Fragment>);
-  }
-
-  return result;
-};
-
-const wrapTextWithStyles = (text: string, styles: Array<string>) => {
-  return styles.reduce((acc, style) => {
-    switch (style) {
-      case "BOLD":
-        return <strong>{acc}</strong>;
-      case "ITALIC":
-        return <em>{acc}</em>;
-      case "UNDERLINE":
-        return <u>{acc}</u>;
-      default:
-        return acc;
-    }
-  }, text as React.ReactNode);
-};
+import SwiperModal from "@/components/Template/SwiperModal";
+import Bgm from "@/components/Template/Bgm";
+import { applyStyles } from "@/utils/parseInlineStyle";
+import { shareKakao } from "@/utils/shareKakao";
+import { copyLink } from "@/utils/copyLink";
+import YouTube from "react-youtube";
 
 const TheSimple = () => {
-  const [isAudioPlay, setIsAudioPlay] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [currentGuestBookPage, setCurrentGuestBookPage] = useState(1);
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
   const [isOpenAccountWho, setIsOpenAccountWho] = useState("");
   const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [curSwiperImageIndex, setCurSwiperImageIndex] = useState(0);
   const containerRef = useRef<HTMLInputElement>(null);
   const itemRefs = useRef<HTMLDivElement[]>([]);
   const fieldsRef = useRef<{
     name: HTMLInputElement | null;
     password: HTMLInputElement | null;
     content: HTMLTextAreaElement | null;
+    delete: HTMLInputElement | null;
   }>({
     name: null,
     password: null,
     content: null,
+    delete: null,
   });
 
   const itemsPerPage = 5;
@@ -129,10 +70,6 @@ const TheSimple = () => {
     if (el && !itemRefs.current.includes(el)) {
       itemRefs.current.push(el);
     }
-  };
-
-  const handleClickAudio = () => {
-    setIsAudioPlay(!isAudioPlay);
   };
 
   const handleClickContantModal = () => {
@@ -148,7 +85,7 @@ const TheSimple = () => {
     }
   };
 
-  const handleClickNaverMap = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleClickRoadMap = (e: React.MouseEvent<HTMLDivElement>) => {
     let target = e.target as HTMLElement;
     while (target !== null && target.id === "") {
       target = target.parentNode as HTMLElement;
@@ -192,31 +129,12 @@ const TheSimple = () => {
   };
 
   const handleClickShareKakao = () => {
-    if (window.Kakao) {
-      window.Kakao.Link.sendDefault({
-        objectType: "feed",
-        content: {
-          title: sampleData.open_graph.title,
-          description: sampleData.open_graph.subtitle,
-          imageUrl: "https://avatars.githubusercontent.com/u/75530371?v=4",
-          link: {
-            mobileWebUrl: window.location.href,
-            webUrl: window.location.href,
-          },
-        },
-      });
-    }
-  };
-
-  const handleClickCopyLink = () => {
-    navigator.clipboard
-      .writeText(window.location.href)
-      .then(() => {
-        alert("링크주소가 클립보드에 복사되었습니다.");
-      })
-      .catch(err => {
-        console.error("클립보드 복사에 실패했습니다.", err);
-      });
+    shareKakao({
+      title: sampleData.open_graph.title,
+      description: sampleData.open_graph.subtitle,
+      imageUrl: "https://avatars.githubusercontent.com/u/75530371?v=4",
+      link: window.location.href,
+    });
   };
 
   const handleClickOpenWrite = () => {
@@ -236,10 +154,26 @@ const TheSimple = () => {
     }
   };
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.5;
+  const handleClickDelete = () => {
+    if (fieldsRef.current.delete) {
+      if (!fieldsRef.current.delete.value) {
+        alert("비밀번호를 입력해주세요.");
+        return;
+      } else {
+        console.log(fieldsRef.current.delete.value);
+      }
     }
+  };
+
+  const handleClickGalleryImage = (index: number) => {
+    setCurSwiperImageIndex(index);
+  };
+
+  const handleClickLiveWedding = () => {
+    window.open(sampleData.contents.live_url);
+  };
+
+  useEffect(() => {
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init(import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY);
     }
@@ -273,10 +207,6 @@ const TheSimple = () => {
     };
   }, [itemRefs.current.length]);
 
-  useEffect(() => {
-    isAudioPlay ? audioRef.current?.play() : audioRef.current?.pause();
-  }, [isAudioPlay]);
-
   return (
     <S.Container ref={containerRef}>
       <Helmet>
@@ -290,13 +220,8 @@ const TheSimple = () => {
         />
         <meta property="og:url" content="페이지 URL" />
       </Helmet>
-      <S.AudioWrapper>
-        <audio src={Audios[sampleData.contents.bgm - 1]} ref={audioRef} />
-        <div className="audio-image" onClick={handleClickAudio}>
-          {isAudioPlay ? <PiSpeakerHighDuotone size={20} /> : <PiSpeakerXDuotone size={20} />}
-        </div>
-      </S.AudioWrapper>
-      <S.MainWrapper ref={addItemRef}>
+      <Bgm audioNumber={sampleData.contents.bgm} />
+      <S.MainWrapper ref={addItemRef} className="observer">
         <div className="date">
           <div className="date-yymmdd">
             <span>{getYear(new Date(sampleData.date))}</span>
@@ -324,7 +249,7 @@ const TheSimple = () => {
           </div>
         </div>
       </S.MainWrapper>
-      <S.GreetingWrapper ref={addItemRef}>
+      <S.GreetingWrapper ref={addItemRef} className="observer">
         <img src="/Template/icon_flower.png" />
         <div className="text">
           {sampleData.welcome.map(({ text, inline_style }, index) => (
@@ -332,7 +257,7 @@ const TheSimple = () => {
           ))}
         </div>
       </S.GreetingWrapper>
-      <S.HumanWrapper ref={addItemRef}>
+      <S.HumanWrapper ref={addItemRef} className="observer">
         <div className="humanInfo">
           <p>
             김장인
@@ -356,7 +281,7 @@ const TheSimple = () => {
           연락하기
         </button>
       </S.HumanWrapper>
-      <S.CalendarWrapper ref={addItemRef}>
+      <S.CalendarWrapper ref={addItemRef} className="observer">
         <div className="date">
           <p className="yymmdd">{getDateWithDots(new Date(sampleData.date))}</p>
           <p className="ddhhmm">{getDayWithTime(new Date(sampleData.date))}</p>
@@ -384,7 +309,7 @@ const TheSimple = () => {
           </p>
         </div>
       </S.CalendarWrapper>
-      <S.LocationContainer ref={addItemRef}>
+      <S.LocationContainer ref={addItemRef} className="observer">
         <div className="title">
           <span className="eng">LOCATION</span>
           <span className="kor">오시는 길</span>
@@ -395,7 +320,7 @@ const TheSimple = () => {
         </div>
         <div className="roadmap">
           {<LocationCard latitude={sampleData.location.latitude} longitude={sampleData.location.longitude} />}
-          <div className="roadmap-nav" onClick={handleClickNaverMap}>
+          <div className="roadmap-nav" onClick={handleClickRoadMap}>
             <div id="naver">
               <img src="/Template/icon_navermap.png" />
               <span>네이버 지도</span>
@@ -412,7 +337,7 @@ const TheSimple = () => {
         </div>
       </S.LocationContainer>
       <S.WayToComeContainer>
-        <div ref={addItemRef} className="traffic bus">
+        <div ref={addItemRef} className="traffic bus observer">
           <div className="title">
             <div className="icon">
               <IoBusOutline size={30} color="#ab9da1" />
@@ -425,7 +350,7 @@ const TheSimple = () => {
             ))}
           </div>
         </div>
-        <div ref={addItemRef} className="traffic subway">
+        <div ref={addItemRef} className="traffic subway observer">
           <div className="title">
             <div className="icon">
               <IoSubwayOutline size={30} color="#ab9da1" />
@@ -438,7 +363,7 @@ const TheSimple = () => {
             ))}
           </div>
         </div>
-        <div ref={addItemRef} className="traffic car">
+        <div ref={addItemRef} className="traffic car observer">
           <div className="title">
             <div className="icon">
               <IoCarOutline size={30} color="#ab9da1" />
@@ -451,7 +376,7 @@ const TheSimple = () => {
             ))}
           </div>
         </div>
-        <div ref={addItemRef} className="traffic etc">
+        <div ref={addItemRef} className="traffic etc observer">
           <div className="title">
             <div className="icon">
               <IoBalloonOutline size={30} color="#ab9da1" />
@@ -465,18 +390,53 @@ const TheSimple = () => {
           </div>
         </div>
       </S.WayToComeContainer>
-      <S.GalleryContainer ref={addItemRef}>
+      <S.GalleryContainer ref={addItemRef} className="observer">
         <div className="title">
           <span className="eng">GALLERY</span>
           <span className="kor">갤러리</span>
         </div>
         <div className="grid">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((_, index) => (
-            <img key={index} src={`https://picsum.photos/200/250`} />
+          {galleryImages.GalleryImages.map((src, index) => (
+            <img key={index} src={src} onClick={() => handleClickGalleryImage(index + 1)} />
           ))}
         </div>
       </S.GalleryContainer>
-      <S.AccountContainer ref={addItemRef}>
+      <S.WeddingVideoContainer ref={addItemRef} className="observer">
+        <div className="title">
+          <span className="eng">WEDDING VIDEO</span>
+          <span className="kor">웨딩 영상</span>
+        </div>
+        <YouTube
+          videoId={sampleData.contents.video_id}
+          className="youtube"
+          opts={{
+            width: "100%",
+            height: "300px",
+            playerVars: {
+              autoplay: 1,
+            },
+          }}
+        />
+      </S.WeddingVideoContainer>
+      {sampleData.contents.live_url && (
+        <S.LiveWeddingContainer ref={addItemRef} className="observer">
+          <div className="title">
+            <span className="eng">LIVE WEDDING</span>
+            <span className="kor">라이브 웨딩</span>
+          </div>
+          <div className="inner">
+            <div>
+              <span>참석이 어려운 분들께서는</span>
+              <br />
+              <span> 온라인 중계로 시청하실 수 있습니다.</span>
+            </div>
+            <button className="view-button" onClick={handleClickLiveWedding}>
+              라이브 웨딩 보러가기
+            </button>
+          </div>
+        </S.LiveWeddingContainer>
+      )}
+      <S.AccountContainer ref={addItemRef} className="observer">
         <img src="/Template/icon_flower_account.png" />
         <h2 className="title">마음 전하실 곳</h2>
         <div className="wrapper">
@@ -498,7 +458,7 @@ const TheSimple = () => {
           </div>
         </div>
       </S.AccountContainer>
-      <S.GuestBookContainer ref={addItemRef}>
+      <S.GuestBookContainer ref={addItemRef} className="observer">
         <div className="title">
           <span className="eng">GUESTBOOK</span>
           <span className="kor">방명록</span>
@@ -510,7 +470,7 @@ const TheSimple = () => {
               <p>{item.content}</p>
               <div className="close">
                 <span>{getDateWithDots(new Date(item.date))}</span>
-                <IoCloseOutline color="#aaa" size={15} />
+                <IoCloseOutline color="#aaa" size={15} onClick={() => setIsDeleteModalOpen(true)} />
               </div>
             </div>
           ))}
@@ -533,12 +493,12 @@ const TheSimple = () => {
           </button>
         </div>
       </S.GuestBookContainer>
-      <S.FooterContainer ref={addItemRef}>
+      <S.FooterContainer ref={addItemRef} className="observer">
         <div className="wrapper" onClick={handleClickShareKakao}>
           <RiKakaoTalkFill size={24} />
           <span>카카오톡 공유하기</span>
         </div>
-        <div className="wrapper" onClick={handleClickCopyLink}>
+        <div className="wrapper" onClick={() => copyLink(window.location.href)}>
           <HiOutlineLink size={24} />
           <span>링크주소 복사하기</span>
         </div>
@@ -777,6 +737,34 @@ const TheSimple = () => {
           </div>
         </S.WriteModalContainer>
       )}
+      {isDeleteModalOpen && (
+        <S.DeleteModalContainer>
+          <div className="wrapper">
+            <div className="title">
+              <span>방명록 삭제</span>
+              <button onClick={() => setIsDeleteModalOpen(false)}>
+                <IoCloseOutline size={25} />
+              </button>
+            </div>
+            <div className="inner">
+              <div className="password">
+                <span>비밀번호</span>
+                <input ref={el => (fieldsRef.current.delete = el)} />
+              </div>
+            </div>
+            <button className="delete-button" onClick={handleClickDelete}>
+              삭제하기
+            </button>
+          </div>
+        </S.DeleteModalContainer>
+      )}
+      {curSwiperImageIndex ? (
+        <SwiperModal
+          images={galleryImages.GalleryImages}
+          curSwiperImageIndex={curSwiperImageIndex}
+          setCurSwiperImageIndex={setCurSwiperImageIndex}
+        />
+      ) : null}
     </S.Container>
   );
 };
