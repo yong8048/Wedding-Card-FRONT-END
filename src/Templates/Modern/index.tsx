@@ -1,17 +1,16 @@
-import { getDateMonthDay, getDateWithDots, getDayWithTime } from "@/utils/parseDate";
+import { getDateMonthDay, getDateWithDots, getDayWithTime, getFullDate } from "@/utils/parseDate";
 import * as S from "./style";
 import sampleData from "@/mock/sampleData.json";
 import { IoCall } from "react-icons/io5";
 import { MdOutlineMessage } from "react-icons/md";
 import Calendar from "react-calendar";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
 
-import { Navigation } from "swiper/modules";
+import { Navigation, EffectFade } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+
+import { Fragment, useEffect, useState } from "react";
 
 const tileClassName = ({ date, view }: { date: Date; view: string }) => {
   if (view === "month") {
@@ -27,17 +26,43 @@ const formatDay = (_locale: string | undefined, date: Date) => {
 
 const Modern = () => {
   const date = getDateMonthDay(new Date(sampleData.date));
+  const [topSwiper, setTopSwiper] = useState<SwiperCore | null>(null);
+  const [bottomSwiper, setBottomSwiper] = useState<SwiperCore | null>(null);
+  const [swiperIndex, setSwiperIndex] = useState(0);
+
+  useEffect(() => {
+    if (topSwiper?.swipeDirection === "next") {
+      if (swiperIndex >= 3) {
+        bottomSwiper?.slideNext();
+      }
+    } else {
+      if (swiperIndex <= (topSwiper?.slides.length as number) - 4) {
+        bottomSwiper?.slidePrev();
+      }
+    }
+  }, [swiperIndex]);
+
+  const handleSlideChange = (e: { realIndex: number }) => {
+    setSwiperIndex(e.realIndex);
+  };
+
+  const clickBottomImage = (index: number) => {
+    if (topSwiper) {
+      topSwiper.slideTo(index);
+    }
+  };
+
   return (
     <S.Container>
       <S.Page1Div>
         <S.Page1Date>
           <p>
             {date.split("").map((char, index) => (
-              <>
+              <Fragment key={index}>
                 {index === 2 ? <span>月</span> : null}
-                <span key={index}>{char}</span>
+                <span>{char}</span>
                 {index === 3 ? <span>日</span> : null}
-              </>
+              </Fragment>
             ))}
           </p>
         </S.Page1Date>
@@ -181,24 +206,66 @@ const Modern = () => {
         </div>
       </S.Page6CalendarWrapper>
       <S.Page7Photo>
-        <p>갤러리</p>
-        <Swiper className="swiper" modules={[Navigation]} slidesPerView={1}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => (
-            <SwiperSlide key={index} className="swiper-slide">
-              <img src="https://picsum.photos/300/343" alt="image" />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <S.SwiperTop>
+          <p>갤러리</p>
+          <Swiper
+            className="swiper"
+            modules={[Navigation, EffectFade]}
+            slidesPerView={1}
+            effect={"fade"}
+            onSlideChange={handleSlideChange}
+            onSwiper={setTopSwiper}
+          >
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => (
+              <SwiperSlide key={index} className="swiper-slide">
+                <img src={`https://picsum.photos/id/${index * 5}/300/343/`} alt="image" />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </S.SwiperTop>
+        <S.SwiperBottom>
+          <Swiper
+            className="swiper-bottom"
+            modules={[Navigation]}
+            watchSlidesProgress={false}
+            slidesPerView={5}
+            allowTouchMove={false}
+            spaceBetween={5}
+            onSwiper={setBottomSwiper}
+          >
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => (
+              <S.SwiperSlideComponent
+                $opacity={swiperIndex === index}
+                key={index}
+                className="swiper-bottom-slide"
+                onClick={() => clickBottomImage(index)}
+              >
+                <img src={`https://picsum.photos/id/${index * 5}/300/343/`} alt="image" />
+              </S.SwiperSlideComponent>
+            ))}
+          </Swiper>
+        </S.SwiperBottom>
       </S.Page7Photo>
-      <S.SwiperBottom>
-        <Swiper className="swiper-bottom" modules={[Navigation]} slidesPerView={5} spaceBetween={5}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => (
-            <SwiperSlide key={index} className="swiper-bottom-slide">
-              <img src="https://picsum.photos/200/300" alt="image" />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </S.SwiperBottom>
+      <S.Page8YouTube>
+        <p>영상보기</p>
+        <div>유튜브</div>
+        <span>예쁘게 잘 살겠습니다</span>
+        <span className="spantext">wedding day</span>
+      </S.Page8YouTube>
+      <S.Page9Live>
+        <p className="title">라이브 웨딩 안내</p>
+        <p>참석이 어려운 분들께서는</p>
+        <p>온라인 중계로 시청하실 수 있습니다.</p>
+        <p className="wedding-date">{getFullDate(new Date(sampleData.date))}</p>
+        <button>라이브 웨딩 보러가기</button>
+      </S.Page9Live>
+      <S.Page10Map>
+        <p className="title">오시는 길</p>
+        <div>
+          <h1>{sampleData.location.wedding_hall}</h1>
+          <p>{sampleData.location.address}</p>
+        </div>
+      </S.Page10Map>
     </S.Container>
   );
 };

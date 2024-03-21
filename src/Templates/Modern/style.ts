@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SwiperSlide } from "swiper/react";
 
 export const Container = styled.div`
   width: 100%;
@@ -268,14 +269,41 @@ export const Page6CalendarWrapper = styled.div`
 `;
 
 export const Page7Photo = styled.div`
-  width: 80%;
-  /* height: 400px; */
-  border-top: 2px solid #ccc;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+export const SwiperBottom = styled.div`
+  width: 90%;
+  margin-bottom: 100px;
 
+  .swiper-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .swiper-bottom-slide {
+    text-align: center;
+    height: 65px;
+    display: flex;
+
+    img {
+      width: 65px;
+      height: 65px;
+      color: #aaa;
+    }
+  }
+`;
+export const SwiperTop = styled.div`
+  width: 80%;
+  border-top: 2px solid #ccc;
   p {
     text-align: center;
     line-height: 30px;
     margin-bottom: 50px;
+    padding-top: 20px;
   }
   .swiper {
     width: 100%;
@@ -287,20 +315,106 @@ export const Page7Photo = styled.div`
     text-align: center;
   }
 `;
-export const SwiperBottom = styled.div`
-  width: 90%;
-  margin-bottom: 100px;
+export const SwiperSlideComponent = styled(SwiperSlide)<{ $opacity: boolean }>`
+  filter: ${({ $opacity }) => ($opacity ? "brightness(100%)" : "brightness(50%)")};
+`;
 
-  .swiper-bottom {
-    width: 100%;
-  }
-  .swiper-bottom-slide {
+export const Page8YouTube = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80px;
+  p {
+    width: 80%;
+    display: block;
+    border-top: 2px solid #ccc;
     text-align: center;
-    height: 65px;
+    line-height: 30px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+  }
+  div {
+    width: 100%;
+    background-color: #ccc;
+    height: 210px;
+    margin: 30px 0;
+  }
+  span {
+    width: 13px;
+    line-height: 20px;
+    margin-bottom: 20px;
+  }
+  .spantext {
+    width: 100%;
+    color: #fd2;
+    text-align: center;
+    letter-spacing: 5px;
+  }
+`;
 
-    img {
-      width: 65px;
-      height: 65px;
+export const Page9Live = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    line-height: 25px;
+  }
+  button {
+    background-color: #000;
+    color: #fff;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+  }
+  .title {
+    width: 80%;
+    display: block;
+    border-top: 2px solid #ccc;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+  }
+  .wedding-date {
+    color: 55f;
+    margin: 50px 0;
+  }
+`;
+
+export const Page10Map = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 80px 0;
+
+  .title {
+    width: 80%;
+    display: block;
+    border-top: 2px solid #ccc;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+  }
+
+  div {
+    width: 100%;
+    height: 60px;
+    padding: 10px 20px;
+    position: relative;
+    box-sizing: border-box;
+    background-color: #fafafa;
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #aaa;
     }
   }
 `;
