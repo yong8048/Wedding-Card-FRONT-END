@@ -726,6 +726,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-helmet-async@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@types/react-helmet-async/-/react-helmet-async-1.0.3.tgz#89d581d6cb129e5357d39d7d1b41313b20523989"
+  integrity sha512-DqbSuZPSHiH1l3XI/y8LbhrAGNh+Bpc9QY4MsYRM1yD4+qhax8bN4DInUMpv/tNyIdjsa+1V8XXmbRx8W5dB0w==
+  dependencies:
+    react-helmet-async "*"
+
 "@types/react-html-parser@^2.0.6":
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/@types/react-html-parser/-/react-html-parser-2.0.6.tgz#b57174bb738e3432e3df1b9f485c106ed9fd8b4e"
@@ -757,6 +764,13 @@
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@types/stylis/-/stylis-4.2.0.tgz#199a3f473f0c3a6f6e4e1b17cdbc967f274bdc6b"
   integrity sha512-n4sx2bqL0mW1tvDf/loQ+aMX7GQD3lc3fkCMC55VFNDu/vBOabO+LTIeXKM14xK0ppk5TUGcWRjiSpIlUpghKw==
+
+"@types/swiper@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/swiper/-/swiper-6.0.0.tgz#9934ecd569611b660a2a9bf200f25ce5ba4b4d63"
+  integrity sha512-QPZRgxZ+ivXXtzV43B3LxpXUIC7FE/EoKM+rtxngmgt2M7eeUYypZhyqZD8UxJtlBcUDw/ATGoVeSNpvBBrz2w==
+  dependencies:
+    swiper "*"
 
 "@typescript-eslint/eslint-plugin@^6.14.0":
   version "6.20.0"
@@ -2027,7 +2041,7 @@ react-fast-compare@^3.2.2:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.2.tgz#929a97a532304ce9fee4bcae44234f1ce2c21d49"
   integrity sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==
 
-react-helmet-async@^2.0.4:
+react-helmet-async@*, react-helmet-async@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-helmet-async/-/react-helmet-async-2.0.4.tgz#50a4377778f380ed1d0136303916b38eff1bf153"
   integrity sha512-yxjQMWposw+akRfvpl5+8xejl4JtUlHnEBcji6u8/e6oc7ozT+P9PNTWMhCbz2y9tc5zPegw2BvKjQA+NwdEjQ==
@@ -2283,6 +2297,11 @@ supports-color@^7.1.0:
   integrity sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
   dependencies:
     has-flag "^4.0.0"
+
+swiper@*:
+  version "11.0.7"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-11.0.7.tgz#fe51bb64546c2c21a1ec6914e7764af953443ded"
+  integrity sha512-cDfglW1B6uSmB6eB6pNmzDTNLmZtu5bWWa1vak0RU7fOI9qHjMzl7gVBvYSl34b0RU2N11HxxETJqQ5LeqI1cA==
 
 swiper@^11.0.6:
   version "11.0.6"
