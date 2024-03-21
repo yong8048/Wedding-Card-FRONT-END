@@ -4,7 +4,7 @@ body {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none
+  user-select: none;
 }
 
 #root {
@@ -58,9 +58,38 @@ textarea {
   font-family: "Pretendard";
 }
 
+strong {
+  font-weight: 600 !important;
+}
+
+em {
+  font-style: italic !important;
+}
+
 @font-face {
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 400;
   src: url("./fonts/PretendardVariable.woff2") format("woff");
+}
+
+@font-face {
+  font-family: "CrimsonPro";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/CrimsonPro.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "IropkeBatangM";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/IropkeBatangM.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'GowunDodum';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }

@@ -1,9 +1,21 @@
-interface IReqCreateInvitation {
+interface IReqInvitationJSON {
   date: string;
-  address: string;
-  wedding_hall: string;
+  location: {
+    wedding_hall: string;
+    address: string;
+    latitude: number;
+    longitude: number;
+  };
   welcome: IEditorState[];
   welcome_align: DraftTextAlignment;
+  contents: {
+    video_id: string;
+    bgm: number;
+    live_url: string;
+  };
+  management: {
+    management_password: string;
+  };
   HUSBAND: {
     ME: {
       name: string;
@@ -51,13 +63,23 @@ interface IReqCreateInvitation {
     bus: IEditorState[];
     car: IEditorState[];
     etc: {
-      type: string;
+      transport_type: string;
       info: IEditorState[];
     };
   };
-  management_password: string;
-  video_id: string;
-  bgm: number;
+  open_graph: {
+    title: string;
+    subtitle: string;
+  };
+}
+
+interface IReqInvitationPhotos {
+  main_photo: File | undefined;
+  slide_photos: {
+    file: File;
+    index: number;
+  }[];
+  kakao_thumbnail: File | undefined;
 }
 
 interface IEditorState {
@@ -73,4 +95,11 @@ type TconcernedPersonType = "HUSBAND" | "WIFE";
 type TconcernedParentType = "FATHER" | "MOTHER" | "ME";
 type DraftTextAlignment = "left" | "center" | "right";
 
-export type { IReqCreateInvitation, IEditorState, TconcernedPersonType, TconcernedParentType, DraftTextAlignment };
+export type {
+  IReqInvitationJSON,
+  IReqInvitationPhotos,
+  IEditorState,
+  TconcernedPersonType,
+  TconcernedParentType,
+  DraftTextAlignment,
+};

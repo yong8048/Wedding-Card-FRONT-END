@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import * as S from "./style";
-import { IReqCreateInvitation, TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
+import { TconcernedParentType, TconcernedPersonType } from "@/types/invitation";
+import { useSetRecoilState } from "recoil";
+import { invitationJSONState } from "@/stores/createInvitationJSONStore";
 
 type TFamily = "신랑" | "신랑 부" | "신랑 모" | "신부" | "신부 부" | "신부 모";
 type TFamilyKey = "HUSBAND.ME" | "HUSBAND.FATHER" | "HUSBAND.MOTHER" | "WIFE.ME" | "WIFE.FATHER" | "WIFE.MOTHER";
@@ -66,13 +68,10 @@ const initailData = {
   },
 };
 
-const Account = ({
-  setCreateInvitaionData,
-}: {
-  setCreateInvitaionData: React.Dispatch<React.SetStateAction<IReqCreateInvitation>>;
-}) => {
+const Account = () => {
   const [familyMemebers, setFamilyMemebers] = useState(family);
   const [inputValue, setInputValue] = useState(initailData);
+  const setInvitationData = useSetRecoilState(invitationJSONState);
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const key = e.target.name as TFamily;
@@ -95,7 +94,7 @@ const Account = ({
       },
     }));
 
-    setCreateInvitaionData(previousData => ({
+    setInvitationData(previousData => ({
       ...previousData,
       [person]: {
         ...previousData[concernedPerson],
@@ -126,7 +125,7 @@ const Account = ({
       const concernedPerson = person as TconcernedPersonType;
       const concernedParent = parent as TconcernedParentType;
 
-      setCreateInvitaionData(previousData => ({
+      setInvitationData(previousData => ({
         ...previousData,
         [concernedPerson]: {
           ...previousData[concernedPerson],
@@ -155,7 +154,7 @@ const Account = ({
         </div>
         <div id="input-area">
           {Object.entries(familyMemebers).filter(([, value]) => value.isChecked).length > 0 && (
-            <h3>' - '를 제외하고 입력해주세요.</h3>
+            <h3>' - '를 포함하여 입력해주세요.</h3>
           )}
           {Object.entries(familyMemebers)
             .filter(([, value]) => value.isChecked)
@@ -172,7 +171,7 @@ const Account = ({
                     onChange={handleChange}
                   />
                   <input
-                    placeholder="계좌번호 ( ' - ' 제외)"
+                    placeholder="계좌번호 ( ' - ' 필수)"
                     name="account"
                     id={value.who}
                     value={inputValue[value.who].account}

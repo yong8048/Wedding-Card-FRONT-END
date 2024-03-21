@@ -7,6 +7,7 @@ import Select from "@/pages/Select";
 import Information from "@/pages/Information";
 import Preview from "@/pages/Preview";
 import Search from "@/pages/Search";
+import Letter from "@/pages/Letter";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
             <Route path="/search/:word" element={<Search />} />
           </Route>
         </Route>
+        <Route path="/u/:id" element={<Letter />} />
       </Routes>
     </BrowserRouter>
   );

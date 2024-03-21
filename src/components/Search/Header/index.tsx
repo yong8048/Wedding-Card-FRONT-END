@@ -39,7 +39,8 @@ const Header = () => {
     if (!searchData) {
       alert("검색어를 추가하세요.");
     } else {
-      const newStorageList = [...storageData, searchData];
+      const filteredStorageData = storageData.filter(item => item !== searchData);
+      const newStorageList = [...filteredStorageData, searchData];
       setStorageData(newStorageList);
       localStorage.setItem("searchData", JSON.stringify(newStorageList));
       navigate(`/search/${searchData}`);
