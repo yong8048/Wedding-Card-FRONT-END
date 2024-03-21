@@ -2,6 +2,7 @@ declare global {
   interface Window {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     daum: any;
+    Kakao: any;
   }
 }
 

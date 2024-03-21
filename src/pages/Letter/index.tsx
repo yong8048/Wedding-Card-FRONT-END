@@ -4,9 +4,7 @@ import { useParams } from "react-router";
 import { useEffect } from "react";
 import Modern from "@/Templates/Modern";
 
-// const TEMPLATES = {
-
-// }
+import { HelmetProvider } from "react-helmet-async";
 
 const Letter = () => {
   const { id } = useParams();
@@ -28,7 +26,9 @@ const Letter = () => {
 
   return (
     <S.Main>
-      <Modern />
+      <HelmetProvider>
+        <Modern />
+      </HelmetProvider>
     </S.Main>
   );
 };

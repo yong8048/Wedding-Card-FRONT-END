@@ -54,8 +54,22 @@ export const getDayWithTime = (date: Date) => {
 
 export const getDday = (date: Date) => {
   const now = new Date();
-  const dDayTime = Math.abs(date.getTime() - now.getTime());
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const dDayTime = targetDate.getTime() - today.getTime();
   const dDay = Math.ceil(dDayTime / (1000 * 60 * 60 * 24));
 
   return dDay;
+};
+
+export const tileClassName = ({ date, view }: { date: Date; view: string }) => {
+  if (view === "month") {
+    if (date.getDay() === 6) {
+      return "saturday";
+    }
+  }
+};
+
+export const formatDay = (_locale: string | undefined, date: Date) => {
+  return date.getDate().toString();
 };

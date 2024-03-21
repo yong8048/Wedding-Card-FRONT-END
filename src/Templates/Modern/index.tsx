@@ -1,6 +1,6 @@
 import { getDateMonthDay, getDateWithDots, getDayWithTime, getFullDate } from "@/utils/parseDate";
 import * as S from "./style";
-import sampleData from "@/mock/sampleData.json";
+import sampleData from "@/mock/JSONData.json";
 import { IoCall } from "react-icons/io5";
 import { MdOutlineMessage } from "react-icons/md";
 import Calendar from "react-calendar";
