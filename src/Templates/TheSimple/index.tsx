@@ -40,6 +40,10 @@ import { copyLink } from "@/utils/copyLink";
 import YouTube from "react-youtube";
 import { Effects } from "@/constants/ContentsData";
 
+window.YTConfig = {
+  host: "https://www.youtube.com",
+};
+
 const TheSimple = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [currentGuestBookPage, setCurrentGuestBookPage] = useState(1);
