@@ -11,7 +11,7 @@ export const getDate = (date: Date) => {
 };
 
 export const getDayEng = (date: Date) => {
-  return ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"][date.getDay()];
+  return ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"][date.getDay()];
 };
 
 export const getDayKor = (date: Date) => {
