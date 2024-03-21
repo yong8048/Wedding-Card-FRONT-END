@@ -117,7 +117,7 @@ export const Page5Div = styled.div`
   p {
     width: 100%;
     height: 40px;
-    background-color: #f4f4f4;
+    background-color: #fafafa;
     text-align: center;
     line-height: 40px;
     margin-bottom: 2rem;
@@ -193,9 +193,12 @@ export const Page5Data = styled.div`
 
 export const Page6CalendarWrapper = styled.div`
   padding: 80px 0;
-  background-color: #f6f5f5;
+  background-color: #fafafa;
   margin: 20px 0;
 
+  .d-day {
+    text-align: center;
+  }
   .date {
     color: #524548;
     display: flex;
@@ -221,7 +224,7 @@ export const Page6CalendarWrapper = styled.div`
       border: 1px solid #e8dfdf;
       border-left: none;
       border-right: none;
-      background-color: transparent;
+      background-color: #fafafa;
       abbr {
         font-weight: 400;
         font-size: 16px;
@@ -388,7 +391,7 @@ export const Page10Map = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 80px 0;
+  margin: 80px 0 20px 0;
 
   .title {
     width: 80%;
@@ -400,9 +403,8 @@ export const Page10Map = styled.div`
     padding-top: 20px;
   }
 
-  div {
+  .address {
     width: 100%;
-    height: 60px;
     padding: 10px 20px;
     position: relative;
     box-sizing: border-box;
@@ -410,11 +412,103 @@ export const Page10Map = styled.div`
 
     h1 {
       font-size: 20px;
-      font-weight: bold;
+      font-weight: 600;
       margin-bottom: 10px;
     }
     p {
       color: #aaa;
+    }
+  }
+  .roadmap {
+    width: 100%;
+    background-color: #fafafa;
+    .map-container {
+      width: 90%;
+    }
+  }
+  .roadmap-nav {
+    background-color: #fafafa;
+    width: 100%;
+    height: 42px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
+
+    div {
+      width: 100%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      border-right: 1px solid rgba(97, 80, 67, 0.2);
+
+      &:last-child {
+        border: none;
+      }
+
+      img {
+        width: 16px;
+      }
+    }
+  }
+`;
+
+export const Page11Way = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 80px;
+  div {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+
+    .title {
+      font-size: large;
+      font-weight: 600;
+      line-height: 25px;
+      margin-bottom: 10px;
+    }
+    .info {
+      color: #999;
+    }
+  }
+`;
+
+export const Page12Account = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  .title {
+    width: 80%;
+    display: block;
+    border-top: 2px solid #aaa;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+  }
+  .text {
+    margin-bottom: 50px;
+  }
+  div {
+    display: flex;
+    gap: 20px;
+
+    p {
+      line-height: 50px;
+    }
+
+    button {
+      width: 100px;
+      height: 50px;
+      border-radius: 20px;
+      background-color: #aaa;
     }
   }
 `;
