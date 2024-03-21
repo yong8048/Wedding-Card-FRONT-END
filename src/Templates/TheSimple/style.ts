@@ -57,10 +57,29 @@ export const MainWrapper = styled.div`
   }
 
   .main-image {
-    padding: 20px;
+    padding: 0 20px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+    line-height: 0;
+
     img {
+      position: relative;
       width: 100%;
       height: fit-content;
+    }
+
+    .background-video {
+      position: absolute;
+      mix-blend-mode: screen;
+      left: 20px;
+      top: 0px;
+      width: calc(100% - 40px);
+      video {
+        width: 100%;
+        opacity: 1;
+        visibility: initial;
+      }
     }
   }
 
