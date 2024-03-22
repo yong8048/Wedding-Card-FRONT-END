@@ -14,6 +14,7 @@ import "swiper/css";
 import { Fragment, useEffect, useState } from "react";
 import LocationCard from "@/components/Common/LocationCard";
 import { applyStyles } from "@/utils/parseInlineStyle";
+import Bgm from "@/components/Template/Bgm";
 
 const tileClassName = ({ date, view }: { date: Date; view: string }) => {
   if (view === "month") {
@@ -32,6 +33,7 @@ const Modern = () => {
   const [topSwiper, setTopSwiper] = useState<SwiperCore | null>(null);
   const [bottomSwiper, setBottomSwiper] = useState<SwiperCore | null>(null);
   const [swiperIndex, setSwiperIndex] = useState(0);
+  const [accountModal, setAccountModal] = useState(false);
 
   useEffect(() => {
     if (topSwiper?.swipeDirection === "next") {
@@ -79,8 +81,13 @@ const Modern = () => {
     window.open(url, "_blank");
   };
 
+  const clickAccountModal = () => {
+    setAccountModal(!accountModal);
+  };
+
   return (
     <S.Container>
+      <Bgm audioNumber={MockData.contents.bgm} />
       <S.Page1Div>
         <S.Page1Date>
           <p>
@@ -349,13 +356,38 @@ const Modern = () => {
         <p className="text">축하의 마음을 담아 축의금을 전달해보세요.</p>
         <div>
           <p>신랑측 마음</p>
-          <button>계좌번호 보기</button>
+          <button onClick={clickAccountModal}>계좌번호 보기</button>
         </div>
         <div>
           <p>신부측 마음</p>
-          <button>계좌번호 보기</button>
+          <button onClick={clickAccountModal}>계좌번호 보기</button>
         </div>
       </S.Page12Account>
+      {!accountModal ? (
+        <S.AccountModal>
+          <div>
+            <p>신랑측 계좌정보</p>
+            <div>
+              <div>
+                <p>{MockData.HUSBAND.FATHER.bank}은행</p>
+                <p>예금주 : {MockData.HUSBAND.FATHER.name}</p>
+              </div>
+              <div>
+                <input type="text" value={MockData.HUSBAND.FATHER.account} />
+                <button>복사</button>
+              </div>
+            </div>
+            <div>
+              <p>장인 계좌</p>
+              <p>예금주 : {MockData.HUSBAND.MOTHER.name}</p>
+              <div>
+                <input type="text" value={MockData.HUSBAND.MOTHER.account} />
+                <button>복사</button>
+              </div>
+            </div>
+          </div>
+        </S.AccountModal>
+      ) : null}
     </S.Container>
   );
 };

@@ -7,6 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 export const Page1Div = styled.div`
   display: flex;
@@ -499,16 +500,41 @@ export const Page12Account = styled.div`
   div {
     display: flex;
     gap: 20px;
+    justify-content: center;
+    align-items: center;
 
     p {
       line-height: 50px;
     }
 
     button {
-      width: 100px;
-      height: 50px;
+      width: 150px;
+      height: 40px;
       border-radius: 20px;
       background-color: #aaa;
+      color: #fafafa;
+    }
+  }
+`;
+
+export const AccountModal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fafafa;
+
+    div {
+      display: flex;
+      flex-direction: column;
     }
   }
 `;
