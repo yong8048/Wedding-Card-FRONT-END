@@ -64,7 +64,7 @@ const MainPhoto = () => {
           {!invitationPhotos.main_photo && <span>이미지를 업로드 해주세요.</span>}
           {invitationJSON.contents.effect !== 0 && (
             <div className="background-video">
-              <video key={Effects[invitationJSON.contents.effect - 1]} muted autoPlay loop>
+              <video key={Effects[invitationJSON.contents.effect - 1]} muted autoPlay loop playsInline>
                 <source src={Effects[invitationJSON.contents.effect - 1]} type="video/mp4" />
               </video>
             </div>

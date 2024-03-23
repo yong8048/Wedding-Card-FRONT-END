@@ -240,7 +240,7 @@ const TheSimple = () => {
         <div className="main-image">
           <img src="/img1.jpg" />
           <div className="background-video">
-            <video muted autoPlay loop>
+            <video muted autoPlay loop playsInline>
               <source src={Effects[sampleData.contents.effect - 1]} type="video/mp4" />
             </video>
           </div>
