@@ -12,7 +12,6 @@ const fadeIn = keyframes`
 `;
 
 export const Container = styled.div`
-  font-size: 0.9rem;
   text-align: center;
   position: relative;
 
@@ -86,7 +85,6 @@ export const MainWrapper = styled.div`
   .wedding-info {
     font-family: "GowunDodum", serif;
     margin: 10px 0;
-    font-weight: 600;
     color: #544f4f;
 
     .wedding-info-name {
@@ -128,8 +126,6 @@ export const GreetingWrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: 24px;
-
-    font-size: 18px;
     font-family: "GowunDodum", serif;
     color: #544f4f;
   }
@@ -140,7 +136,7 @@ export const HumanWrapper = styled.div`
   font-family: "GowunDodum", serif;
 
   .humanInfo {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 20px;
     color: #242424;
 
