@@ -10,6 +10,7 @@ const Bgm = ({ audioNumber }: { audioNumber: number }) => {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = 0.5;
+      audioRef.current.play();
     }
   }, []);
 
@@ -23,7 +24,7 @@ const Bgm = ({ audioNumber }: { audioNumber: number }) => {
 
   return (
     <S.AudioWrapper>
-      <audio src={Audios[audioNumber - 1]} ref={audioRef} />
+      <audio src={Audios[audioNumber - 1]} ref={audioRef} autoPlay />
       <div className="audio-image" onClick={handleClickAudio}>
         {isAudioPlay ? <PiSpeakerHighDuotone size={20} /> : <PiSpeakerXDuotone size={20} />}
       </div>
