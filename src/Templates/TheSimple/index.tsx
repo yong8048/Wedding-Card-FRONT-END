@@ -424,7 +424,7 @@ const TheSimple = () => {
               width: "100%",
               height: "300px",
               playerVars: {
-                autoplay: 1,
+                autoplay: false,
               },
             }}
           />
