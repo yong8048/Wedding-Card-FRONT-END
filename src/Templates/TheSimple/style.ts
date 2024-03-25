@@ -12,7 +12,6 @@ const fadeIn = keyframes`
 `;
 
 export const Container = styled.div`
-  font-size: 0.9rem;
   text-align: center;
   position: relative;
 
@@ -57,17 +56,35 @@ export const MainWrapper = styled.div`
   }
 
   .main-image {
-    padding: 20px;
+    padding: 0 20px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+    line-height: 0;
+
     img {
+      position: relative;
       width: 100%;
       height: fit-content;
+    }
+
+    .background-video {
+      position: absolute;
+      mix-blend-mode: screen;
+      left: 20px;
+      top: 0px;
+      width: calc(100% - 40px);
+      video {
+        width: 100%;
+        opacity: 1;
+        visibility: initial;
+      }
     }
   }
 
   .wedding-info {
     font-family: "GowunDodum", serif;
     margin: 10px 0;
-    font-weight: 600;
     color: #544f4f;
 
     .wedding-info-name {
@@ -109,8 +126,6 @@ export const GreetingWrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: 24px;
-
-    font-size: 18px;
     font-family: "GowunDodum", serif;
     color: #544f4f;
   }
@@ -121,7 +136,7 @@ export const HumanWrapper = styled.div`
   font-family: "GowunDodum", serif;
 
   .humanInfo {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 20px;
     color: #242424;
 
@@ -145,6 +160,7 @@ export const HumanWrapper = styled.div`
     border: 1px solid #cec3c3;
     padding: 10px 80px;
     border-radius: 32px;
+    color: #242424;
 
     svg {
       margin-right: 10px;
@@ -192,6 +208,10 @@ export const CalendarWrapper = styled.div`
       .react-calendar__tile {
         pointer-events: none;
         padding: 10px;
+        color: #242424;
+      }
+      .sunday {
+        color: red;
       }
       .react-calendar__tile--active {
         background-color: #cec3c3;
@@ -204,8 +224,10 @@ export const CalendarWrapper = styled.div`
       .saturday {
         color: inherit;
       }
-      .react-calendar__month-view__weekdays abbr[title="일요일"] {
-        color: red;
+      .react-calendar__month-view__weekdays {
+        abbr[title="일요일"] {
+          color: red;
+        }
       }
       .react-calendar__month-view__days__day--neighboringMonth {
         visibility: hidden;

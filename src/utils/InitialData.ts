@@ -13,6 +13,7 @@ const InitialData_CreateInvitationJSON: IReqInvitationJSON = {
   contents: {
     video_id: "",
     bgm: 0,
+    effect: 0,
     live_url: "",
   },
   management: {

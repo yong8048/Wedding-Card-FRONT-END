@@ -38,6 +38,11 @@ import { applyStyles } from "@/utils/parseInlineStyle";
 import { shareKakao } from "@/utils/shareKakao";
 import { copyLink } from "@/utils/copyLink";
 import YouTube from "react-youtube";
+import { Effects } from "@/constants/ContentsData";
+
+window.YTConfig = {
+  host: "https://www.youtube.com",
+};
 
 const TheSimple = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -234,6 +239,11 @@ const TheSimple = () => {
         </div>
         <div className="main-image">
           <img src="/img1.jpg" />
+          <div className="background-video">
+            <video muted autoPlay loop playsInline>
+              <source src={Effects[sampleData.contents.effect - 1]} type="video/mp4" />
+            </video>
+          </div>
         </div>
         <div className="wedding-info">
           <div className="wedding-info-name">
@@ -414,7 +424,7 @@ const TheSimple = () => {
               width: "100%",
               height: "300px",
               playerVars: {
-                autoplay: 1,
+                autoplay: false,
               },
             }}
           />

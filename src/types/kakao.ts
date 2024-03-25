@@ -3,6 +3,7 @@ declare global {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     daum: any;
     Kakao: any;
+    YTConfig: any;
   }
 }
 

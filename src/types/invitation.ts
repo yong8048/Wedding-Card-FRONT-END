@@ -11,6 +11,7 @@ interface IReqInvitationJSON {
   contents: {
     video_id: string;
     bgm: number;
+    effect: number;
     live_url: string;
   };
   management: {
