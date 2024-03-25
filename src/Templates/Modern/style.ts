@@ -1,5 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { SwiperSlide } from "swiper/react";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -8,6 +19,15 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  font-family: "GowunDodum";
+  position: relative;
+  overflow: hidden;
+  .observer {
+    &.visible {
+      animation: ${fadeIn} 1.5s ease-out forwards;
+    }
+    opacity: 0;
+  }
 `;
 export const Page1Div = styled.div`
   display: flex;
@@ -91,25 +111,23 @@ export const Page4Div = styled.div`
     align-items: center;
     gap: 10px;
     margin-bottom: 30px;
-
-    button {
-      &:nth-child(2) {
-        background-color: #7e7;
-      }
-    }
   }
   button {
-    background-color: #78c0e9;
     border-radius: 50%;
     padding: 10px;
     border: none;
     width: 40px;
     height: 40px;
-
     svg {
       width: 20px;
       height: 20px;
     }
+  }
+  .call {
+    background-color: #7e7;
+  }
+  .message {
+    background-color: #78c0e9;
   }
 `;
 
@@ -132,7 +150,12 @@ export const Page5Data = styled.div`
     width: 20px;
     height: 20px;
   }
-
+  .call {
+    background-color: #7e7;
+  }
+  .message {
+    background-color: #78c0e9;
+  }
   div {
     width: 40%;
     display: flex;
@@ -170,7 +193,6 @@ export const Page5Data = styled.div`
         justify-content: center;
 
         button {
-          background-color: #78c0e9;
           border-radius: 50%;
           padding: 10px;
           border: none;
@@ -182,11 +204,6 @@ export const Page5Data = styled.div`
             height: 20px;
           }
         }
-      }
-    }
-    button {
-      &:nth-child(1) {
-        background-color: #7e7;
       }
     }
   }
@@ -260,6 +277,9 @@ export const Page6CalendarWrapper = styled.div`
         height: 300px;
       }
     }
+    .react-calendar__month-view__days__day--weekend {
+      color: red;
+    }
   }
 
   .d-day {
@@ -329,6 +349,10 @@ export const Page8YouTube = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 80px;
+  box-sizing: border-box;
+  .youtube {
+    height: 300px;
+  }
   p {
     width: 80%;
     display: block;
@@ -524,17 +548,192 @@ export const AccountModal = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10;
+  display: flex;
+  align-items: center;
+
   div {
+    width: 100%;
+    height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #fafafa;
-
+    position: relative;
+    .close {
+      position: absolute;
+      right: 0;
+      top: 7px;
+      width: 40px;
+      height: 40px;
+      z-index: 2;
+      path {
+        width: 40px;
+        height: 40px;
+      }
+    }
     div {
       display: flex;
       flex-direction: column;
+
+      div {
+        display: flex;
+        width: 80%;
+        height: 30px;
+        flex-direction: row;
+        justify-content: space-between;
+
+        input {
+          width: 80%;
+          border-radius: 0px;
+          border-right: none;
+          height: 25px;
+        }
+        button {
+          width: 20%;
+          height: 29px;
+          background-color: #ccc;
+        }
+      }
     }
+  }
+`;
+
+export const Page13Message = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  box-sizing: border-box;
+  .title {
+    width: 80%;
+    display: block;
+    border-top: 2px solid #ccc;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+  }
+  .write {
+    margin-top: 50px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    input {
+      width: 47%;
+      height: 35px;
+      padding-left: 5px;
+    }
+    div {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 0px;
+      resize: vertical;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+  }
+  button {
+    width: 90%;
+    background-color: #333;
+    color: #fafafa;
+    margin-top: 10px;
+    height: 35px;
+    border-radius: 5px;
+  }
+  .guestbook-wrapper {
+    width: 90%;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+    position: relative;
+    div {
+      display: flex;
+
+      h2 {
+        font-weight: 700;
+        line-height: 30px;
+        margin-right: 10px;
+      }
+      span {
+        font-size: small;
+        line-height: 30px;
+      }
+    }
+    p {
+      width: 80%;
+    }
+    .close {
+      position: absolute;
+      top: 23px;
+      right: 0;
+      width: 30px;
+      height: 30px;
+      background-color: #333;
+      border-radius: 5px;
+      svg {
+        width: 30px;
+        height: 30px;
+        color: white;
+      }
+    }
+  }
+  .pagination {
+    margin: 20px 0;
+  }
+`;
+
+export const GuestBookPaginationSpan = styled.span<{ $isActiveIndex: boolean }>`
+  display: inline-block;
+  text-align: center;
+  width: 30px;
+  cursor: pointer;
+  color: #89757a;
+  opacity: ${({ $isActiveIndex }) => ($isActiveIndex ? 1 : 0.35)};
+  font-weight: ${({ $isActiveIndex }) => ($isActiveIndex ? "600" : "400")};
+`;
+
+export const Page14Share = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    width: 80%;
+    display: block;
+    border-top: 2px solid #ccc;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+  }
+  div {
+    display: flex;
+    margin: 10px;
+    div {
+      display: flex;
+      gap: 5px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+  .copyright {
+    color: #ccc;
+    margin: 20px 0;
   }
 `;
