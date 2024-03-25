@@ -160,6 +160,7 @@ export const HumanWrapper = styled.div`
     border: 1px solid #cec3c3;
     padding: 10px 80px;
     border-radius: 32px;
+    color: #242424;
 
     svg {
       margin-right: 10px;
@@ -199,6 +200,7 @@ export const CalendarWrapper = styled.div`
         font-size: 16px;
         font-family: "GowunDodum", serif;
         text-decoration: none;
+        color: #242424;
       }
 
       .react-calendar__navigation {
