@@ -42,7 +42,8 @@ export const ImageForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
+  padding: 20px 0;
+  margin-bottom: 20px;
 
   .img-container {
     display: flex;
@@ -68,6 +69,20 @@ export const ImageForm = styled.form`
       font-size: 22px;
       white-space: nowrap;
       color: #567073;
+    }
+    .background-video {
+      position: absolute;
+      mix-blend-mode: screen;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      video {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        visibility: initial;
+      }
     }
   }
 
@@ -111,4 +126,13 @@ export const ImageForm = styled.form`
       font-size: 14px;
     }
   }
+`;
+
+export const EffectForm = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  z-index: 1000;
 `;

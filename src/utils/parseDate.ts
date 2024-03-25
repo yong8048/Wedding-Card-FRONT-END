@@ -11,7 +11,7 @@ export const getDate = (date: Date) => {
 };
 
 export const getDayEng = (date: Date) => {
-  return ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"][date.getDay()];
+  return ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"][date.getDay()];
 };
 
 export const getDayKor = (date: Date) => {
@@ -66,6 +66,8 @@ export const tileClassName = ({ date, view }: { date: Date; view: string }) => {
   if (view === "month") {
     if (date.getDay() === 6) {
       return "saturday";
+    } else if (date.getDay() === 0) {
+      return "sunday";
     }
   }
 };
