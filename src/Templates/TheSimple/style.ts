@@ -200,7 +200,6 @@ export const CalendarWrapper = styled.div`
         font-size: 16px;
         font-family: "GowunDodum", serif;
         text-decoration: none;
-        color: #242424;
       }
 
       .react-calendar__navigation {
@@ -209,6 +208,10 @@ export const CalendarWrapper = styled.div`
       .react-calendar__tile {
         pointer-events: none;
         padding: 10px;
+        color: #242424;
+      }
+      .sunday {
+        color: red;
       }
       .react-calendar__tile--active {
         background-color: #cec3c3;
@@ -221,8 +224,10 @@ export const CalendarWrapper = styled.div`
       .saturday {
         color: inherit;
       }
-      .react-calendar__month-view__weekdays abbr[title="일요일"] {
-        color: red;
+      .react-calendar__month-view__weekdays {
+        abbr[title="일요일"] {
+          color: red;
+        }
       }
       .react-calendar__month-view__days__day--neighboringMonth {
         visibility: hidden;
