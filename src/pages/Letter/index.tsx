@@ -5,6 +5,14 @@ import { useEffect } from "react";
 
 import { HelmetProvider } from "react-helmet-async";
 import TheSimple from "@/Templates/TheSimple";
+import Modern from "@/Templates/Modern";
+
+type temp_template = "modern" | "thesimple";
+
+const temp_param = {
+  modern: <Modern />,
+  thesimple: <TheSimple />,
+};
 
 const Letter = () => {
   const { id } = useParams();
@@ -26,9 +34,7 @@ const Letter = () => {
 
   return (
     <S.Main>
-      <HelmetProvider>
-        <TheSimple />
-      </HelmetProvider>
+      <HelmetProvider>{temp_param[id as temp_template]}</HelmetProvider>
     </S.Main>
   );
 };
