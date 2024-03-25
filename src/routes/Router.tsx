@@ -8,6 +8,7 @@ import Information from "@/pages/Information";
 import Preview from "@/pages/Preview";
 import Search from "@/pages/Search";
 import Letter from "@/pages/Letter";
+import Mypage from "@/pages/Mypage";
 
 function Router() {
   return (
@@ -20,6 +21,7 @@ function Router() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/preview" element={<Preview />} />
           <Route path="/information" element={<Information />} />
+          <Route path="mypage" element={<Mypage />} />
           <Route path="/search" element={<Search />}>
             <Route path="/search/:word" element={<Search />} />
           </Route>
