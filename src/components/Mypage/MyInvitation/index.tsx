@@ -1,9 +1,11 @@
-import TemplateList from "@/components/Common/TemplateList";
+import { useState } from "react";
 import * as S from "./style";
 import { IoOpenOutline } from "react-icons/io5";
-import TemplateData from "@/constants/TemplateData.json";
+import LoadingUI from "@/components/Common/LoadingUI";
 
 const MyInvitation = () => {
+  const [isIframeLoading, setIsIframeLoading] = useState(false);
+
   return (
     <S.Container>
       <S.Header>
@@ -21,24 +23,19 @@ const MyInvitation = () => {
         </div>
         <div className="iframe-container">
           <img src="/Template/iphone_frame.png" />
-          <iframe id="preview" src="http://localhost:5173/u/thesimple"></iframe>
+          <iframe id="preview" src="http://localhost:5173/u/thesimple" onLoad={() => setIsIframeLoading(true)}></iframe>
+          {!isIframeLoading && <LoadingUI />}
         </div>
-        <div className="edit">
-          <span>정보 수정</span>
-        </div>
-        <div className="url">
-          <span>모바일 청첩장 바로가기</span>
-          <IoOpenOutline />
+        <div className="button-container">
+          <div className="edit">
+            <span>정보 수정</span>
+          </div>
+          <div className="url">
+            <span>모바일 청첩장 바로가기</span>
+            <IoOpenOutline />
+          </div>
         </div>
       </S.InvitationWrapper>
-      <S.FavoriteWrapper>
-        <h2>북마크</h2>
-        <ul className="unordered">
-          {Object.entries(TemplateData).map(([title, data], index) => (
-            <TemplateList key={index} item={{ title, data, index }} />
-          ))}
-        </ul>
-      </S.FavoriteWrapper>
     </S.Container>
   );
 };
