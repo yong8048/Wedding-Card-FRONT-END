@@ -60,6 +60,10 @@ export const InvitationWrapper = styled.div`
       }
     }
   }
+
+  .edit {
+    cursor: pointer;
+  }
   .url {
     width: fit-content;
     margin: 10px auto;
@@ -69,6 +73,7 @@ export const InvitationWrapper = styled.div`
     border: 1px solid #e4e4e4;
     border-radius: 8px;
     padding: 8px 12px;
+    cursor: pointer;
 
     span {
       margin-right: 8px;

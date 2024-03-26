@@ -21,7 +21,7 @@ function Router() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/preview" element={<Preview />} />
           <Route path="/information" element={<Information />} />
-          <Route path="mypage" element={<Mypage />} />
+          <Route path="/mypage" element={<Mypage />} />
           <Route path="/search" element={<Search />}>
             <Route path="/search/:word" element={<Search />} />
           </Route>
