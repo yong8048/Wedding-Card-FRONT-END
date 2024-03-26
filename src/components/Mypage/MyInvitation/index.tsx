@@ -2,6 +2,7 @@ import { useState } from "react";
 import * as S from "./style";
 import { IoOpenOutline } from "react-icons/io5";
 import LoadingUI from "@/components/Common/LoadingUI";
+import { Link } from "react-router-dom";
 
 const MyInvitation = () => {
   const [isIframeLoading, setIsIframeLoading] = useState(false);
@@ -27,9 +28,9 @@ const MyInvitation = () => {
           {!isIframeLoading && <LoadingUI />}
         </div>
         <div className="button-container">
-          <div className="edit">
-            <span>정보 수정</span>
-          </div>
+          <Link className="edit" to="/modify/information">
+            <span>정보 수정하기</span>
+          </Link>
           <div className="url">
             <span>모바일 청첩장 바로가기</span>
             <IoOpenOutline />
