@@ -190,7 +190,7 @@ export const CalendarWrapper = styled.div`
   .calendar {
     .react-calendar {
       margin: 30px auto;
-      padding: 20px 0;
+      padding: 20px;
       border: 1px solid #e8dfdf;
       border-left: none;
       border-right: none;
