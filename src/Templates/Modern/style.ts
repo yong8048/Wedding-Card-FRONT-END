@@ -210,7 +210,7 @@ export const Page5Data = styled.div`
 `;
 
 export const Page6CalendarWrapper = styled.div`
-  padding: 80px 0;
+  padding: 80px 20px;
   background-color: #fafafa;
   margin: 20px 0;
 
@@ -264,6 +264,9 @@ export const Page6CalendarWrapper = styled.div`
           color: white;
         }
       }
+      .react-calendar__month-view__weekdays__weekday--weekend {
+        color: blue;
+      }
       .saturday {
         color: blue;
       }
@@ -312,7 +315,7 @@ export const SwiperBottom = styled.div`
     text-align: center;
     height: 65px;
     display: flex;
-
+    cursor: pointer;
     img {
       width: 65px;
       height: 65px;
@@ -337,6 +340,12 @@ export const SwiperTop = styled.div`
     width: 343px;
     height: 343px;
     text-align: center;
+    cursor: pointer;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
   }
 `;
 export const SwiperSlideComponent = styled(SwiperSlide)<{ $opacity: boolean }>`
@@ -344,9 +353,10 @@ export const SwiperSlideComponent = styled(SwiperSlide)<{ $opacity: boolean }>`
 `;
 
 export const Page8YouTube = styled.div`
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin-bottom: 80px;
   box-sizing: border-box;
@@ -544,13 +554,15 @@ export const Page12Account = styled.div`
 export const AccountModal = styled.div`
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 450px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
-
+  z-index: 10;
+  box-sizing: border-box;
   div {
     width: 100%;
     height: 40%;
@@ -567,6 +579,7 @@ export const AccountModal = styled.div`
       width: 40px;
       height: 40px;
       z-index: 2;
+      cursor: pointer;
       path {
         width: 40px;
         height: 40px;
@@ -636,6 +649,8 @@ export const Page13Message = styled.div`
     textarea {
       width: 100%;
       height: 100px;
+      min-height: 50px;
+      max-height: 150px;
       padding: 0px;
       resize: vertical;
       padding: 5px;
@@ -679,6 +694,7 @@ export const Page13Message = styled.div`
       height: 30px;
       background-color: #333;
       border-radius: 5px;
+      cursor: pointer;
       svg {
         width: 30px;
         height: 30px;
@@ -731,6 +747,9 @@ export const Page14Share = styled.div`
         height: 40px;
       }
     }
+  }
+  .wrapper {
+    cursor: pointer;
   }
   .copyright {
     color: #ccc;
