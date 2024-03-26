@@ -19,6 +19,9 @@ import Bgm from "@/components/Template/Bgm";
 import guestBook from "@/mock/GuestBook.json";
 import { copyLink } from "@/utils/copyLink";
 import YouTube from "react-youtube";
+import { shareKakao } from "@/utils/shareKakao";
+import SwiperModal from "@/components/Template/SwiperModal";
+import galleryImages from "@/mock/GalleryImages.json";
 
 const tileClassName = ({ date, view }: { date: Date; view: string }) => {
   if (view === "month") {
@@ -42,6 +45,7 @@ const Modern = () => {
   const [currentGuestBookPage, setCurrentGuestBookPage] = useState(1);
   const containerRef = useRef<HTMLInputElement>(null);
   const itemRefs = useRef<HTMLDivElement[]>([]);
+  const [curSwiperImageIndex, setCurSwiperImageIndex] = useState(0);
 
   const itemsPerPage = 5;
   const indexOfLastItem = currentGuestBookPage * itemsPerPage;
@@ -60,8 +64,10 @@ const Modern = () => {
         bottomSwiper?.slideNext();
       }
     } else {
-      if (swiperIndex <= (topSwiper?.slides.length as number) - 4) {
-        bottomSwiper?.slidePrev();
+      if (topSwiper?.slides) {
+        if (swiperIndex <= (topSwiper?.slides.length as number) - 4) {
+          bottomSwiper?.slidePrev();
+        }
       }
     }
   }, [swiperIndex]);
@@ -142,11 +148,32 @@ const Modern = () => {
   const clickPostMessage = () => {};
   const clickRemoveWrite = () => {};
 
+  const clickOpenImageModal = (index: number) => {
+    setCurSwiperImageIndex(index);
+  };
+  const handleClickCopyAccount = (account: string) => {
+    navigator.clipboard
+      .writeText(account)
+      .then(() => {
+        alert("계좌 번호가 클립보드에 복사되었습니다.");
+      })
+      .catch(err => {
+        console.error("클립보드 복사에 실패했습니다.", err);
+      });
+  };
+
   const handleClickGuestBookPagination = (index: number) => {
     setCurrentGuestBookPage(index);
   };
 
-  const handleClickShareKakao = () => {};
+  const handleClickShareKakao = () => {
+    shareKakao({
+      title: MockData.open_graph.title,
+      description: MockData.open_graph.subtitle,
+      imageUrl: "https://avatars.githubusercontent.com/u/75530371?v=4",
+      link: window.location.href,
+    });
+  };
 
   const handleSlideChange = (e: { realIndex: number }) => {
     setSwiperIndex(e.realIndex);
@@ -341,9 +368,9 @@ const Modern = () => {
             onSlideChange={handleSlideChange}
             onSwiper={setTopSwiper}
           >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => (
-              <SwiperSlide key={index} className="swiper-slide">
-                <img src={`https://picsum.photos/id/${index * 5}/300/343/`} alt="image" />
+            {galleryImages.GalleryImages.map((data, index) => (
+              <SwiperSlide key={index} className="swiper-slide" onClick={() => clickOpenImageModal(index + 1)}>
+                <img src={data} alt="image" />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -358,19 +385,26 @@ const Modern = () => {
             spaceBetween={5}
             onSwiper={setBottomSwiper}
           >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => (
+            {galleryImages.GalleryImages.map((data, index) => (
               <S.SwiperSlideComponent
                 $opacity={swiperIndex === index}
                 key={index}
                 className="swiper-bottom-slide"
                 onClick={() => clickBottomImage(index)}
               >
-                <img src={`https://picsum.photos/id/${index * 5}/300/343/`} alt="image" />
+                <img src={data} alt="image" />
               </S.SwiperSlideComponent>
             ))}
           </Swiper>
         </S.SwiperBottom>
       </S.Page7Photo>
+      {curSwiperImageIndex !== 0 && (
+        <SwiperModal
+          curSwiperImageIndex={curSwiperImageIndex}
+          images={galleryImages.GalleryImages}
+          setCurSwiperImageIndex={setCurSwiperImageIndex}
+        />
+      )}
       <S.Page8YouTube ref={addItemRef} className="observer">
         <p>영상보기</p>
         <YouTube
@@ -493,7 +527,13 @@ const Modern = () => {
                 ) : (
                   <input type="text" value={MockData.WIFE.FATHER.account} readOnly />
                 )}
-                <button>복사</button>
+                <button
+                  onClick={() =>
+                    handleClickCopyAccount(accountInfo ? MockData.HUSBAND.FATHER.account : MockData.WIFE.FATHER.account)
+                  }
+                >
+                  복사
+                </button>
               </div>
             </div>
             <div>
@@ -518,7 +558,13 @@ const Modern = () => {
                 ) : (
                   <input type="text" value={MockData.WIFE.MOTHER.account} readOnly />
                 )}
-                <button>복사</button>
+                <button
+                  onClick={() =>
+                    handleClickCopyAccount(accountInfo ? MockData.HUSBAND.MOTHER.account : MockData.WIFE.MOTHER.account)
+                  }
+                >
+                  복사
+                </button>
               </div>
             </div>
           </div>
