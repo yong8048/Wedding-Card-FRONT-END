@@ -9,6 +9,7 @@ import Preview from "@/pages/Preview";
 import Search from "@/pages/Search";
 import Letter from "@/pages/Letter";
 import Mypage from "@/pages/Mypage";
+import ModifyInformation from "@/pages/Modify/Information";
 
 function Router() {
   return (
@@ -25,6 +26,8 @@ function Router() {
           <Route path="/search" element={<Search />}>
             <Route path="/search/:word" element={<Search />} />
           </Route>
+          <Route path="/modify/information" element={<ModifyInformation />} />
+          {/* <Route path="/modify/information" element={<ModifyInformation />} /> */}
         </Route>
         <Route path="/u/:id" element={<Letter />} />
       </Routes>
