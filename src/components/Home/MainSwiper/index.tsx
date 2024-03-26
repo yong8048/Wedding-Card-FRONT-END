@@ -27,7 +27,7 @@ const MainSwiper = () => {
         effect="fade"
         modules={[Navigation, Autoplay, EffectFade]}
         slidesPerView={1}
-        autoplay={{ delay: 500 }}
+        // autoplay={{ delay: 2000 }}
         loop={true}
         onSlideChange={handleChangeSwiper}
       >

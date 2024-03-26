@@ -1,5 +1,7 @@
-import { CiBookmark } from "react-icons/ci";
+import { IoBookmark } from "react-icons/io5";
+import { IoBookmarkOutline } from "react-icons/io5";
 import * as S from "./style";
+import { useState } from "react";
 
 interface TemplateListItem {
   title: string;
@@ -15,6 +17,8 @@ interface TemplateListProps {
 }
 
 const TemplateList = ({ item }: TemplateListProps) => {
+  const [isBookmark, setIsBookmark] = useState(false);
+
   const clickLike = (index: number) => {
     console.log(index);
   };
@@ -23,13 +27,24 @@ const TemplateList = ({ item }: TemplateListProps) => {
     <S.ItemLi>
       <S.ItemImg>
         <img src={item.data.img} alt={item.title} />
-        <CiBookmark
-          size={25}
-          onClick={e => {
-            e.stopPropagation();
-            clickLike(item.index);
-          }}
-        />
+        {isBookmark ? (
+          <IoBookmark
+            size={25}
+            onClick={e => {
+              e.stopPropagation();
+              clickLike(item.index);
+            }}
+            color="#03c75a"
+          />
+        ) : (
+          <IoBookmarkOutline
+            size={25}
+            onClick={e => {
+              e.stopPropagation();
+              clickLike(item.index);
+            }}
+          />
+        )}
       </S.ItemImg>
       <S.ItemInfo>
         <span>{item.title}</span>

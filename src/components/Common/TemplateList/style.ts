@@ -46,8 +46,12 @@ export const ItemImg = styled.div`
 
   svg {
     position: absolute;
-    right: 5px;
-    bottom: 5px;
+    right: 50px;
+    bottom: -17px;
+  }
+
+  div {
+    color: #0f0;
   }
 `;
 export const ItemInfo = styled.div`

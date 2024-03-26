@@ -10,7 +10,7 @@ export const SwiperContainer = styled.div`
     text-align: center;
     max-width: 450px;
     width: 100%;
-    max-height: 100%;
+    height: 100%;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -35,15 +35,16 @@ export const SwiperContainer = styled.div`
     height: 100%;
     position: relative;
   }
-  .swiperImg {
-  }
-  .swiper-pagination {
-  }
 `;
 export const SwiperImage = styled.img`
-  max-width: 450px;
-  width: 80%;
-  object-fit: contain;
+  width: 100%;
+  height: 700px;
+  @media ${({ theme }) => theme.windowSize.md} {
+    height: 650px;
+  }
+  @media ${({ theme }) => theme.windowSize.sm} {
+    height: 600px;
+  }
 `;
 
 export const SwiperImageTag = styled.p`
