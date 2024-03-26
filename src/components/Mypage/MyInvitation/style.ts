@@ -22,22 +22,6 @@ export const Header = styled.div`
 `;
 
 export const InvitationWrapper = styled.div`
-  .iframe-container {
-    margin: 0 auto;
-    padding: 10px;
-    max-width: 338px;
-    width: 100%;
-    img {
-      width: 100%;
-    }
-    #preview {
-      margin-top: -3px;
-      width: 100%;
-      height: 600px;
-      border-radius: 0 0 0 24px;
-    }
-  }
-
   .inform-container {
     display: flex;
     flex-direction: column;
@@ -52,59 +36,62 @@ export const InvitationWrapper = styled.div`
       position: relative;
       button {
         position: absolute;
-        right: -100px;
+        right: -120px;
         background-color: white;
         border: 1px solid #dcdcdc;
         border-radius: 8px;
         padding: 4px 8px;
+        font-size: 20px;
       }
     }
   }
-
-  .edit {
-    cursor: pointer;
-  }
-  .url {
-    width: fit-content;
-    margin: 10px auto;
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border: 1px solid #e4e4e4;
-    border-radius: 8px;
-    padding: 8px 12px;
-    cursor: pointer;
-
-    span {
-      margin-right: 8px;
+  .iframe-container {
+    margin: 0 auto;
+    padding: 10px;
+    max-width: 338px;
+    width: 100%;
+    position: relative;
+    img {
+      width: 100%;
+    }
+    #preview {
+      margin-top: -3px;
+      width: 100%;
+      height: 600px;
+      border-radius: 0 0 0 24px;
     }
   }
-
-  .edit {
-    width: fit-content;
-    margin: 10px auto;
-    background-color: white;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    padding: 6px 8px;
-  }
-`;
-
-export const FavoriteWrapper = styled.div`
-  margin-top: 40px;
-  padding: 20px;
-  text-align: left;
-  h2 {
-    padding-bottom: 4px;
-    font-size: 24px;
-    border-bottom: 1px solid black;
-  }
-
-  .unordered {
+  .button-container {
     display: flex;
-    gap: 20px;
-    padding: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+    width: 350px;
+    margin: 0 auto;
+    font-size: 20px;
+    white-space: nowrap;
+    .edit {
+      width: fit-content;
+      margin: 10px auto;
+      background-color: white;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      padding: 6px 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .url {
+      width: fit-content;
+      margin: 10px auto;
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border: 1px solid #e4e4e4;
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+
+      span {
+        margin-right: 8px;
+      }
+    }
   }
 `;
