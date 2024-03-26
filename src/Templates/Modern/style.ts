@@ -265,7 +265,7 @@ export const Page6CalendarWrapper = styled.div`
         }
       }
       .saturday {
-        color: inherit;
+        color: blue;
       }
       .react-calendar__month-view__weekdays abbr[title="일요일"] {
         color: red;

@@ -60,8 +60,10 @@ const Modern = () => {
         bottomSwiper?.slideNext();
       }
     } else {
-      if (swiperIndex <= (topSwiper?.slides.length as number) - 4) {
-        bottomSwiper?.slidePrev();
+      if (topSwiper?.slides) {
+        if (swiperIndex <= (topSwiper?.slides.length as number) - 4) {
+          bottomSwiper?.slidePrev();
+        }
       }
     }
   }, [swiperIndex]);
