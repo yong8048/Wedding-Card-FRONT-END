@@ -21,7 +21,7 @@ const MyInvitation = () => {
         </div>
         <div className="iframe-container">
           <img src="/Template/iphone_frame.png" />
-          <iframe id="preview" src="http://localhost:5173/u/asdasd"></iframe>
+          <iframe id="preview" src="http://localhost:5173/u/thesimple"></iframe>
         </div>
         <div className="edit">
           <span>정보 수정</span>

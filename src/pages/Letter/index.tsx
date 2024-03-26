@@ -16,7 +16,6 @@ const temp_param = {
 
 const Letter = () => {
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     const body = document.querySelector("body");
