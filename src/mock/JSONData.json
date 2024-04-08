@@ -60,6 +60,7 @@
       ]
     }
   ],
+  "welcome_align": "left",
   "contents": {
     "bgm": 2,
     "effect": 1,
@@ -67,7 +68,7 @@
     "live_url": "https://www.google.co.kr"
   },
   "management": {
-    "manament_password": ""
+    "management_password": ""
   },
   "HUSBAND": {
     "ME": {
