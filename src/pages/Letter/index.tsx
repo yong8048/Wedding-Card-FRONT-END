@@ -6,12 +6,14 @@ import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import TheSimple from "@/Templates/TheSimple";
 import Modern from "@/Templates/Modern";
+import Blue from "@/Templates/Blue";
 
 type temp_template = "modern" | "thesimple";
 
 const temp_param = {
   modern: <Modern />,
   thesimple: <TheSimple />,
+  blue: <Blue />,
 };
 
 const Letter = () => {

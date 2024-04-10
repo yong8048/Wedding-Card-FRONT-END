@@ -6,6 +6,7 @@ import { removeCookie } from "@/utils/cookie";
 import Description from "@/components/Home/Description";
 import { useSetRecoilState } from "recoil";
 import { LoginState } from "@/stores/LoginStateStore";
+import Reccomend from "@/components/Home/Reccomend";
 
 const Home = () => {
   const { userInfo } = useGetUserInfo();
@@ -24,6 +25,7 @@ const Home = () => {
     <div>
       <MainSwiper />
       <Description />
+      <Reccomend />
       <S.Logo src="/logo.png" alt="logo" onClick={clickLogout} />
     </div>
   );

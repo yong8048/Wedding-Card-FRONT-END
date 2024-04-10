@@ -20,7 +20,8 @@ const NavigationBar = () => {
     <S.NavContainer>
       <div>
         <S.NavLinkEl to={"/"}>
-          <img src="/logo.png" alt="logo" />
+          <img src="/favicon.png" alt="logo" className="logo" />
+          <span>홈</span>
         </S.NavLinkEl>
       </div>
       <div onClick={clickSearch}>

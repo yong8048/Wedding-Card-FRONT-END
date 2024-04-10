@@ -3,7 +3,12 @@ export const getYear = (date: Date) => {
 };
 
 export const getMonth = (date: Date) => {
-  return date.getMonth() + 1;
+  const month = date.getMonth() + 1;
+  return month < 10 ? `0${month}` : month.toString();
+};
+export const getDay = (date: Date) => {
+  const day = date.getDate();
+  return day < 10 ? `0${day}` : day.toString();
 };
 
 export const getDate = (date: Date) => {

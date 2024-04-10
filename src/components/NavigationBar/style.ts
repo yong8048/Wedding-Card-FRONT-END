@@ -37,6 +37,10 @@ export const NavContainer = styled.nav`
       display: none;
     }
   }
+  .logo {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 export const NavLinkEl = styled(NavLink)`
