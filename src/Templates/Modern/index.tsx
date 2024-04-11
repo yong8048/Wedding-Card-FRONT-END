@@ -1,6 +1,6 @@
 import { getDateMonthDay, getDateWithDots, getDayWithTime, getDday, getFullDate } from "@/utils/parseDate";
 import * as S from "./style";
-import MockData from "@/mock/JSONData.json";
+import SampleData from "@/mock/JSONData.json";
 import { IoCall } from "react-icons/io5";
 import { MdOutlineMessage } from "react-icons/md";
 import Calendar from "react-calendar";
@@ -36,7 +36,7 @@ const formatDay = (_locale: string | undefined, date: Date) => {
 };
 
 const Modern = () => {
-  const date = getDateMonthDay(new Date(MockData.date));
+  const date = getDateMonthDay(new Date(SampleData.date));
   const [topSwiper, setTopSwiper] = useState<SwiperCore | null>(null);
   const [bottomSwiper, setBottomSwiper] = useState<SwiperCore | null>(null);
   const [swiperIndex, setSwiperIndex] = useState(0);
@@ -122,13 +122,13 @@ const Modern = () => {
 
     switch (target.id) {
       case "naver":
-        url = `https://map.naver.com/v5/search/${encodeURIComponent(MockData.location.address)}`;
+        url = `https://map.naver.com/v5/search/${encodeURIComponent(SampleData.location.address)}`;
         break;
       case "kakao":
-        url = `https://map.kakao.com/?q=${encodeURIComponent(MockData.location.address)}`;
+        url = `https://map.kakao.com/?q=${encodeURIComponent(SampleData.location.address)}`;
         break;
       case "tmap":
-        url = `https://apis.openapi.sk.com/tmap/app/routes?appKey=${import.meta.env.VITE_TMAP_APP_KEY}&name=${MockData.location.address}&lon=${MockData.location.longitude}&lat=${MockData.location.latitude}`;
+        url = `https://apis.openapi.sk.com/tmap/app/routes?appKey=${import.meta.env.VITE_TMAP_APP_KEY}&name=${SampleData.location.address}&lon=${SampleData.location.longitude}&lat=${SampleData.location.latitude}`;
         break;
       default:
         return;
@@ -168,8 +168,8 @@ const Modern = () => {
 
   const handleClickShareKakao = () => {
     shareKakao({
-      title: MockData.open_graph.title,
-      description: MockData.open_graph.subtitle,
+      title: SampleData.open_graph.title,
+      description: SampleData.open_graph.subtitle,
       imageUrl: "https://avatars.githubusercontent.com/u/75530371?v=4",
       link: window.location.href,
     });
@@ -181,7 +181,7 @@ const Modern = () => {
 
   return (
     <S.Container ref={containerRef}>
-      <Bgm audioNumber={MockData.contents.bgm} />
+      <Bgm audioNumber={SampleData.contents.bgm} />
       <S.Page1Div ref={addItemRef} className="observer">
         <S.Page1Date>
           <p>
@@ -197,28 +197,28 @@ const Modern = () => {
         <img src="/img1.jpg" alt="사진" />
         <S.Page1Info>
           <h1>
-            {MockData.HUSBAND.ME.name} / {MockData.WIFE.ME.name}
+            {SampleData.HUSBAND.ME.name} / {SampleData.WIFE.ME.name}
           </h1>
-          <h2>{getDayWithTime(new Date(MockData.date))}</h2>
-          <h2>{MockData.location.wedding_hall}</h2>
+          <h2>{getDayWithTime(new Date(SampleData.date))}</h2>
+          <h2>{SampleData.location.wedding_hall}</h2>
         </S.Page1Info>
       </S.Page1Div>
       <S.Page2Div ref={addItemRef} className="observer">
         <S.Page2Text>
-          {MockData.welcome.map((data, index) => (
+          {SampleData.welcome.map((data, index) => (
             <h1 key={index}>{data.text}</h1>
           ))}
         </S.Page2Text>
         <S.Page2Name>
           <h2>
-            {MockData.HUSBAND.FATHER.name} · {MockData.HUSBAND.MOTHER.name}
-            <span>의 {MockData.HUSBAND.relationship}</span>
-            {` ${MockData.HUSBAND.ME.name}`}
+            {SampleData.HUSBAND.FATHER.name} · {SampleData.HUSBAND.MOTHER.name}
+            <span>의 {SampleData.HUSBAND.relationship}</span>
+            {` ${SampleData.HUSBAND.ME.name}`}
           </h2>
           <h2>
-            {MockData.WIFE.FATHER.name} · {MockData.WIFE.MOTHER.name}
-            <span>의 {MockData.WIFE.relationship}</span>
-            {` ${MockData.WIFE.ME.name}`}
+            {SampleData.WIFE.FATHER.name} · {SampleData.WIFE.MOTHER.name}
+            <span>의 {SampleData.WIFE.relationship}</span>
+            {` ${SampleData.WIFE.ME.name}`}
           </h2>
         </S.Page2Name>
       </S.Page2Div>
@@ -228,12 +228,12 @@ const Modern = () => {
       <S.Page4Div ref={addItemRef} className="observer">
         <div>
           <h1>신랑에게 연락하기</h1>
-          <a href={`tel:${MockData.HUSBAND.ME.contact}`}>
+          <a href={`tel:${SampleData.HUSBAND.ME.contact}`}>
             <button className="call">
               <IoCall color="#fff" />
             </button>
           </a>
-          <a href={`sms:${MockData.HUSBAND.ME.contact}`}>
+          <a href={`sms:${SampleData.HUSBAND.ME.contact}`}>
             <button className="message">
               <MdOutlineMessage color="#fff" />
             </button>
@@ -241,12 +241,12 @@ const Modern = () => {
         </div>
         <div>
           <h1>신부에게 연락하기</h1>
-          <a href={`tel:${MockData.HUSBAND.ME.contact}`}>
+          <a href={`tel:${SampleData.HUSBAND.ME.contact}`}>
             <button className="call">
               <IoCall color="#fff" />
             </button>
           </a>
-          <a href={`sms:${MockData.HUSBAND.ME.contact}`}>
+          <a href={`sms:${SampleData.HUSBAND.ME.contact}`}>
             <button className="message">
               <MdOutlineMessage color="#fff" />
             </button>
@@ -261,15 +261,15 @@ const Modern = () => {
             <div>
               <span>
                 <span>아버지 </span>
-                <span>{MockData.HUSBAND.FATHER.name}</span>
+                <span>{SampleData.HUSBAND.FATHER.name}</span>
               </span>
               <div>
-                <a href={`tel:${MockData.HUSBAND.FATHER.contact}`}>
+                <a href={`tel:${SampleData.HUSBAND.FATHER.contact}`}>
                   <button className="call">
                     <IoCall color="#fff" />
                   </button>
                 </a>
-                <a href={`sms:${MockData.HUSBAND.FATHER.contact}`}>
+                <a href={`sms:${SampleData.HUSBAND.FATHER.contact}`}>
                   <button className="message">
                     <MdOutlineMessage color="#fff" />
                   </button>
@@ -279,15 +279,15 @@ const Modern = () => {
             <div>
               <span>
                 <span>어머니 </span>
-                <span>{MockData.HUSBAND.MOTHER.name}</span>
+                <span>{SampleData.HUSBAND.MOTHER.name}</span>
               </span>
               <div>
-                <a href={`tel:${MockData.HUSBAND.MOTHER.contact}`}>
+                <a href={`tel:${SampleData.HUSBAND.MOTHER.contact}`}>
                   <button className="call">
                     <IoCall color="#fff" />
                   </button>
                 </a>
-                <a href={`sms:${MockData.HUSBAND.MOTHER.contact}`}>
+                <a href={`sms:${SampleData.HUSBAND.MOTHER.contact}`}>
                   <button className="message">
                     <MdOutlineMessage color="#fff" />
                   </button>
@@ -300,15 +300,15 @@ const Modern = () => {
             <div>
               <span>
                 <span>아버지 </span>
-                <span>{MockData.WIFE.FATHER.name}</span>
+                <span>{SampleData.WIFE.FATHER.name}</span>
               </span>
               <div>
-                <a href={`tel:${MockData.WIFE.FATHER.contact}`}>
+                <a href={`tel:${SampleData.WIFE.FATHER.contact}`}>
                   <button className="call">
                     <IoCall color="#fff" />
                   </button>
                 </a>
-                <a href={`sms:${MockData.WIFE.FATHER.contact}`}>
+                <a href={`sms:${SampleData.WIFE.FATHER.contact}`}>
                   <button className="message">
                     <MdOutlineMessage color="#fff" />
                   </button>
@@ -318,15 +318,15 @@ const Modern = () => {
             <div>
               <span>
                 <span>어머니 </span>
-                <span>{MockData.WIFE.MOTHER.name}</span>
+                <span>{SampleData.WIFE.MOTHER.name}</span>
               </span>
               <div>
-                <a href={`tel:${MockData.WIFE.MOTHER.contact}`}>
+                <a href={`tel:${SampleData.WIFE.MOTHER.contact}`}>
                   <button className="call">
                     <IoCall color="#fff" />
                   </button>
                 </a>
-                <a href={`sms:${MockData.WIFE.MOTHER.contact}`}>
+                <a href={`sms:${SampleData.WIFE.MOTHER.contact}`}>
                   <button className="message">
                     <MdOutlineMessage color="#fff" />
                   </button>
@@ -339,12 +339,12 @@ const Modern = () => {
 
       <S.Page6CalendarWrapper ref={addItemRef} className="observer">
         <div className="date">
-          <p className="yymmdd">{getDateWithDots(new Date(MockData.date))}</p>
-          <p className="ddhhmm">{getDayWithTime(new Date(MockData.date))}</p>
+          <p className="yymmdd">{getDateWithDots(new Date(SampleData.date))}</p>
+          <p className="ddhhmm">{getDayWithTime(new Date(SampleData.date))}</p>
         </div>
         <div className="calendar">
           <Calendar
-            value={new Date(MockData.date)}
+            value={new Date(SampleData.date)}
             formatDay={formatDay}
             calendarType="gregory"
             tileClassName={tileClassName}
@@ -352,8 +352,8 @@ const Modern = () => {
         </div>
         <div className="d-day">
           <p>
-            {MockData.HUSBAND.ME.name} <FcLike /> {MockData.WIFE.ME.name}의 결혼식이{" "}
-            <span>{getDday(new Date(MockData.date))}일</span> 남았습니다.
+            {SampleData.HUSBAND.ME.name} <FcLike /> {SampleData.WIFE.ME.name}의 결혼식이{" "}
+            <span>{getDday(new Date(SampleData.date))}일</span> 남았습니다.
           </p>
         </div>
       </S.Page6CalendarWrapper>
@@ -408,7 +408,7 @@ const Modern = () => {
       <S.Page8YouTube ref={addItemRef} className="observer">
         <p>영상보기</p>
         <YouTube
-          videoId={MockData.contents.video_id}
+          videoId={SampleData.contents.video_id}
           className="youtube"
           opts={{
             width: "100%",
@@ -425,17 +425,17 @@ const Modern = () => {
         <p className="title">라이브 웨딩 안내</p>
         <p>참석이 어려운 분들께서는</p>
         <p>온라인 중계로 시청하실 수 있습니다.</p>
-        <p className="wedding-date">{getFullDate(new Date(MockData.date))}</p>
+        <p className="wedding-date">{getFullDate(new Date(SampleData.date))}</p>
         <button>라이브 웨딩 보러가기</button>
       </S.Page9Live>
       <S.Page10Map ref={addItemRef} className="observer">
         <p className="title">오시는 길</p>
         <div className="address">
-          <h1>{MockData.location.wedding_hall}</h1>
-          <p>{MockData.location.address}</p>
+          <h1>{SampleData.location.wedding_hall}</h1>
+          <p>{SampleData.location.address}</p>
         </div>
         <div className="roadmap">
-          <LocationCard latitude={MockData.location.latitude} longitude={MockData.location.longitude} />
+          <LocationCard latitude={SampleData.location.latitude} longitude={SampleData.location.longitude} />
         </div>
         <div className="roadmap-nav" onClick={clickRoadMap}>
           <div id="naver">
@@ -455,7 +455,7 @@ const Modern = () => {
       <S.Page11Way ref={addItemRef} className="observer">
         <div>
           <p className="title">지하철안내</p>
-          {MockData.road.subway.map(({ text, inline_style }, index) => (
+          {SampleData.road.subway.map(({ text, inline_style }, index) => (
             <p className="info" key={index}>
               {applyStyles(text, inline_style)}
             </p>
@@ -463,7 +463,7 @@ const Modern = () => {
         </div>
         <div>
           <p className="title">버스안내</p>
-          {MockData.road.bus.map(({ text, inline_style }, index) => (
+          {SampleData.road.bus.map(({ text, inline_style }, index) => (
             <p className="info" key={index}>
               {applyStyles(text, inline_style)}
             </p>
@@ -471,7 +471,7 @@ const Modern = () => {
         </div>
         <div>
           <p className="title">주차안내</p>
-          {MockData.road.car.map(({ text, inline_style }, index) => (
+          {SampleData.road.car.map(({ text, inline_style }, index) => (
             <p className="info" key={index}>
               {applyStyles(text, inline_style)}
             </p>
@@ -479,7 +479,7 @@ const Modern = () => {
         </div>
         <div>
           <p className="title">전세버스안내</p>
-          {MockData.road.etc.info.map(({ text, inline_style }, index) => (
+          {SampleData.road.etc.info.map(({ text, inline_style }, index) => (
             <p className="info" key={index}>
               {applyStyles(text, inline_style)}
             </p>
@@ -510,26 +510,28 @@ const Modern = () => {
                 {accountInfo ? (
                   <>
                     {" "}
-                    <p>{MockData.HUSBAND.FATHER.bank}은행</p>
-                    <p>예금주 : {MockData.HUSBAND.FATHER.name}</p>
+                    <p>{SampleData.HUSBAND.FATHER.bank}은행</p>
+                    <p>예금주 : {SampleData.HUSBAND.FATHER.name}</p>
                   </>
                 ) : (
                   <>
                     {" "}
-                    <p>{MockData.WIFE.FATHER.bank}은행</p>
-                    <p>예금주 : {MockData.WIFE.FATHER.name}</p>
+                    <p>{SampleData.WIFE.FATHER.bank}은행</p>
+                    <p>예금주 : {SampleData.WIFE.FATHER.name}</p>
                   </>
                 )}
               </div>
               <div>
                 {accountInfo ? (
-                  <input type="text" value={MockData.HUSBAND.FATHER.account} readOnly />
+                  <input type="text" value={SampleData.HUSBAND.FATHER.account} readOnly />
                 ) : (
-                  <input type="text" value={MockData.WIFE.FATHER.account} readOnly />
+                  <input type="text" value={SampleData.WIFE.FATHER.account} readOnly />
                 )}
                 <button
                   onClick={() =>
-                    handleClickCopyAccount(accountInfo ? MockData.HUSBAND.FATHER.account : MockData.WIFE.FATHER.account)
+                    handleClickCopyAccount(
+                      accountInfo ? SampleData.HUSBAND.FATHER.account : SampleData.WIFE.FATHER.account,
+                    )
                   }
                 >
                   복사
@@ -541,26 +543,28 @@ const Modern = () => {
                 {accountInfo ? (
                   <>
                     {" "}
-                    <p>{MockData.HUSBAND.MOTHER.bank}은행</p>
-                    <p>예금주 : {MockData.HUSBAND.MOTHER.name}</p>
+                    <p>{SampleData.HUSBAND.MOTHER.bank}은행</p>
+                    <p>예금주 : {SampleData.HUSBAND.MOTHER.name}</p>
                   </>
                 ) : (
                   <>
                     {" "}
-                    <p>{MockData.WIFE.MOTHER.bank}은행</p>
-                    <p>예금주 : {MockData.WIFE.MOTHER.name}</p>
+                    <p>{SampleData.WIFE.MOTHER.bank}은행</p>
+                    <p>예금주 : {SampleData.WIFE.MOTHER.name}</p>
                   </>
                 )}
               </div>
               <div>
                 {accountInfo ? (
-                  <input type="text" value={MockData.HUSBAND.MOTHER.account} readOnly />
+                  <input type="text" value={SampleData.HUSBAND.MOTHER.account} readOnly />
                 ) : (
-                  <input type="text" value={MockData.WIFE.MOTHER.account} readOnly />
+                  <input type="text" value={SampleData.WIFE.MOTHER.account} readOnly />
                 )}
                 <button
                   onClick={() =>
-                    handleClickCopyAccount(accountInfo ? MockData.HUSBAND.MOTHER.account : MockData.WIFE.MOTHER.account)
+                    handleClickCopyAccount(
+                      accountInfo ? SampleData.HUSBAND.MOTHER.account : SampleData.WIFE.MOTHER.account,
+                    )
                   }
                 >
                   복사
